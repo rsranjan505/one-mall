@@ -5,9 +5,12 @@
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
-        "php": "^8.2",
+        "php": "^8.2 || 8.1",
         "laravel/framework": "^11.9",
-        "laravel/tinker": "^2.9"
+        "laravel/tinker": "^2.9",
+        "laravel/sanctum": "^4.0",
+        "brian2694/laravel-toastr": "^5.57",
+        "laravel/ui": "^4.5"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -22,7 +25,12 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+          "app/Helpers/Helpers.php",
+          "app/Helpers/response.php",
+          "app/Helpers/json.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

@@ -1,0 +1,270 @@
+{
+  "menu": [
+    {
+      "name": "Dashboards",
+      "url": "admin/dashboard",
+      "icon": "home",
+      "slug": "admin.dashboard"
+    },
+    {
+      "name": "Products",
+      "icon": "package",
+      "dropdown": "1",
+      "slug": "",
+      "submenu": [
+        {
+          "url": "app/email",
+          "name": "Product List",
+          "icon": "circle",
+          "slug": "app-email"
+        },
+        {
+          "url": "app/chat",
+          "name": "Add Product",
+          "icon": "circle",
+          "slug": "app-chat"
+        },
+        {
+          "url": "app/todo",
+          "name": "Category List",
+          "icon": "circle",
+          "slug": "app-todo"
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "icon": "layers",
+      "dropdown": "1",
+      "slug": "",
+      "submenu": [
+        {
+          "url": "ui/typography",
+          "name": "Order List",
+          "icon": "type",
+          "slug": "ui-typography"
+        },
+        {
+          "url": "icons/feather",
+          "name": "Order Details",
+          "icon": "eye",
+          "slug": "icons-feather"
+        }
+      ]
+    },
+    {
+      "name": "Customer",
+      "icon": "edit",
+      "dropdown": "1",
+      "slug": "",
+      "submenu": [
+        {
+          "url": "form/layout",
+          "name": "All Customers",
+          "icon": "box",
+          "slug": "form-layout"
+        },
+        {
+          "name": "Customer Details",
+          "icon": "grid",
+          "slug": "",
+          "submenu": [
+            {
+              "url": "table/datatable/basic",
+              "name": "Overview",
+              "icon": "circle",
+              "slug": "datatable-basic"
+            },
+            {
+              "url": "table/datatable/advance",
+              "name": "Security",
+              "icon": "circle",
+              "slug": "datatable-advance"
+            },
+            {
+                "url": "table/datatable/advance",
+                "name": "Address & Billing",
+                "icon": "circle",
+                "slug": "datatable-advance"
+            },
+            {
+                "url": "table/datatable/advance",
+                "name": "Notification",
+                "icon": "circle",
+                "slug": "datatable-advance"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Manage Review",
+      "icon": "file-text",
+      "dropdown": "1",
+      "slug": "",
+      "submenu": [
+        {
+          "url": "page/profile",
+          "name": "Profile",
+          "icon": "user",
+          "slug": "page-profile"
+        },
+        {
+          "url": "page/api-key",
+          "name": "API Key",
+          "icon": "circle",
+          "slug": "page-api-key"
+        }
+      ]
+    },
+
+    {
+      "name": "Referrals",
+      "icon": "bar-chart-2",
+      "dropdown": "1",
+      "slug": "",
+      "submenu": [
+        {
+          "url": "maps/leaflet",
+          "name": "Leaflet Maps",
+          "icon": "map",
+          "slug": "map-leaflet"
+        }
+      ]
+    },
+    {
+        "name": "Settings",
+        "icon": "shield",
+        "dropdown": "1",
+        "slug": "",
+        "submenu": [
+          {
+            "url": "maps/leaflet",
+            "name": "Store Details",
+            "icon": "circle",
+            "slug": "map-leaflet"
+          },
+          {
+            "url": "maps/leaflet",
+            "name": "Payments",
+            "icon": "circle",
+            "slug": "map-leaflet"
+          },
+          {
+            "url": "maps/leaflet",
+            "name": "Checkout",
+            "icon": "circle",
+            "slug": "map-leaflet"
+          },
+          {
+            "url": "maps/leaflet",
+            "name": "Shipping & Delivery",
+            "icon": "circle",
+            "slug": "map-leaflet"
+          },
+          {
+            "url": "maps/leaflet",
+            "name": "Locations",
+            "icon": "circle",
+            "slug": "map-leaflet"
+          },
+          {
+            "url": "maps/leaflet",
+            "name": "Notifications",
+            "icon": "circle",
+            "slug": "map-leaflet"
+          }
+        ]
+    },
+    {
+        "name": "Invoice",
+        "icon": "file-text",
+        "slug": "",
+        "submenu": [
+          {
+            "url": "app/invoice/list",
+            "name": "List",
+            "icon": "circle",
+            "slug": "app-invoice-list"
+          },
+          {
+            "url": "app/invoice/preview",
+            "name": "Preview",
+            "icon": "circle",
+            "slug": "app-invoice-preview"
+          },
+          {
+            "url": "app/invoice/edit",
+            "name": "Edit",
+            "icon": "circle",
+            "slug": "app-invoice-edit"
+          },
+          {
+            "url": "app/invoice/add",
+            "name": "Add",
+            "icon": "circle",
+            "slug": "app-invoice-add"
+          }
+        ]
+      },
+    {
+      "name": "Users",
+      "icon": "box",
+      "dropdown": "1",
+      "slug": "",
+      "submenu": [
+          {
+            "name": "View",
+            "icon": "circle",
+            "slug": "",
+            "submenu": [
+              {
+                "url": "app/user/view/account",
+                "name": "Account",
+                "icon": "circle",
+                "slug": "app-user-view-account"
+              },
+              {
+                "url": "app/user/view/security",
+                "name": "Security",
+                "icon": "circle",
+                "slug": "app-user-view-security"
+              },
+              {
+                "url": "app/user/view/notifications",
+                "name": "Notifications",
+                "icon": "circle",
+                "slug": "app-user-view-notifications"
+              }
+            ]
+          },
+        {
+          "url": "app/invoice/add",
+          "name": "Add",
+          "icon": "circle",
+          "slug": "app-invoice-add"
+        },
+        {
+            "name": "Roles & Permission",
+            "icon": "shield",
+            "dropdown": "1",
+            "slug": "",
+            "submenu": [
+                {
+                "url": "app/access-roles",
+                "name": "Roles",
+                "icon": "circle",
+                "slug": "app-access-roles"
+                },
+                {
+                "url": "app/access-permission",
+                "name": "Permission",
+                "icon": "circle",
+                "slug": "app-access-permission"
+                }
+            ]
+        }
+      ]
+    }
+  ]
+}
