@@ -80,7 +80,7 @@
 
 <div class="mb-4"></div><!-- End .mb-2 -->
 
-<div class="container">
+{{-- <div class="container">
     <h2 class="title text-center mb-2">Explore Popular Categories</h2><!-- End .title -->
 
     <div class="cat-blocks-container">
@@ -93,9 +93,9 @@
                         </span>
                     </figure>
 
-                    <h3 class="cat-block-title">Computer & Laptop</h3><!-- End .cat-block-title -->
+                    <h3 class="cat-block-title">Computer & Laptop</h3>
                 </a>
-            </div><!-- End .col-sm-4 col-lg-2 -->
+            </div>
 
             <div class="col-6 col-sm-4 col-lg-2">
                 <a href="category.html" class="cat-block">
@@ -105,9 +105,9 @@
                         </span>
                     </figure>
 
-                    <h3 class="cat-block-title">Lighting</h3><!-- End .cat-block-title -->
+                    <h3 class="cat-block-title">Lighting</h3>
                 </a>
-            </div><!-- End .col-sm-4 col-lg-2 -->
+            </div>
 
             <div class="col-6 col-sm-4 col-lg-2">
                 <a href="category.html" class="cat-block">
@@ -117,9 +117,9 @@
                         </span>
                     </figure>
 
-                    <h3 class="cat-block-title">Smart Phones</h3><!-- End .cat-block-title -->
+                    <h3 class="cat-block-title">Smart Phones</h3>
                 </a>
-            </div><!-- End .col-sm-4 col-lg-2 -->
+            </div>
 
             <div class="col-6 col-sm-4 col-lg-2">
                 <a href="category.html" class="cat-block">
@@ -129,9 +129,9 @@
                         </span>
                     </figure>
 
-                    <h3 class="cat-block-title">Televisions</h3><!-- End .cat-block-title -->
+                    <h3 class="cat-block-title">Televisions</h3>
                 </a>
-            </div><!-- End .col-sm-4 col-lg-2 -->
+            </div>
 
             <div class="col-6 col-sm-4 col-lg-2">
                 <a href="category.html" class="cat-block">
@@ -141,9 +141,9 @@
                         </span>
                     </figure>
 
-                    <h3 class="cat-block-title">Cooking</h3><!-- End .cat-block-title -->
+                    <h3 class="cat-block-title">Cooking</h3>
                 </a>
-            </div><!-- End .col-sm-4 col-lg-2 -->
+            </div>
 
             <div class="col-6 col-sm-4 col-lg-2">
                 <a href="category.html" class="cat-block">
@@ -153,16 +153,16 @@
                         </span>
                     </figure>
 
-                    <h3 class="cat-block-title">Furniture</h3><!-- End .cat-block-title -->
+                    <h3 class="cat-block-title">Furniture</h3>
                 </a>
-            </div><!-- End .col-sm-4 col-lg-2 -->
-        </div><!-- End .row -->
-    </div><!-- End .cat-blocks-container -->
-</div><!-- End .container -->
+            </div>
+        </div>
+    </div>
+</div> --}}
 
-<div class="mb-2"></div><!-- End .mb-2 -->
+<div class="mb-2"></div>
 
-<div class="container">
+{{-- <div class="container">
     <div class="row">
         <div class="col-sm-6 col-lg-3">
             <div class="banner banner-overlay">
@@ -206,7 +206,7 @@
             </div><!-- End .banner -->
         </div><!-- End .col-lg-6 -->
     </div><!-- End .row -->
-</div><!-- End .container -->
+</div> --}}
 
 <div class="mb-3"></div><!-- End .mb-3 -->
 
@@ -2044,7 +2044,7 @@
 
 <div class="mb-3"></div><!-- End .mb-3 -->
 
-<div class="container">
+{{-- <div class="container">
     <div class="row">
         <div class="col-lg-6">
             <div class="banner banner-overlay banner-overlay-light">
@@ -2074,7 +2074,7 @@
             </div><!-- End .banner -->
         </div><!-- End .col-lg-6 -->
     </div><!-- End .row -->
-</div><!-- End .container -->
+</div> --}}
 
 <div class="mb-1"></div><!-- End .mb-1 -->
 

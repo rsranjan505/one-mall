@@ -193,11 +193,11 @@
         </a>
 
         @if (Auth::check())
-          <a class="dropdown-item" href="{{ route('/logout') }}"
+          <a class="dropdown-item" href="{{ route('logout') }}"
             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             <i class="me-50" data-feather="power"></i> Logout
           </a>
-          <form method="POST" id="logout-form" action="{{ route('/logout') }}">
+          <form method="POST" id="logout-form" action="{{ route('logout') }}">
             @csrf
           </form>
         @else
