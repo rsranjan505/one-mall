@@ -78,89 +78,69 @@
     <span class="slider-loader"></span><!-- End .slider-loader -->
 </div><!-- End .intro-slider-container -->
 
-<div class="mb-4"></div><!-- End .mb-2 -->
-
-{{-- <div class="container">
-    <h2 class="title text-center mb-2">Explore Popular Categories</h2><!-- End .title -->
-
-    <div class="cat-blocks-container">
+<div class="icon-boxes-container bg-primary">
+    <div class="container">
         <div class="row">
-            <div class="col-6 col-sm-4 col-lg-2">
-                <a href="category.html" class="cat-block">
-                    <figure>
-                        <span>
-                            <img src="marketplace/assets/images/demos/demo-13/cats/1.jpg" alt="Category image">
-                        </span>
-                    </figure>
+            <div class="col-sm-6 col-lg-3">
+                <div class="icon-box icon-box-side">
+                    <span class="icon-box-icon">
+                        <i class="icon-rocket"></i>
+                    </span>
 
-                    <h3 class="cat-block-title">Computer & Laptop</h3>
-                </a>
-            </div>
+                    <div class="icon-box-content">
+                        <h3 class="icon-box-title">Free Shipping</h3><!-- End .icon-box-title -->
+                        <p>Orders $50 or more</p>
+                    </div><!-- End .icon-box-content -->
+                </div><!-- End .icon-box -->
+            </div><!-- End .col-sm-6 col-lg-3 -->
 
-            <div class="col-6 col-sm-4 col-lg-2">
-                <a href="category.html" class="cat-block">
-                    <figure>
-                        <span>
-                            <img src="marketplace/assets/images/demos/demo-13/cats/2.jpg" alt="Category image">
-                        </span>
-                    </figure>
+            <div class="col-sm-6 col-lg-3">
+                <div class="icon-box icon-box-side">
+                    <span class="icon-box-icon">
+                        <i class="icon-rotate-left"></i>
+                    </span>
 
-                    <h3 class="cat-block-title">Lighting</h3>
-                </a>
-            </div>
+                    <div class="icon-box-content">
+                        <h3 class="icon-box-title">Free Returns</h3><!-- End .icon-box-title -->
+                        <p>Within 30 days</p>
+                    </div><!-- End .icon-box-content -->
+                </div><!-- End .icon-box -->
+            </div><!-- End .col-sm-6 col-lg-3 -->
 
-            <div class="col-6 col-sm-4 col-lg-2">
-                <a href="category.html" class="cat-block">
-                    <figure>
-                        <span>
-                            <img src="marketplace/assets/images/demos/demo-13/cats/3.jpg" alt="Category image">
-                        </span>
-                    </figure>
+            <div class="col-sm-6 col-lg-3">
+                <div class="icon-box icon-box-side">
+                    <span class="icon-box-icon">
+                        <i class="icon-info-circle"></i>
+                    </span>
 
-                    <h3 class="cat-block-title">Smart Phones</h3>
-                </a>
-            </div>
+                    <div class="icon-box-content">
+                        <h3 class="icon-box-title">Get 20% Off 1 Item</h3><!-- End .icon-box-title -->
+                        <p>When you sign up</p>
+                    </div><!-- End .icon-box-content -->
+                </div><!-- End .icon-box -->
+            </div><!-- End .col-sm-6 col-lg-3 -->
 
-            <div class="col-6 col-sm-4 col-lg-2">
-                <a href="category.html" class="cat-block">
-                    <figure>
-                        <span>
-                            <img src="marketplace/assets/images/demos/demo-13/cats/4.jpg" alt="Category image">
-                        </span>
-                    </figure>
+            <div class="col-sm-6 col-lg-3">
+                <div class="icon-box icon-box-side">
+                    <span class="icon-box-icon">
+                        <i class="icon-life-ring"></i>
+                    </span>
 
-                    <h3 class="cat-block-title">Televisions</h3>
-                </a>
-            </div>
+                    <div class="icon-box-content">
+                        <h3 class="icon-box-title">We Support</h3><!-- End .icon-box-title -->
+                        <p>24/7 amazing services</p>
+                    </div><!-- End .icon-box-content -->
+                </div><!-- End .icon-box -->
+            </div><!-- End .col-sm-6 col-lg-3 -->
+        </div><!-- End .row -->
+    </div><!-- End .container -->
+</div>
 
-            <div class="col-6 col-sm-4 col-lg-2">
-                <a href="category.html" class="cat-block">
-                    <figure>
-                        <span>
-                            <img src="marketplace/assets/images/demos/demo-13/cats/5.jpg" alt="Category image">
-                        </span>
-                    </figure>
+{{-- <div class="mb-4"></div> --}}
 
-                    <h3 class="cat-block-title">Cooking</h3>
-                </a>
-            </div>
+{{-- <div class="mb-2"></div> --}}
 
-            <div class="col-6 col-sm-4 col-lg-2">
-                <a href="category.html" class="cat-block">
-                    <figure>
-                        <span>
-                            <img src="marketplace/assets/images/demos/demo-13/cats/6.jpg" alt="Category image">
-                        </span>
-                    </figure>
 
-                    <h3 class="cat-block-title">Furniture</h3>
-                </a>
-            </div>
-        </div>
-    </div>
-</div> --}}
-
-<div class="mb-2"></div>
 
 {{-- <div class="container">
     <div class="row">
@@ -208,7 +188,7 @@
     </div><!-- End .row -->
 </div> --}}
 
-<div class="mb-3"></div><!-- End .mb-3 -->
+<div class="mb-3 "></div><!-- End .mb-3 -->
 
 <div class="bg-light pt-3 pb-5">
     <div class="container">
@@ -260,7 +240,7 @@
                                 "items":4
                             },
                             "1280": {
-                                "items":5,
+                                "items":4,
                                 "nav": true
                             }
                         }
@@ -524,7 +504,7 @@
                                 "items":4
                             },
                             "1280": {
-                                "items":5,
+                                "items":4,
                                 "nav": true
                             }
                         }
@@ -753,7 +733,7 @@
                                 "items":4
                             },
                             "1280": {
-                                "items":5,
+                                "items":4,
                                 "nav": true
                             }
                         }
@@ -1017,7 +997,7 @@
                                 "items":4
                             },
                             "1280": {
-                                "items":5,
+                                "items":4,
                                 "nav": true
                             }
                         }
@@ -1207,7 +1187,7 @@
                                 "items":4
                             },
                             "1280": {
-                                "items":5,
+                                "items":4,
                                 "nav": true
                             }
                         }
@@ -1454,7 +1434,7 @@
                             "items":4
                         },
                         "1280": {
-                            "items":5,
+                            "items":4,
                             "nav": true
                         }
                     }
@@ -2121,7 +2101,7 @@
                             "items":4
                         },
                         "1280": {
-                            "items":5,
+                            "items":4,
                             "nav": true
                         }
                     }
@@ -2729,7 +2709,7 @@
     </div><!-- End .tab-content -->
 </div><!-- End .container -->
 
-<div class="mb-3"></div><!-- End .mb-3 -->
+<div class="mb-3 bg-black"></div><!-- End .mb-3 -->
 
 <div class="container clothing ">
     <div class="heading heading-flex heading-border mb-3">
@@ -2774,7 +2754,7 @@
                             "items":4
                         },
                         "1280": {
-                            "items":5,
+                            "items":4,
                             "nav": true
                         }
                     }
@@ -3445,155 +3425,6 @@
         </div><!-- End .row -->
     </div><!-- End .container -->
 </div><!-- End .cta -->
-
-
-{{-- Blogs --}}
-{{-- <div class="blog-posts bg-light pt-4 pb-7">
-    <div class="container">
-        <h2 class="title">From Our Blog</h2><!-- End .title-lg text-center -->
-
-        <div class="owl-carousel owl-simple" data-toggle="owl"
-            data-owl-options='{
-                "nav": false,
-                "dots": true,
-                "items": 3,
-                "margin": 20,
-                "loop": false,
-                "responsive": {
-                    "0": {
-                        "items":1
-                    },
-                    "600": {
-                        "items":2
-                    },
-                    "992": {
-                        "items":3
-                    },
-                    "1280": {
-                        "items":4,
-                        "nav": true,
-                        "dots": false
-                    }
-                }
-            }'>
-            <article class="entry">
-                <figure class="entry-media">
-                    <a href="single.html">
-                        <img src="marketplace/assets/images/demos/demo-13/blog/post-1.jpg" alt="image desc">
-                    </a>
-                </figure><!-- End .entry-media -->
-
-                <div class="entry-body">
-                    <div class="entry-meta">
-                        <a href="#">Nov 22, 2018</a>, 0 Comments
-                    </div><!-- End .entry-meta -->
-
-                    <h3 class="entry-title">
-                        <a href="single.html">Sed adipiscing ornare.</a>
-                    </h3><!-- End .entry-title -->
-
-                    <div class="entry-content">
-                        <p>Lorem ipsum dolor consectetuer adipiscing elit. Phasellus hendrerit. Pelletesque aliquet nibh ...</p>
-                        <a href="single.html" class="read-more">Read More</a>
-                    </div><!-- End .entry-content -->
-                </div><!-- End .entry-body -->
-            </article><!-- End .entry -->
-
-            <article class="entry">
-                <figure class="entry-media">
-                    <a href="single.html">
-                        <img src="marketplace/assets/images/demos/demo-13/blog/post-2.jpg" alt="image desc">
-                    </a>
-                </figure><!-- End .entry-media -->
-
-                <div class="entry-body">
-                    <div class="entry-meta">
-                        <a href="#">Dec 12, 2018</a>, 0 Comments
-                    </div><!-- End .entry-meta -->
-
-                    <h3 class="entry-title">
-                        <a href="single.html">Vivamus vestibulum ntulla.</a>
-                    </h3><!-- End .entry-title -->
-
-                    <div class="entry-content">
-                        <p>Phasellus hendrerit. Pelletesque aliquet nibh necurna In nisi neque, aliquet vel, dapibus id ... </p>
-                        <a href="single.html" class="read-more">Read More</a>
-                    </div><!-- End .entry-content -->
-                </div><!-- End .entry-body -->
-            </article><!-- End .entry -->
-
-            <article class="entry">
-                <figure class="entry-media">
-                    <a href="single.html">
-                        <img src="marketplace/assets/images/demos/demo-13/blog/post-3.jpg" alt="image desc">
-                    </a>
-                </figure><!-- End .entry-media -->
-
-                <div class="entry-body">
-                    <div class="entry-meta">
-                        <a href="#">Dec 19, 2018</a>, 2 Comments
-                    </div><!-- End .entry-meta -->
-
-                    <h3 class="entry-title">
-                        <a href="single.html">Praesent placerat risus.</a>
-                    </h3><!-- End .entry-title -->
-
-                    <div class="entry-content">
-                        <p>Sed pretium, ligula sollicitudin laoreet viverra, tortor libero sodales leo, eget blandit nunc ...</p>
-                        <a href="single.html" class="read-more">Read More</a>
-                    </div><!-- End .entry-content -->
-                </div><!-- End .entry-body -->
-            </article><!-- End .entry -->
-
-            <article class="entry">
-                <figure class="entry-media">
-                    <a href="single.html">
-                        <img src="marketplace/assets/images/demos/demo-13/blog/post-4.jpg" alt="image desc">
-                    </a>
-                </figure><!-- End .entry-media -->
-
-                <div class="entry-body">
-                    <div class="entry-meta">
-                        <a href="#">Dec 19, 2018</a>, 2 Comments
-                    </div><!-- End .entry-meta -->
-
-                    <h3 class="entry-title">
-                        <a href="single.html">Fusce pellentesque suscipit.</a>
-                    </h3><!-- End .entry-title -->
-
-                    <div class="entry-content">
-                        <p>Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero augue. </p>
-                        <a href="single.html" class="read-more">Read More</a>
-                    </div><!-- End .entry-content -->
-                </div><!-- End .entry-body -->
-            </article><!-- End .entry -->
-
-            <article class="entry">
-                <figure class="entry-media">
-                    <a href="single.html">
-                        <img src="marketplace/assets/images/demos/demo-13/blog/post-1.jpg" alt="image desc">
-                    </a>
-                </figure><!-- End .entry-media -->
-
-                <div class="entry-body">
-                    <div class="entry-meta">
-                        <a href="#">Nov 22, 2018</a>, 0 Comments
-                    </div><!-- End .entry-meta -->
-
-                    <h3 class="entry-title">
-                        <a href="single.html">Sed adipiscing ornare.</a>
-                    </h3><!-- End .entry-title -->
-
-                    <div class="entry-content">
-                        <p>Lorem ipsum dolor consectetuer adipiscing elit. Phasellus hendrerit. Pelletesque aliquet nibh ...</p>
-                        <a href="single.html" class="read-more">Read More</a>
-                    </div><!-- End .entry-content -->
-                </div><!-- End .entry-body -->
-            </article><!-- End .entry -->
-        </div><!-- End .owl-carousel -->
-    </div><!-- End .container -->
-</div>
- --}}
 
 
 @endsection

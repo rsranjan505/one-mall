@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="{{ asset('marketplace/assets/css/plugins/magnific-popup/magnific-popup.css') }}">
     <link rel="stylesheet" href="{{ asset('marketplace/assets/css/plugins/jquery.countdown.css') }}">
     <link rel="stylesheet" href="{{ asset('marketplace/assets/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('marketplace/assets/css/skins/skin-demo-13.css') }}">
+    <link rel="stylesheet" href="{{ asset('marketplace/assets/css/skins/skin-demo-13-.css') }}">
     <link rel="stylesheet" href="{{ asset('marketplace/assets/css/demos/demo-13.css') }}">
 
 
@@ -43,7 +43,7 @@
     <div class="page-wrapper">
 
         @if (Request::is('/')  || Request::is('home'))
-            @include('marketplace.sections.header')
+            @include('marketplace.sections.header-2')
         @else
             @include('marketplace.sections.header-2')
         @endif

@@ -192,7 +192,7 @@
 
         <div class="header-bottom sticky-header">
             <div class="container">
-                <div class="header-left">
+                {{-- <div class="header-left">
                     <div class="dropdown category-dropdown show is-on" data-visible="true">
                         <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-display="static" title="Browse Categories">
                             Browse Categories
@@ -497,7 +497,7 @@
                             </nav><!-- End .side-nav -->
                         </div><!-- End .dropdown-menu -->
                     </div><!-- End .category-dropdown -->
-                </div><!-- End .col-lg-3 -->
+                </div><!-- End .col-lg-3 --> --}}
                 <div class="header-center">
                     <nav class="main-nav">
                         <ul class="menu sf-arrows">
@@ -579,9 +579,9 @@
                         </ul><!-- End .menu -->
                     </nav><!-- End .main-nav -->
                 </div><!-- End .col-lg-9 -->
-                <div class="header-right">
+                {{-- <div class="header-right">
                     <i class="la la-lightbulb-o"></i><p>Clearance Up to 30% Off</span></p>
-                </div>
+                </div> --}}
             </div><!-- End .container -->
         </div><!-- End .header-bottom -->
     </header><!-- End .header -->
