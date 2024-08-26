@@ -621,12 +621,14 @@ a:focus {
 }
 .nav.nav-pills .nav-link:hover,
 .nav.nav-pills .nav-link:focus {
-    color: #1cc0a0;
+    border-radius: 30px;
+    border: solid 1px #E21C1B;
+    color: #E21C1B;
 }
 .nav.nav-pills .nav-item.show .nav-link,
 .nav.nav-pills .nav-item .nav-link.active {
-    color: #1cc0a0;
-    border-bottom-color: #1cc0a0;
+    color: #E21C1B;
+    border-bottom-color: #E21C1B;
 }
 .nav.nav-border-anim .nav-link:before {
     background-color: #1cc0a0;

@@ -49,10 +49,10 @@
                     <i class="icon-bars"></i>
                 </button>
 
-                <a href="{{ route('market.home')}}" class="logo">
+                {{-- <a href="{{ route('market.home')}}" class="logo">
                     <h3>One Mall</h3>
-                    {{-- <img src="marketplace/assets/images/logo.png" alt="Molla Logo" width="105" height="25"> --}}
-                </a>
+                    <img src="marketplace/assets/images/logo.png" alt="Molla Logo" width="105" height="25">
+                </a> --}}
 
                 <nav class="main-nav">
                     <ul class="menu sf-arrows">
@@ -114,7 +114,7 @@
                         </div><!-- End .header-search-wrapper -->
                     </form>
                 </div><!-- End .header-search -->
-                <div class="dropdown compare-dropdown">
+                {{-- <div class="dropdown compare-dropdown">
                     <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" title="Compare Products" aria-label="Compare Products">
                         <i class="icon-random"></i>
                     </a>
@@ -136,7 +136,7 @@
                             <a href="#" class="btn btn-outline-primary-2"><span>Compare</span><i class="icon-long-arrow-right"></i></a>
                         </div>
                     </div><!-- End .dropdown-menu -->
-                </div><!-- End .compare-dropdown -->
+                </div> --}}
 
                 <div class="dropdown cart-dropdown">
                     <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">

@@ -62,7 +62,7 @@
 }
 .title-link:hover,
 .title-link:focus {
-    color: #1cc0a0;
+    color: #E21C1B;
 }
 .intro-section {
     margin-top: 0;
@@ -188,14 +188,14 @@
     padding-top: 1.1rem;
     padding-bottom: 1.1rem;
     border-radius: 0.3rem;
-    color: #1cc0a0;
-    border: 0.1rem solid #1cc0a0;
+    color: #E21C1B;
+    border: 0.1rem solid #E21C1B;
 }
 .btn-product.btn-cart {
     text-transform: uppercase;
 }
 .btn-product span {
-    color: #1cc0a0;
+    color: #E21C1B;
     font-size: 1.4rem;
 }
 .btn-product:before {
@@ -206,7 +206,7 @@
 .btn-product:hover,
 .btn-product:focus {
     color: #fff;
-    background-color: #1cc0a0;
+    background-color: #E21C1B;
 }
 .btn-product:hover span,
 .btn-product:focus span {
@@ -258,7 +258,7 @@
 }
 .new-price,
 .product-price {
-    color: #1cc0a0;
+    color: #E21C1B;
 }
 .old-price {
     text-decoration: none;
@@ -311,7 +311,7 @@
 .product-big .product-title a:focus,
 .product-big .product-price a:hover,
 .product-big .product-price a:focus {
-    color: #1cc0a0;
+    color: #E21C1B;
 }
 .product-big .product-cat {
     font-size: 1.4rem;
@@ -474,7 +474,7 @@
     max-width: 500px;
 }
 .footer .widget-about-info a {
-    color: #1cc0a0;
+    color: #E21C1B;
 }
 @media screen and (min-width: 576px) {
     .banner-big .banner-content {

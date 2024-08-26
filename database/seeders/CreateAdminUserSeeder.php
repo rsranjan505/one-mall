@@ -23,6 +23,7 @@ class CreateAdminUserSeeder extends Seeder
             'last_name' => 'Developer',
             'email' => 'admin@sspl.com',
             'mobile' => '7004857557',
+            'user_type' => 'admin',
             'password' => bcrypt('12345678')
         ]);
 

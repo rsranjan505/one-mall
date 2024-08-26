@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="{{ asset('marketplace/assets/css/plugins/magnific-popup/magnific-popup.css') }}">
     <link rel="stylesheet" href="{{ asset('marketplace/assets/css/plugins/jquery.countdown.css') }}">
     <link rel="stylesheet" href="{{ asset('marketplace/assets/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('marketplace/assets/css/skins/skin-demo-13-.css') }}">
+    <link rel="stylesheet" href="{{ asset('marketplace/assets/css/skins/skin-demo-13.css') }}">
     <link rel="stylesheet" href="{{ asset('marketplace/assets/css/demos/demo-13.css') }}">
 
 
@@ -381,8 +381,8 @@
             </div><!-- End .modal-content -->
         </div><!-- End .modal-dialog -->
     </div><!-- End .modal -->
-
-    @include('marketplace.components.news-letter')
+{{--
+    @include('marketplace.components.news-letter') --}}
 
     <!-- Plugins JS File -->
     <script src="{{ asset('marketplace/assets/js/jquery.min.js')}}"></script>
@@ -399,6 +399,20 @@
     <!-- Main JS File -->
     <script src="{{ asset('marketplace/assets/js/main.js')}}"></script>
     <script src="{{ asset('marketplace/assets/js/demos/demo-13.js')}}"></script>
+
+
+    <script>
+        $(document) .ready(function(){
+            // this is for scrolling category tabs
+            var li =  $(".owl-item li a.nav-link");
+            $(".owl-item li").click(function(){
+                li.removeClass('active');
+
+            });
+        });
+    </script>
+
+
 </body>
 
 <!-- One Mall/index-13.html  22 Nov 2019 09:59:31 GMT -->

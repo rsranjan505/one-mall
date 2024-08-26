@@ -803,10 +803,10 @@
     .intro-title sup {
         font-size: 1.8rem;
     }
-    .nav.nav-pills .nav-link {
+    /* .nav.nav-pills .nav-link {
         padding-top: 1.55rem;
         padding-bottom: 1.55rem;
-    }
+    } */
     .banner-poster .banner-content {
         left: 8rem;
     }
@@ -921,3 +921,26 @@
     }
 }
 /*# sourceMappingURL=demo-13.css.map */
+
+
+
+
+.container {
+    width: 100%;
+    max-width: 1420px;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+.product.demo21 .product-body {
+    padding-top: 0;
+}
+.product.demo21 .product-action {
+    padding: 0 2rem;
+}
+.product.demo21 .product-action a {
+    padding: 1rem;
+}
