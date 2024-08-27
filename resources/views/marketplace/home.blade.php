@@ -143,7 +143,7 @@
     <h2 class="title text-center mb-2">Explore Popular Categories</h2><!-- End .title -->
 
     <div class="cat-blocks-container">
-        <div class="row">
+        <div class="row ">
             <div class="col-6 col-sm-4 col-lg-2">
                 <a href="category.html" class="cat-block">
                     <figure>
@@ -268,12 +268,12 @@
 
 <div class="mb-3 "></div><!-- End .mb-3 -->
 
-<div class="bg-light pt-3 pb-5">
+{{-- <div class="bg-light pt-3 pb-5">
     <div class="container">
         <div class="heading heading-flex heading-border mb-3">
             <div class="heading-left">
-                <h2 class="title">Hot Deals Products</h2><!-- End .title -->
-            </div><!-- End .heading-left -->
+                <h2 class="title">Hot Deals Products</h2>
+            </div>
 
            <div class="heading-right">
                 <ul class="nav nav-pills nav-border-anim justify-content-center" role="tablist" >
@@ -293,8 +293,8 @@
                         <a class="nav-link" id="hot-acc-link" data-toggle="tab" href="#hot-acc-tab" role="tab" aria-controls="hot-acc-tab" aria-selected="false">Accessories</a>
                     </li>
                 </ul>
-           </div><!-- End .heading-right -->
-        </div><!-- End .heading -->
+           </div>
+        </div>
 
         <div class="tab-content tab-content-carousel">
             <div class="tab-pane p-0 fade show active" id="hot-all-tab" role="tabpanel" aria-labelledby="hot-all-link">
@@ -334,30 +334,30 @@
                                 <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
                                 <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
                                 <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
-                            </div><!-- End .product-action-vertical -->
+                            </div>
 
                             <div class="product-action">
                                 <a href="#" class="btn-product btn-cart" title="Add to cart"><span>add to cart</span></a>
-                            </div><!-- End .product-action -->
-                        </figure><!-- End .product-media -->
+                            </div>
+                        </figure><
 
                         <div class="product-body">
                             <div class="product-cat">
                                 <a href="#">Furniture</a>
-                            </div><!-- End .product-cat -->
+                            </div>
                             <h3 class="product-title"><a href="{{ route('market.product-deatils')}}">Butler Stool Ladder</a></h3><!-- End .product-title -->
                             <div class="product-price">
                                 <span class="new-price">$251.99</span>
                                 <span class="old-price">Was $290.00</span>
-                            </div><!-- End .product-price -->
+                            </div>
                             <div class="ratings-container">
                                 <div class="ratings">
-                                    <div class="ratings-val" style="width: 100%;"></div><!-- End .ratings-val -->
-                                </div><!-- End .ratings -->
+                                    <div class="ratings-val" style="width: 100%;"></div>
+                                </div>
                                 <span class="ratings-text">( 2 Reviews )</span>
-                            </div><!-- End .rating-container -->
-                        </div><!-- End .product-body -->
-                    </div><!-- End .product -->
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="product">
                         <figure class="product-media">
@@ -373,28 +373,28 @@
                                 <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
                                 <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
                                 <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
-                            </div><!-- End .product-action-vertical -->
+                            </div>
 
                             <div class="product-action">
                                 <a href="#" class="btn-product btn-cart" title="Add to cart"><span>add to cart</span></a>
-                            </div><!-- End .product-action -->
-                        </figure><!-- End .product-media -->
+                            </div>
+                        </figure>
 
                         <div class="product-body">
                             <div class="product-cat">
                                 <a href="#">Electronics</a>
-                            </div><!-- End .product-cat -->
+                            </div>
                             <h3 class="product-title"><a href="{{ route('market.product-deatils')}}">Bose - SoundSport  wireless headphones</a></h3><!-- End .product-title -->
                             <div class="product-price">
                                 <span class="new-price">$179.99</span>
                                 <span class="old-price">Was $199.99</span>
-                            </div><!-- End .product-price -->
+                            </div>
                             <div class="ratings-container">
                                 <div class="ratings">
-                                    <div class="ratings-val" style="width: 100%;"></div><!-- End .ratings-val -->
-                                </div><!-- End .ratings -->
+                                    <div class="ratings-val" style="width: 100%;"></div>
+                                </div>
                                 <span class="ratings-text">( 4 Reviews )</span>
-                            </div><!-- End .rating-container -->
+                            </div>
 
                             <div class="product-nav product-nav-dots">
                                 <a href="#" class="active" style="background: #69b4ff;"><span class="sr-only">Color name</span></a>
@@ -1465,7 +1465,7 @@
             </div><!-- .End .tab-pane -->
         </div><!-- End .tab-content -->
     </div><!-- End .container -->
-</div><!-- End .bg-light pt-5 pb-5 -->
+</div> --}}
 
 <div class="mb-3"></div><!-- End .mb-3 -->
 
