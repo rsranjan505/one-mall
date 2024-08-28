@@ -160,7 +160,7 @@
                     <div class="form-box">
                         <div class="form-tab">
                             <ul class="nav nav-pills nav-fill nav-border-anim" role="tablist">
-                                <li class="nav-item">
+                                <li class="nav-item" style="border: none;">
                                     <a class="nav-link active" id="signin-tab" data-toggle="tab" href="#signin" role="tab" aria-controls="signin" aria-selected="true">Sign In</a>
                                 </li>
                                 <li class="nav-item">

@@ -142,7 +142,157 @@
 <div class="container">
     <h2 class="title text-center mb-2">Explore Popular Categories</h2><!-- End .title -->
 
-    <div class="cat-blocks-container">
+    <ul class="nav nav-tabs justify-content-center owl-carousel mb-5 owl-simple img-category" data-toggle="owl" data-owl-options='{
+            "nav": false,
+            "dots": true,
+            "margin": 30,
+            "loop": false,
+            "responsive": {
+                "0": {
+                    "items":2
+                },
+                "420": {
+                    "items":3
+                },
+                "600": {
+                    "items":4
+                },
+                "900": {
+                    "items":5
+                },
+                "1024": {
+                    "items":8
+                },
+                "1280": {
+                    "items":8,
+                    "nav": true,
+                    "dots": false
+                }
+            }
+        }' >
+        <li class="nav-item">
+            <a href="category.html" class="cat-block">
+                <figure>
+                    <span>
+                        <img src="marketplace/assets/images/demos/demo-13/cats/1.jpg" alt="Category image">
+                    </span>
+                </figure>
+
+                <h3 class="cat-block-title">Computer & Laptop</h3><!-- End .cat-block-title -->
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="category.html" class="cat-block">
+                <figure>
+                    <span>
+                        <img src="marketplace/assets/images/demos/demo-13/cats/2.jpg" alt="Category image">
+                    </span>
+                </figure>
+
+                <h3 class="cat-block-title">Lighting</h3><!-- End .cat-block-title -->
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="category.html" class="cat-block">
+                <figure>
+                    <span>
+                        <img src="marketplace/assets/images/demos/demo-13/cats/3.jpg" alt="Category image">
+                    </span>
+                </figure>
+
+                <h3 class="cat-block-title">Smart Phones</h3><!-- End .cat-block-title -->
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="category.html" class="cat-block">
+                <figure>
+                    <span>
+                        <img src="marketplace/assets/images/demos/demo-13/cats/4.jpg" alt="Category image">
+                    </span>
+                </figure>
+
+                <h3 class="cat-block-title">Televisions</h3><!-- End .cat-block-title -->
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="category.html" class="cat-block">
+                <figure>
+                    <span>
+                        <img src="marketplace/assets/images/demos/demo-13/cats/5.jpg" alt="Category image">
+                    </span>
+                </figure>
+
+                <h3 class="cat-block-title">Cooking</h3><!-- End .cat-block-title -->
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="category.html" class="cat-block">
+                <figure>
+                    <span>
+                        <img src="marketplace/assets/images/demos/demo-13/cats/6.jpg" alt="Category image">
+                    </span>
+                </figure>
+
+                <h3 class="cat-block-title">Furniture</h3><!-- End .cat-block-title -->
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="category.html" class="cat-block">
+                <figure>
+                    <span>
+                        <img src="marketplace/assets/images/demos/demo-13/cats/6.jpg" alt="Category image">
+                    </span>
+                </figure>
+
+                <h3 class="cat-block-title">Furniture</h3><!-- End .cat-block-title -->
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="category.html" class="cat-block">
+                <figure>
+                    <span>
+                        <img src="marketplace/assets/images/demos/demo-13/cats/6.jpg" alt="Category image">
+                    </span>
+                </figure>
+
+                <h3 class="cat-block-title">Furniture</h3><!-- End .cat-block-title -->
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="category.html" class="cat-block">
+                <figure>
+                    <span>
+                        <img src="marketplace/assets/images/demos/demo-13/cats/6.jpg" alt="Category image">
+                    </span>
+                </figure>
+
+                <h3 class="cat-block-title">Furniture</h3><!-- End .cat-block-title -->
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="category.html" class="cat-block">
+                <figure>
+                    <span>
+                        <img src="marketplace/assets/images/demos/demo-13/cats/6.jpg" alt="Category image">
+                    </span>
+                </figure>
+
+                <h3 class="cat-block-title">Furniture</h3><!-- End .cat-block-title -->
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="category.html" class="cat-block">
+                <figure>
+                    <span>
+                        <img src="marketplace/assets/images/demos/demo-13/cats/6.jpg" alt="Category image">
+                    </span>
+                </figure>
+
+                <h3 class="cat-block-title">Furniture</h3><!-- End .cat-block-title -->
+            </a>
+        </li>
+    </ul>
+    {{-- <div class="cat-blocks-container">
         <div class="row ">
             <div class="col-6 col-sm-4 col-lg-2">
                 <a href="category.html" class="cat-block">
@@ -216,7 +366,7 @@
                 </a>
             </div><!-- End .col-sm-4 col-lg-2 -->
         </div><!-- End .row -->
-    </div><!-- End .cat-blocks-container -->
+    </div> --}}
 </div>
 
 
@@ -1480,7 +1630,7 @@
     <div class="heading heading-center mb-3">
         <h2 class="title">EXPLORE YOUR INTEREST </h2><!-- End .title -->
 
-        <ul class="nav nav-pills justify-content-center owl-carousel mb-5 owl-simple" data-toggle="owl" data-owl-options='{
+        <ul class="nav nav-pills justify-content-center owl-carousel mb-5 owl-simple text-category" data-toggle="owl" data-owl-options='{
             "nav": false,
             "dots": true,
             "margin": 30,
@@ -1508,7 +1658,7 @@
                 }
             }
         }'>
-            <li class="nav-item">
+            <li class="nav-item bg-black">
                 <a class="nav-link category-tab active" id="arrivals-all-link" data-toggle="tab" href="#arrivals-all-tab" role="tab" aria-controls="arrivals-all-tab" aria-selected="true">All</a>
             </li>
             <li class="nav-item">

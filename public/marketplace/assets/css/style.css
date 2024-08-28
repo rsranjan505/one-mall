@@ -180,7 +180,7 @@ a:focus {
     color: #E21C1B !important;
 }
 .text-secondary {
-    color: #ADFFA2 !important;
+    color: #bf8040 !important;
 }
 .text-dark {
     color: #333 !important;
@@ -2556,7 +2556,7 @@ blockquote.text-white cite span {
 .nav.nav-pills-mobile {
     display: flex;
     align-items: center;
-    border-bottom: 0.1rem solid rgba(255, 255, 255, 0.1);
+    /* border-bottom: 0.1rem solid rgba(255, 255, 255, 0.1); */
     margin: 0 0 0.2rem;
 }
 .nav.nav-pills-mobile .nav-item {
@@ -2570,7 +2570,7 @@ blockquote.text-white cite span {
     font-size: 1.3rem;
     line-height: 1.5;
     text-transform: uppercase;
-    border-bottom: 0.2rem solid transparent;
+    /* border-bottom: 0.2rem solid transparent; */
     background: none;
     padding: 0.8rem 2rem;
     transition: all 0.35s ease;
@@ -2579,7 +2579,7 @@ blockquote.text-white cite span {
 .nav.nav-pills-mobile .nav-link:hover,
 .nav.nav-pills-mobile .nav-link:focus {
     color: #E21C1B;
-    border-bottom-color: #E21C1B;
+    /* border-bottom-color: #E21C1B; */
 }
 .mobile-cats-nav .mobile-menu > li > a {
     text-transform: capitalize;
@@ -5531,7 +5531,7 @@ p {
     }
 }
 .nav-link:focus {
-    outline: solid !important;
+    /* outline: solid !important; */
 }
 .nav.nav-tabs {
     border-bottom-right-radius: 0.3rem;
@@ -5618,7 +5618,7 @@ p {
 .nav.nav-pills .nav-item .nav-link.active {
     color: #E21C1B;
     border-color: #d7d7d7;
-    border-bottom-color: #E21C1B;
+    /* border-bottom-color: #E21C1B; */
 }
 .nav-pills + .tab-content .tab-pane {
     padding: 1.4rem 0;
@@ -12908,7 +12908,7 @@ button:focus {
 }
 .form-tab .nav.nav-pills {
     color: #333;
-    border-bottom: 0.1rem solid #ebebeb;
+    /* border-bottom: 0.1rem solid #ebebeb; */
 }
 .form-tab .nav.nav-pills .nav-item {
     margin-bottom: -0.1rem;
@@ -12922,7 +12922,7 @@ button:focus {
     font-size: 2rem;
     letter-spacing: -0.025em;
     color: inherit;
-    border-bottom-width: 0.2rem;
+    /* border-bottom-width: 0.2rem; */
     padding: 0.9rem 1rem;
 }
 .form-tab .nav.nav-pills .nav-link.active {
@@ -16351,7 +16351,16 @@ button:focus {
     background-color: #20cb55;
 } */
 
-.owl-stage-outer {
+.img-category .owl-stage-outer
+{
+    background-color: #f54747;
+    padding-top: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 5px;
+}
+
+.text-category .owl-stage-outer {
     background-color: #f5f5f5;
     border-radius: 20px;
 }
