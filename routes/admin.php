@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{
+    CategoryController,
     DashboardController
 };
 
@@ -19,7 +20,7 @@ use App\Http\Controllers\Admin\{
 
 Route::group(['prefix' => 'admin'], function(){
     Route::get('/login', 'App\Http\Controllers\Admin\Auth\LoginController@showLoginForm')->name('login');
-    Route::post('/login', 'App\Http\Controllers\Admin\Auth\LoginController@login');
+    Route::post('/login', 'App\Http\Controllers\Admin\Auth\LoginController@login')->name('login.post');
     Route::post('/logout', 'App\Http\Controllers\Admin\Auth\LoginController@logout')->name('logout');
 
     Route::group(['middleware' => 'auth'], function () {
@@ -42,6 +43,8 @@ Route::group(['prefix' => 'admin'], function(){
 });
 
 
-// Route::middleware('auth','web')->prefix('admin')->group(function(){
-    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-// });
+Route::middleware('auth','web')->prefix('admin')->group(function(){
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+
+    Route::resource('categories', CategoryController::class);
+});

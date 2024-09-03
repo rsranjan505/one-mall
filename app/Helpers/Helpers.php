@@ -3,6 +3,8 @@
 namespace App\Helpers;
 
 use Config;
+use Exception;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class Helpers
@@ -141,9 +143,4 @@ class Helpers
         }
     }
 
-    ################################################################
-    ###########     Own Helper function ############################
-    ################################################################
-
-    //Notification email
 }

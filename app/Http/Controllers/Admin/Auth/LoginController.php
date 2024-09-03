@@ -37,4 +37,24 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
         $this->middleware('auth')->only('logout');
     }
+
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+
+    public function login()
+    {
+        if (auth()->guard('web')->attempt(['email' => request('email'), 'password' => request('password')])) {
+            return redirect('/admin/dashboard');
+        }
+
+        return redirect('/admin/login');
+    }
+
+    public function logout()
+    {
+        auth()->guard('web')->logout();
+        return redirect('/admin/login');
+    }
 }

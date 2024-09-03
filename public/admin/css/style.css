@@ -9,3 +9,13 @@ NOTE:
 ------
 PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
 WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+
+.icon-hover:hover {
+  cursor: pointer !important;
+}
+
+.icon-hover #icon:hover {
+    fill: rgb(235, 153, 31) !important;
+    cursor: pointer !important;
+  }

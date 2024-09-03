@@ -46,7 +46,7 @@
             <label for="login-email" class="form-label">Email</label>
             <input
               type="text"
-              class="form-control"
+              class="form-control @error('email') is-invalid @enderror"
               id="email"
               name="email"
               placeholder="john@example.com"
@@ -54,6 +54,11 @@
               tabindex="1"
               autofocus
             />
+            @error('email')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
           </div>
 
           <div class="mb-1">

@@ -25,10 +25,10 @@
           "slug": "app-chat"
         },
         {
-          "url": "app/todo",
+          "url": "admin/categories",
           "name": "Category List",
           "icon": "circle",
-          "slug": "app-todo"
+          "slug": "categories.index"
         }
       ]
     },

@@ -22,8 +22,14 @@
   <title>{{ config('app.name', 'One Mall') }}</title>
   <link rel="apple-touch-icon" href="{{ asset('images/ico/favicon-32x32.png') }}">
   <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/logo/favicon.ico') }}">
+
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600"
     rel="stylesheet">
+
+    {{-- <link rel="stylesheet" href="https://demos.pixinvent.com/vuexy-html-admin-template/assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="https://demos.pixinvent.com/vuexy-html-admin-template/assets/vendor/fonts/tabler-icons.css"/>
+    <link rel="stylesheet" href="https://demos.pixinvent.com/vuexy-html-admin-template/assets/vendor/fonts/flag-icons.css" /> --}}
+
 
   {{-- Include core + vendor Styles --}}
   @include('admin.panels.styles')
@@ -54,6 +60,9 @@
   {{-- include default scripts --}}
   @include('admin.panels.scripts')
 
+
+
+
   <script type="text/javascript">
     $(window).on('load', function() {
       if (feather) {
@@ -63,6 +72,16 @@
         });
       }
     })
+
+    $(document).ready(function() {
+        $('#select-field' ).select2( {
+            theme: 'bootstrap-5'
+        } );
+
+        $('input[type="checkbox"]').not("[id*='check_']").bootstrapSwitch('state');
+    });
+
+
   </script>
 
 </body>

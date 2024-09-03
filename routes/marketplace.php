@@ -20,4 +20,4 @@ Route::get('/product-deatils', [ProductController::class, 'index'])->name('marke
 Route::get('/cart', [CartController::class, 'index'])->name('market.cart');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('market.checkout');
 
-Route::get('/dashboard', [DashboradController::class, 'index'])->name('market.dashboard');
+// Route::get('/dashboard', [DashboradController::class, 'index'])->name('market.dashboard');
