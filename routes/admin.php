@@ -2,10 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\{
+    AttributeController,
     CategoryController,
-    DashboardController
+    DashboardController,
+    ProductController
 };
-
+use App\Http\Controllers\Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,9 +44,16 @@ Route::group(['prefix' => 'admin'], function(){
     // Auth::routes();
 });
 
+Route::post('/file-upload', [Controller::class, 'storeTempFile'])->name('file.upload');
 
 Route::middleware('auth','web')->prefix('admin')->group(function(){
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
     Route::resource('categories', CategoryController::class);
+    Route::get('/categories/{category}/change-status', [CategoryController::class, 'changeStatus'])->name('categories.change.status');
+
+    Route::resource('attributes', AttributeController::class);
+    Route::get('/attributes/{attribute}/change-status', [AttributeController::class, 'changeStatus'])->name('attributes.change.status');
+
+    Route::resource('products', ProductController::class);
 });

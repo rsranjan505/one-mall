@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\Category;
+use App\Models\Attribute;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class CategoryDataTable extends DataTable
+class AttributeDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -22,41 +22,41 @@ class CategoryDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-        ->addIndexColumn()
-        ->editColumn('name', function($row){
-            return ucfirst($row->name);
-        })
-        ->addColumn('status', function($row){
-            $active = $row->is_active == 1 ? "checked" : "";
-            $status = '<div class="form-check form-switch mb-2">
-                        <input class="form-check-input" onchange="statusConfirmation(\''.route('categories.change.status', $row).'\')" type="checkbox" id="status_check-'.$row->id.'" '.$active.'>
-                        <label class="form-check-label" for="'.$row->id.'"></label>
-                    </div>';
+            ->editColumn('name', function($row){
+                return ucfirst($row->name);
+            })
+            ->addColumn('status', function($row){
+                $active = $row->is_active == 1 ? "checked" : "";
+                $status = '<div class="form-check form-switch mb-2">
+                            <input class="form-check-input" onchange="statusConfirmation(\''.route('attributes.change.status', $row).'\')" type="checkbox" id="status_check-'.$row->id.'" '.$active.'>
+                            <label class="form-check-label" for="'.$row->id.'"></label>
+                        </div>';
 
-            return $status;
+                return $status;
 
-        })
-        ->editColumn('parent', function($row){
-            return $row->parent ? ucfirst($row->parent->name) : '';
-        })
-        // ->addColumn('images', function($row){
-        //     return '<img src="'.$row->image ?? $row->image->url.'" alt="Images" class="rounded-circle" width="40">';
-        // })
-        ->addColumn('action', function($row){
+            })
+            ->editColumn('type', function($row){
+                return ucfirst($row->type);
+            })
+            ->editColumn('attribute_type', function($row){
+                return ucfirst($row->attribute_type);
+            })
 
-            return '<a href="javascript:void(0);" onclick="editModel('.$row->id.',\''.route('categories.update',['category' => $row]).'\',\'category\')"><box-icon name="edit-alt" type="solid" color="#053ba9" class="icon-hover"></box-icon></a> | <a href="javascript:void(0);" onclick="deleteConfirmation('.$row->id.',\''.route('categories.destroy',['category' => $row]).'\')"><box-icon name="trash" type="solid" color="#ff0505"  class="icon-hover"></box-icon></a>';
+            ->addColumn('action', function($row){
 
-        })
-        ->rawColumns(['action','status','images'])
-        ->setRowId('id');
+                return '<a href="javascript:void(0);" onclick="editModel('.$row->id.',\''.route('attributes.update',['attribute' => $row]).'\',\'attribute\')"><box-icon name="edit-alt" type="solid" color="#053ba9" class="icon-hover"></box-icon></a> | <a href="javascript:void(0);" onclick="deleteConfirmation('.$row->id.',\''.route('attributes.destroy',['attribute' => $row]).'\')"><box-icon name="trash" type="solid" color="#ff0505"  class="icon-hover"></box-icon></a>';
+
+            })
+            ->rawColumns(['action','status'])
+            ->setRowId('id');
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(Category $model): QueryBuilder
+    public function query(Attribute $model): QueryBuilder
     {
-        return $model->newQuery()->with('image')->latest();
+        return $model->newQuery()->latest();
     }
 
     /**
@@ -65,7 +65,7 @@ class CategoryDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('category-table')
+                    ->setTableId('attribute-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
@@ -89,14 +89,15 @@ class CategoryDataTable extends DataTable
         return [
             Column::make('id'),
             Column::make('name'),
-            Column::make('slug'),
-            Column::make('parent'),
+            Column::make('type'),
+            Column::make('attribute_type'),
             Column::make('status'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
                   ->width(60)
                   ->addClass('text-center'),
+
         ];
     }
 
@@ -105,6 +106,6 @@ class CategoryDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Category_' . date('YmdHis');
+        return 'Attribute_' . date('YmdHis');
     }
 }

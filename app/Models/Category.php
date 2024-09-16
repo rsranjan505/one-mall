@@ -18,6 +18,11 @@ class Category extends Model
         return $this->belongsTo(self::class);
     }
 
+    public function children()
+    {
+        return $this->hasMany(self::class,'parent_id','id')->where('is_active',1) ;
+    }
+
     public function image()
     {
         return $this->morphOne(AssetFile::class, 'pictureable','model_type', 'model_id');

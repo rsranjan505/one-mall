@@ -6,7 +6,7 @@
     </div>
     <!-- Offcanvas Body -->
     <div class="offcanvas-body border-top">
-        <form id="category-edit-form" method="post" action="" enctype="multipart/form-data">
+        <form id="category-edit-form" method="post" data-table="category" action="" enctype="multipart/form-data">
             @csrf
             @method('patch')
             <div class="mb-1">
@@ -43,7 +43,7 @@
             <label class="form-label" for="description">Description</label>
             <textarea id="edit_description" name="description" class="form-control" placeholder="Description"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary">Update</button>
             <span class="spinner-border spinner-border text-success d-none" role="status" aria-hidden="true" style="vertical-align: middle"></span>
             <button type="reset" class="btn btn-danger" data-bs-dismiss="offcanvas" style="float: right; vertical-align: middle">Discard</button>
         </form>

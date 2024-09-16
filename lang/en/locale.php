@@ -6,7 +6,8 @@ return [
     "Products" => "Products",
     "Product List" => "Product List",
     "Add Product" => "Add Product",
-    "Category List" => "Category List",
+    "Category" => "Category",
+    "Attribute" => "Attribute",
     "Orders" => "Orders",
     "Order List" => "Order List",
     "Order Details" => "Order Details",
@@ -38,8 +39,6 @@ return [
     "Locations" => "Locations",
     "Notification" => "Notification",
     "Account" => "Account",
-    "Amenity List" => "Amenity List",
-    "Amenity Add" => "Amenity Add",
     "Commission" => "Commission",
 ];
 

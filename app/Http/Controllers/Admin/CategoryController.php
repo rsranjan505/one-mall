@@ -41,7 +41,6 @@ class CategoryController extends Controller
             'file.max' => 'image should be less than 1MB',
         ]);
 
-
         $category = new Category();
 
         $category = $category->create($request->all());

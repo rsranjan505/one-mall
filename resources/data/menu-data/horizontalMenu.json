@@ -13,22 +13,28 @@
       "slug": "",
       "submenu": [
         {
-          "url": "app/email",
-          "name": "Product List",
-          "icon": "circle",
-          "slug": "app-email"
+            "url": "admin/products",
+            "name": "Product List",
+            "icon": "circle",
+            "slug": "products.index"
         },
         {
-          "url": "app/chat",
-          "name": "Add Product",
-          "icon": "circle",
-          "slug": "app-chat"
+            "url": "admin/products/create",
+            "name": "Add Product",
+            "icon": "circle",
+            "slug": "products.create"
         },
         {
-          "url": "admin/categories",
-          "name": "Category List",
-          "icon": "circle",
-          "slug": "categories.index"
+            "url": "admin/categories",
+            "name": "Category",
+            "icon": "circle",
+            "slug": "categories.index"
+        },
+        {
+            "url": "admin/attributes",
+            "name": "Attribute",
+            "icon": "circle",
+            "slug": "attributes.index"
         }
       ]
     },

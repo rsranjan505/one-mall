@@ -7,7 +7,7 @@
         </div>
         <!-- Offcanvas Body -->
         <div class="offcanvas-body border-top">
-            <form id="category-add-form" method="post" action="{{ route('categories.store') }}" enctype="multipart/form-data">
+            <form id="category-add-form" method="post" data-table="category" action="{{ route('categories.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-1">
                 <label class="form-label" for="name">Title</label>

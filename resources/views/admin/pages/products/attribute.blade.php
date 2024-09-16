@@ -1,7 +1,7 @@
 
 @extends('admin.layout.contentLayoutMaster')
 
-@section('title', 'Category')
+@section('title', 'Attribute')
 
 @section('vendor-style')
 <link rel="stylesheet" href="{{ asset('admin/vendors/css/tables/datatable/dataTables.bootstrap5.min.css') }}">
@@ -19,17 +19,18 @@
             <div class="card">
                 <div class="card-body">
                     <div class="card-header p-0">
-                        <h4 class="card-title">Category List</h4>
-                        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEnd" aria-controls="offcanvasEnd">Add Category</button>
+                        <h4 class="card-title">Attribute</h4>
+                        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEnd" aria-controls="offcanvasEnd">Add Attribute</button>
                     </div>
 
                     <div class="table-responsive text-nowrap">
-                        <table class="table" id="category-table">
+                        <table class="table" id="attribute-table">
                             <thead class="table-light">
                                 <tr>
                                     <th>SN</th>
-                                    <th>Title</th>
-                                    <th>Parent Category</th>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Attribute Type</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
@@ -43,9 +44,9 @@
 
 
 
-@include('admin.components.category-offcanvass')
+@include('admin.components.attribute-offcanvas')
 
-@include('admin.components.category-offcanvas-edit')
+@include('admin.components.attribute-offcanvas-edit')
 
 
 @endsection
@@ -68,19 +69,8 @@
 
 
     // convert title into slug
-    $('#name').on('keyup', function() {
-        var name = $(this).val();
-        var slug = slugify(name);
-        $('#slug').val(slug);
-    });
 
-    $(' #edit_name').on('keyup', function() {
-        var name = $(this).val();
-        var slug = slugify(name);
-        $('#edit_slug').val(slug);
-    });
-
-    $('#category-add-form').on('submit', function(e) {
+    $('#attribute-add-form').on('submit', function(e) {
       e.preventDefault();
 
       $('.spinner-border').removeClass('d-none');
@@ -90,9 +80,10 @@
 
       submit_form( this,'add');
 
+      getajaxdata('{{ route("attributes.index") }}','attribute');
     });
 
-    $('#category-edit-form').on('submit', function(e) {
+    $('#attribute-edit-form').on('submit', function(e) {
       e.preventDefault();
 
       $('.spinner-border').removeClass('d-none');
@@ -104,7 +95,19 @@
 
     });
 
-    getajaxdata('{{ route("categories.index") }}','category');
+    getajaxdata('{{ route("attributes.index") }}','attribute');
+
+    $(document).ready(function () {
+        // $('#add_value_element').on('click', function () {
+        //     $('#default_value_ele').append(`<div  class="d-flex flex-row justify-between mb-1" >
+        //                 <input type="text" class="form-control w-3/4" id="default_value" name="default_value" placeholder="Enter Field name"/>
+        //                 <span class="w-1/4 px-1 m-auto" id="add_value_element">
+        //                     <box-icon name="x-circle" type="solid" color="rgb(245 18 18);" class="icon-hover"></box-icon>
+        //                 </span>
+        //             </div>`);
+        // })
+
+    });
 
   </script>
 @endsection

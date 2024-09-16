@@ -27,11 +27,11 @@ $(function () {
   });
 
   // Multiple Files
-  multipleFiles.dropzone({
-    paramName: 'file', // The name that will be used to transfer the file
-    maxFilesize: 0.5, // MB
-    clickable: true
-  });
+//   multipleFiles.dropzone({
+//     paramName: 'file', // The name that will be used to transfer the file
+//     maxFilesize: 0.5, // MB
+//     clickable: true
+//   });
 
   // Use Button To Select Files
   buttonSelect.dropzone({

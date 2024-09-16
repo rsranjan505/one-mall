@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use Exception;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\File;
+use Symfony\Component\Finder\SplFileInfo;
 
 class Controller extends BaseController
 {
@@ -17,9 +20,65 @@ class Controller extends BaseController
     ###########     Own Helper function ############################
     ################################################################
 
+    //for dropzone file upload
+    function storeTempFile(Request $request)
+    {
+        $path = storage_path('tmp/uploads');
+
+        if (!file_exists($path)) {
+            mkdir($path, 0777, true);
+        }
+
+        $file = $request->file('file');
+
+        $name = uniqid() . '_' . trim($file->getClientOriginalName());
+
+        $file->move($path, $name);
+
+        return response()->json([
+            'name'          => $name,
+            'original_name' => $file->getClientOriginalName(),
+        ]);
+    }
+
+    //this function will convert SplFileInfo to UploadedFile as files bag
+    function convertSplFileInfoToUploadedFile(SplFileInfo $file, string $originalName = null) {
+        try
+        {
+             // Create a temporary file
+            // $tempFile = tempnam('D:\xampp\tmp', 'uploaded_file');
+            $tempFile = tempnam(sys_get_temp_dir(), 'uploaded_file');
+
+            // Copy the SplFileInfo content to the temporary file
+            copy($file->getPathname(), $tempFile);
+
+            // Create an UploadedFile instance
+            $uploadedFile = new UploadedFile(
+                $tempFile,
+                $originalName ?? $file->getFilename(),
+                'image/png',
+                UPLOAD_ERR_OK,
+                true // Indicates that the file is a real file
+            );
+
+            // Clean up the temporary file when the uploaded file is destroyed
+            register_shutdown_function(function () use ($tempFile) {
+                unlink($tempFile);
+            });
+
+            return $uploadedFile;
+        }
+        catch(Exception $e)
+        {
+            return [];
+        }
+
+    }
+
     //Upload images
     function fileUpload($file, $model, $storageType='local'): array
     {
+
         try {
             if($storageType == 'local'){
                 $extension = $file->getClientOriginalExtension();
@@ -50,6 +109,7 @@ class Controller extends BaseController
                 return [];
             }
         } catch (Exception $e) {
+            dd($e);
             return [];
         }
     }
