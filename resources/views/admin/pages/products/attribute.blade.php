@@ -10,7 +10,17 @@
 
 <link rel="stylesheet" href="{{ asset('admin/vendors/css/forms/select/select2.min.css') }}">
 
+
+{{--
+<link rel="stylesheet" href="{{ asset('admin/vendors/css/tables/datatable/dataTables.bootstrap5.min.css') }}">
+<link rel="stylesheet" href="{{ asset('admin/vendors/css/tables/datatable/responsive.bootstrap5.min.css') }}">
+<link rel="stylesheet" href="{{ asset('admin/vendors/css/tables/datatable/buttons.bootstrap5.min.css') }}">
+<link rel="stylesheet" href="{{ asset('admin/vendors/css/tables/datatable/rowGroup.bootstrap5.min.css') }}">
+<link rel="stylesheet" href="{{ asset('admin/vendors/css/pickers/flatpickr/flatpickr.min.css') }}"> --}}
+
 @section('content')
+
+
 
 <section id="basic-tabs-components">
     <div class="row ">
@@ -22,21 +32,19 @@
                         <h4 class="card-title">Attribute</h4>
                         <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEnd" aria-controls="offcanvasEnd">Add Attribute</button>
                     </div>
+                    <table class="datatables-basic table" id="attribute-table">
+                        <thead class="table-light">
+                            <tr>
+                                <th>SN</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Attribute Type</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                    </table>
 
-                    <div class="table-responsive text-nowrap">
-                        <table class="table" id="attribute-table">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>SN</th>
-                                    <th>Name</th>
-                                    <th>Type</th>
-                                    <th>Attribute Type</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
                 </div>
             </div>
         </div>
@@ -54,9 +62,23 @@
 @section('vendor-script')
 
   <script src="{{ asset('admin/vendors/js/extensions/sweetalert2.all.min.js') }}"></script>
+
   <script src="{{ asset('admin/vendors/js/tables/datatable/jquery.dataTables.min.js') }}"></script>
   <script src="{{ asset('admin/vendors/js/tables/datatable/dataTables.bootstrap5.min.js') }}"></script>
   <script src="{{ asset('admin/vendors/js/tables/datatable/dataTables.responsive.min.js') }}"></script>
+
+  {{-- <script src="{{ asset('admin/vendors/js/tables/datatable/responsive.bootstrap5.min.js') }}"></script>
+  <script src="{{ asset('admin/vendors/js/tables/datatable/datatables.checkboxes.min.js') }}"></script>
+  <script src="{{ asset('admin/vendors/js/tables/datatable/datatables.buttons.min.js') }}"></script>
+  <script src="{{ asset('admin/vendors/js/tables/datatable/jszip.min.js') }}"></script>
+  <script src="{{ asset('admin/vendors/js/tables/datatable/pdfmake.min.js') }}"></script>
+  <script src="{{ asset('admin/vendors/js/tables/datatable/vfs_fonts.js') }}"></script>
+  <script src="{{ asset('admin/vendors/js/tables/datatable/buttons.html5.min.js') }}"></script>
+  <script src="{{ asset('admin/vendors/js/tables/datatable/buttons.print.min.js') }}"></script>
+  <script src="{{ asset('admin/vendors/js/tables/datatable/dataTables.rowGroup.min.js') }}"></script>
+  <script src="{{ asset('admin/vendors/js/pickers/flatpickr/flatpickr.min.js') }}"></script>
+ --}}
+
 
   <script src="{{ asset('admin/vendors/js/forms/select/select2.full.min.js') }}"></script>
 

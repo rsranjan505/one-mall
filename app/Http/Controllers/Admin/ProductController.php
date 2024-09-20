@@ -2,22 +2,32 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\ProductDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Attribute;
+use App\Models\AttributeValue;
 use App\Models\Category;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
+
+    protected ProductService $productService;
+
+    public function __construct(ProductService $productService)
+    {
+        $this->productService = $productService;
+    }
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(ProductDataTable $dataTable)
     {
-        return view('admin.pages.products.list-product');
+        return $dataTable->render('admin.pages.products.list-product');
     }
 
     /**
@@ -36,7 +46,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'name' => 'required',
             'short_description' => 'required',
@@ -57,17 +66,28 @@ class ProductController extends Controller
         ]);
         $data = $request->except(['_token','product_images','attribute_id','attribute_value']);
 
+        $attributes = $request->attribute_id;
+
         $product_images = $request->product_images;
 
         $files = File::files(storage_path('tmp/uploads/'));
-
-
         $data['slug'] = Str::slug($request->name);
+
         $product = new Product();
+
         $product = $product->create($data);
         if($product->id){
-            if($request->product_images !=null){
+            foreach ($attributes as $key => $attribute) {
+                if($attribute != null){
+                    $attributeVaLue = new AttributeValue();
+                    $attributeVaLue->product_id = $product->id;
+                    $attributeVaLue->attribute_id = $request->attribute_id[$key];
+                    $attributeVaLue->value = $request->attribute_value[$key];
+                    $attributeVaLue->save();
+                }
+            }
 
+            if($request->product_images !=null){
                 foreach ($files as $file) {
                     if(in_array($file->getFilename(), $product_images)){
                         $uploadedimage = $this->convertSplFileInfoToUploadedFile($file);  //convert SplFileInfo to UploadedFile
@@ -90,7 +110,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        $product = $this->productService->getProductDetails($product->id);
+        return ok($product);
     }
 
     /**
@@ -104,9 +125,49 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $cr)
+    public function update(Request $request, Product $product)
     {
-        //
+        if($request->has('details')){
+
+            $request->validate([
+                'name' => 'required',
+                'short_description' => 'required',
+                'description' => 'required',
+            ],[
+                'name.required' => 'Product name is required',
+                'short_description.required' => 'Short description is required',
+                'description.required' => 'Description is required',
+            ]);
+        }
+        elseif($request->has('stocks')){
+
+            $request->validate([
+                'price' => 'required|numeric',
+                'category' => 'required',
+                'sub_category' => 'required',
+            ],[
+
+                'price.required' => 'Price is required',
+                'category.required' => 'Category is required',
+                'sub_category.required' => 'Sub category is required',
+
+            ]);
+        }
+        elseif($request->has('variants')){
+
+        }
+        else{
+
+        }
+
+        dd($request->all());
+        // $product = $this->productService->getProductDetails($product->id);
+        $update_status = $this->productService->updateProduct($request,$product);
+        if($update_status){
+            return ok($product,'Product updated Successfully');
+        }
+        return bad('Something went wrong');
+
     }
 
     /**
@@ -115,5 +176,14 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+    }
+
+    public function setOutOfStock(int $productId)
+    {
+        $product = $this->productService->getProductDetails($productId);
+        if($this->productService->setOutOfStock($product)){
+            return ok($product,'Product updated Successfully');
+        }
+        return bad('Something went wrong');
     }
 }

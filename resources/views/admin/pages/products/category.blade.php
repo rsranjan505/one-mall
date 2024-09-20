@@ -23,19 +23,17 @@
                         <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEnd" aria-controls="offcanvasEnd">Add Category</button>
                     </div>
 
-                    <div class="table-responsive text-nowrap">
-                        <table class="table" id="category-table">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>SN</th>
-                                    <th>Title</th>
-                                    <th>Parent Category</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
+                    <table class="datatables-basic table" id="category-table">
+                        <thead class="table-light">
+                            <tr>
+                                <th>SN</th>
+                                <th>Title</th>
+                                <th>Parent Category</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
         </div>

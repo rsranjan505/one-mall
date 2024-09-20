@@ -56,4 +56,5 @@ Route::middleware('auth','web')->prefix('admin')->group(function(){
     Route::get('/attributes/{attribute}/change-status', [AttributeController::class, 'changeStatus'])->name('attributes.change.status');
 
     Route::resource('products', ProductController::class);
+    Route::get('/products/{productId}/out-of-stock', [ProductController::class, 'setOutOfStock'])->name('products.outofstock');
 });

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('collection')->nullable();  // it is a 3rd level of category
             $table->decimal('price', 8, 2);
             $table->decimal('sale_price', 8, 2)->nullable();
+            $table->decimal('quantity', 8, 2)->default(0);
             $table->text('short_description');
             $table->text('description');
             $table->text('long_description')->nullable();

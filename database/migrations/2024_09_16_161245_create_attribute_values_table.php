@@ -13,8 +13,14 @@ return new class extends Migration
     {
         Schema::create('attribute_values', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('attribute_id');
+            $table->string('value');
+            $table->double('quantity', 8, 2)->default(0);
             $table->timestamps();
+
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('cascade');
         });
     }
 

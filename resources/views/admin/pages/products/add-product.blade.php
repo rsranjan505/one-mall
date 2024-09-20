@@ -119,7 +119,6 @@
                                                 <option value="{{$attribute->id}}">{{ ucfirst($attribute->name)}}</option>
                                             @endforeach
                                         @endif
-
                                     </select>
                                 </div>
                                 <div class="mb-2 col-8">
@@ -215,34 +214,53 @@
                 <!-- /Pricing Card -->
                 <!-- Organize Card -->
                 <div class="card mb-2">
-                <div class="card-header">
-                    <h5 class="card-title mb-0">Organize</h5>
-                </div>
-                <div class="card-body">
-                    <!-- Vendor -->
-                    <div class="mb-2 col ecommerce-select2-dropdown">
-                        <label class="form-label" for="vendor">
-                            Category
-                        </label>
-                        <select class="form-select select2" id="category" name="category">
-                            <option value="">Select category *</option>
-                            @if (isset($categories))
-                                @foreach ($categories->where('parent_id', null) as $category)
-                                    <option value="{{$category->id}}">{{ ucfirst($category->name)}}</option>
-                                @endforeach
-                            @endif
-                        </select>
-                        <span id="error-category" class="text-danger input-error"></span>
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Organize</h5>
                     </div>
-                    <!-- Category -->
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="card-body">
+                        <!-- Vendor -->
                         <div class="mb-2 col ecommerce-select2-dropdown">
-                            <label class="form-label" for="sub_category">
-                                <span>Sub Category *</span>
+                            <label class="form-label" for="vendor">
+                                Category
                             </label>
+                            <select class="form-select select2" id="category" name="category">
+                                <option value="">Select category *</option>
+                                @if (isset($categories))
+                                    @foreach ($categories->where('parent_id', null) as $category)
+                                        <option value="{{$category->id}}">{{ ucfirst($category->name)}}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                            <span id="error-category" class="text-danger input-error"></span>
+                        </div>
+                        <!-- Category -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="mb-2 col ecommerce-select2-dropdown">
+                                <label class="form-label" for="sub_category">
+                                    <span>Sub Category *</span>
+                                </label>
 
-                            <select class="form-select select2" id="sub_category" name="sub_category">
-                                <option value="">Select sub category</option>
+                                <select class="form-select select2" id="sub_category" name="sub_category">
+                                    <option value="">Select sub category</option>
+                                    @if (isset($categories))
+                                        @foreach ($categories as $category)
+                                            @if (isset($category->children) && count($category->children) > 0 )
+                                                @foreach ($category->children as $item)
+                                                    <option value="{{$item->id}}">{{ ucfirst($item->name)}}</option>
+                                                @endforeach
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </select>
+                                <span id="error-sub_category" class="text-danger input-error"></span>
+                            </div>
+                        </div>
+                        <!-- Collection -->
+                        <div class="mb-6 col ecommerce-select2-dropdown">
+                            <label class="form-label" for="collection">Collection
+                            </label>
+                            <select class="form-select select2" id="collection" name="collection">
+                                <option value="">Select collection</option>
                                 @if (isset($categories))
                                     @foreach ($categories as $category)
                                         @if (isset($category->children) && count($category->children) > 0 )
@@ -253,40 +271,21 @@
                                     @endforeach
                                 @endif
                             </select>
-                            <span id="error-sub_category" class="text-danger input-error"></span>
-                        </div>
-                    </div>
-                    <!-- Collection -->
-                    <div class="mb-6 col ecommerce-select2-dropdown">
-                        <label class="form-label" for="collection">Collection
-                        </label>
-                        <select class="form-select select2" id="collection" name="collection">
-                            <option value="">Select collection</option>
-                            @if (isset($categories))
-                                @foreach ($categories as $category)
-                                    @if (isset($category->children) && count($category->children) > 0 )
-                                        @foreach ($category->children as $item)
-                                            <option value="{{$item->id}}">{{ ucfirst($item->name)}}</option>
-                                        @endforeach
-                                    @endif
-                                @endforeach
-                            @endif
-                        </select>
 
+                        </div>
+                        <!-- Status -->
+                        <div class="mb-2 col ecommerce-select2-dropdown">
+                            <label class="form-label mt-2" for="status">Status
+                            </label>
+                            <select class="form-select select2" id="status" name="status">
+                                <option value="">Select status</option>
+                                <option value="published">Published</option>
+                                <option value="scheduled">Scheduled</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+                        <!-- Tags -->
                     </div>
-                    <!-- Status -->
-                    <div class="mb-2 col ecommerce-select2-dropdown">
-                        <label class="form-label mt-2" for="status">Status
-                        </label>
-                        <select class="form-select select2" id="status" name="status">
-                            <option value="">Select status</option>
-                            <option value="published">Published</option>
-                            <option value="scheduled">Scheduled</option>
-                            <option value="inactive">Inactive</option>
-                        </select>
-                    </div>
-                    <!-- Tags -->
-                </div>
                 </div>
                 <!-- /Organize Card -->
 
@@ -308,9 +307,9 @@
                         <div class="d-flex justify-content-between align-items-center pt-2">
                             <span class="mb-0">Is Popular Product</span>
                             <div class="w-25 d-flex justify-content-center">
-                            <div class="form-check form-switch me-n3">
-                                <input type="checkbox" name="is_popular" id="is_popular" class="form-check-input">
-                            </div>
+                                <div class="form-check form-switch me-n3">
+                                    <input type="checkbox" name="is_popular" id="is_popular" class="form-check-input">
+                                </div>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between align-items-center pt-2">
@@ -340,8 +339,20 @@
                     </div>
                 </div>
                 <!-- /Additional Card -->
-
-
+                 <!-- Quantity Card -->
+                 <div class="card mb-2">
+                    <div class="card-header">
+                    <h5 class="card-title mb-0">Stock Info</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-2">
+                            <label class="form-label" for="quantity">Quantity *</label>
+                            <input type="number" class="form-control" id="quantity" placeholder="quantity" name="quantity" aria-label="Product Quantity" >
+                            <span id="error-quantity" class="text-danger input-error"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Quantity  -->
             </div>
         <!-- /Second column -->
         </div>
@@ -382,11 +393,6 @@
     });
 
 
-    $(document).ready(function () {
-
-
-    });
-
     var upload_images = {};
     var drp = new Dropzone("#dpz-product-images", {
         url: "{{ route('file.upload') }}",
@@ -416,21 +422,6 @@
                 $('#product-add-form').find('input[name="product_images[]"][value="' + name + '"]').remove()
             }
         });
-
-    // drp.on("addedfile", function (file) {
-    // // Hookup the start button
-
-    //     reader = new FileReader();
-    //     reader.onload = function (event) {
-    //         imageData = event.target.result;
-    //         console.log(imageData);
-    //         images.push(imageData);
-
-    //         $('#product-add-form').append('<input type="hidden" name="product_images[]" value="' + file.name + '">')
-    //     };
-    //     reader.readAsDataURL(file);
-
-    // });
 
 
     var short_description = new Quill('#short_description_editor', {
@@ -485,62 +476,35 @@
     $('#btn_product_publish').on('click', function(e) {
 
         var form = $('#product-add-form');
-        // var formData = new FormData(form[0]);
-        // e.preventDefault();
-        // submit_form( form,'add');
+
         $('input[name=short_description]').val(JSON.stringify(short_description.getContents()));
         $('input[name=long_description]').val(JSON.stringify(long_description.getContents()));
         $('input[name=description]').val(JSON.stringify(description.getContents()));
 
-        // $('#product_images').val(images);
-
-
-        //  $.each(images, function() {
-        //     var file = $(this);
-        //     formData.append(file[0].name, file[0]);
-        //     console.log(file);
-
-        // });
-
-        // var files = form.find("#product_images")[0].files;
 
         $.ajax({
             type: "POST",
             url: "{{ route('products.store') }}",
             data: form.serialize(),
             success: function (response) {
-                console.log(response)
-                if(response.status == 'success'){
-                    window.location.href = "{{ route('products.index') }}";
+                if(response.success == true){
+                    console.log(response)
+                    toastr.success(response.message, 'Success!', {
+                        closeButton: true,
+                        tapToDismiss: false
+                    });
+                    // window.location.href = "{{ route('products.index') }}";
                 }
             },
             error: function(response) {
                 $('.spinner-border').addClass('d-none');
                 $.each(response.responseJSON.errors, function(key, value) {
-                    console.log(key);
-
                     $('#error-' + key ).text(value[0]);
                     $('#'+ key ).removeClass('border-0').addClass('is-invalid');
-
                 })
             }
         });
     });
-
-
-// var form = document.querySelector('form');
-// form.onsubmit = function() {
-//   // Populate hidden form on submit
-//   var about = document.querySelector('input[name=box]');
-//   about.value = JSON.stringify(quill.getContents());
-
-//   console.log("field length: " + about.value.length + " ", $(form).serialize(), $(form).serializeArray());
-
-//   // No back end to actually submit to!
-//   alert('Open the console to see the submit data!')
-//   return false;
-// };
-
 
 
   </script>

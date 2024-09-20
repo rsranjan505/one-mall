@@ -51,6 +51,35 @@ function capitalize_first_letter(text) {
     return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
+$(document).ready(function () {
+    // $('.select2').select2();
+
+    // $('.select2-icons').select2({
+    //     templateResult: iconFormat,
+    //     templateSelection: iconFormat
+    // });
+    // $('.select2InModal').select2({
+    //     templateResult: iconFormat,
+    //     templateSelection: iconFormat
+    // });
+
+});
+
+ //checkbox event for value
+ $(function()
+ {
+     $('input[type="checkbox"]').click(function(){
+         if($(this).is(':checked'))
+         {
+             $(this).val(1);
+         }
+         else
+         {
+             $(this).val(0);
+         }
+     });
+ });
+
 
 // clone div
 var varient_element_count = 1;
@@ -108,6 +137,8 @@ function getajaxdata(url, table)
             }else if(table == 'attribute'){
 
                 attribute_datatable(data);
+            }else if(table == 'product'){
+                products_datatable(data);
             }
 
         },
@@ -183,6 +214,350 @@ function getajaxdata(url, table)
     }
 
 
+    function products_datatable(dataset)
+    {
+
+        $('#product-table').DataTable({
+        "data": dataset.data,
+        "iDisplayLength": 10,
+        // "order": ([1, 'asc'], [9, 'asc']),
+        "lengthChange": false,
+        "searching": true,
+        "bDestroy": true,
+        "paging": true,
+        "info": true,
+        "ordering": true,
+        "scrollCollapse": true,
+        "autoWidth": false,
+        "columns": [
+                    { 'data': 'DT_RowId'},
+                    { 'data': 'name' },
+                    { 'data': 'category'},
+                    { 'data': 'out_of_stock'},
+                    { 'data': 'price'},
+                    { 'data': 'sku'},
+                    { 'data': 'quantity'},
+                    { 'data': 'status'},
+                    { 'data': 'action', orderable: false, searchable: false},
+                ],
+                "columnDefs":
+                [
+                  {
+                  "targets": [0],
+                  "orderable": false
+                  },
+                  {
+                    "targets": [1,2,3,4,5,6,7,8],
+                    "createdCell": function (td, cellData, rowData, row, col) {
+
+                    //    $(td).on('click', function(){
+                    //         if(col != 8){
+                    //             editProduct(rowData);
+                    //         }
+                    //    });
+                       if(col == 8)
+                        {
+                            // console.log($(td).children().children().find('a#details'));
+                            $(td).children().children().find('a#details').on('click', function(){
+                                editProduct('details',rowData);
+                            })
+                            $(td).children().children().find('a#stock').on('click', function(){
+                                editProduct('stock',rowData);
+                            })
+                            $(td).children().children().find('a#variants').on('click', function(){
+                                editProduct('variants',rowData);
+                            })
+                            $(td).children().children().find('a#delete').on('click', function(){
+                                editProduct('delete',rowData);
+                            })
+                        }
+                    }
+                  },
+                ],
+                createdRow: function (row, data, dataIndex) {
+                    // if(selected_row != '' && selected_row == dataIndex)
+                    // {
+                    //     $(row).addClass('tr_bg_color');
+                    // }
+                    // row.onclick = function() {
+                    //     $(row).parent().children().removeClass('tr_bg_color');
+                    //     if(selected_row == dataIndex)
+                    //     {
+                    //         $(row).addClass('tr_bg_color');
+                    //     }
+                    // }
+                },
+        });
+    }
+
+
+    function editProduct(menu,product_dt)
+    {
+        $('#edit_product').modal('show');
+        var modal_body = '';
+        $('#edit_product #modal-body').html('');
+        if(menu == 'details')
+        {
+            modal_body = details_modal_body(product_dt);
+
+            $('#edit_product #modal-body').html(modal_body);
+
+            var edit_short_description = new Quill('#edit_short_description_editor', {
+                theme: 'snow' });
+            var edit_description_editor = new Quill('#edit_description_editor', {
+                theme: 'snow' });
+            var edit_long_description_editor = new Quill('#edit_long_description_editor', {
+                theme: 'snow' });
+
+
+            $.ajax({
+                url: 'products/'+product_dt.id,
+                type: "GET",
+                dataType: "json",
+                success: function (response) {
+
+                        edit_short_description.setContents(JSON.parse(response.data.short_description));
+                        edit_description_editor.setContents(JSON.parse(response.data.description));
+                        edit_long_description_editor.setContents(JSON.parse(response.data.long_description));
+
+                },
+                error: function (response) {
+                    console.log('Error:', response);
+                }
+            });
+        }
+        else if(menu == 'stock')
+        {
+            modal_body = stock_modal_body(product_dt);
+            $('#edit_product #modal-body').html(modal_body);
+        }
+        else if(menu == 'variants')
+        {
+            modal_body = varient_modal_body(product_dt);
+            $('#edit_product #modal-body').html(modal_body);
+        }
+
+    }
+
+    function details_modal_body(product_dt)
+    {
+        var body_div = '<form id="editProductForm" class="row gy-1 pt-75" onsubmit="return false">'
+                        + '<div class="mb-1">'
+                                + '<label class="form-label" for="edit_name">Name *</label>'
+                                + '<input type="text" class="form-control" id="edit_name" placeholder="Product title" value="' + product_dt.name + '" name="name" aria-label="Product title">'
+                                + '<span id="error-name" class="text-danger input-error"></span>'
+                            + '</div>'
+                        + '<div class="row mb-1">'
+                            + '<div class="col">'
+                                + '<label class="form-label" for="edit_sku">SKU</label>'
+                                + '<input type="number" class="form-control" id="edit_sku" placeholder="SKU" value="' + product_dt.sku + '" name="sku" aria-label="Product SKU" >'
+                            + '</div>'
+                            + '<div class="col">'
+                                + '<label class="form-label" for="edit_barcode">Barcode</label>'
+                                + '<input type="text" class="form-control" id="edit_barcode" value="' + product_dt.barcode + '" placeholder="0123-4567" name="barcode" aria-label="Product barcode">'
+                            + '</div>'
+                        + '</div>'
+                        + '<div>'
+                        + '<label class="mb-1">Short Description *</label>'
+                        + '<div class="form-control p-0">'
+                            + '<input name="short_description" id="edit_short_description" type="hidden">'
+                            + '<div id="edit_short_description_editor" class="editor-container"></div>'
+                            + '<div id="edit_short_description_counter" class="counter">0 characters</div>'
+                            + '<span id="error-short_description" class="text-danger input-error"></span>'
+                        + '</div>'
+
+                        + '<label class="mb-1 mt-2">Description *</label>'
+                        + '<div class="form-control p-0">'
+                            + '<input name="description" id="edit_description" type="hidden">'
+                            + '<div id="edit_description_editor" class="editor-container"></div>'
+                            + '<div id="edit_description_counter" class="counter">0 characters</div>'
+                            + '<span id="error-description" class="text-danger input-error"></span>'
+                        + '</div>'
+
+                        + '<label class="mb-1 mt-2">Additional Information (Optional)</label>'
+                        + '<div class="form-control p-0">'
+                            + '<input name="long_description" id="edit_long_description" type="hidden">'
+                            + '<div id="edit_long_description_editor" class="editor-container"></div>'
+                            + '<div id="long_description_counter" class="counter">0 characters</div>'
+                        + '</div>'
+                    + '</div>'
+                + '</form>';
+
+        return body_div;
+    }
+    function stock_modal_body(product_dt)
+    {
+
+        var categories = JSON.parse(product_dt.categories);
+
+        var category_options = '';
+        categories.forEach(function (category) {
+            let selection = product_dt.category_id == category.id ? 'selected' : '';
+            category_options += '<option value="'+ category.id +'" '+ selection +' >' + category.name + '</option>'
+        })
+
+        var sub_category_options = '';
+        categories.forEach(function (category) {
+            if(category.children.length > 0)
+            {
+                category.children.forEach(function (subCategory) {
+                    let selection = product_dt.sub_category == subCategory.id ? 'selected' : '';
+                    sub_category_options += '<option value="'+ subCategory.id +'" '+ selection +' >' + subCategory.name + '</option>'
+                })
+            }
+        })
+
+        let feature_checked = product_dt.is_featured == 1 ? 'checked' : '';
+        let popular_checked = product_dt.is_popular == 1 ? 'checked' : '';
+        let new_checked = product_dt.is_latest == 1 ? 'checked' : '';
+        let trending_checked = product_dt.is_trending == 1 ? 'checked' : '';
+        let top_checked = product_dt.is_top_selling == 1 ? 'checked' : '';
+
+
+        var body_div = '<form id="editProductForm" class="row gy-1 pt-75" onsubmit="return false">'
+                        + '<div class="row">'
+                            + '<div class="col-6">'
+                                + '<div class="d-flex justify-content-between align-items-center pt-2">'
+                                    + '<span class="mb-0">Is Featured Product</span>'
+                                    + '<div class="w-25 d-flex justify-content-center">'
+                                        + '<div class="form-check form-switch me-n3">'
+                                            + '<input type="checkbox" name="featured" id="featured" ' + feature_checked +' class="form-check-input">'
+                                        + '</div>'
+                                    + '</div>'
+                                + '</div>'
+                            + '</div>'
+                            + '<div class="col-6">'
+                                + '<div class="d-flex justify-content-between align-items-center pt-2">'
+                                    + '<span class="mb-0">Is Popular Product</span>'
+                                    + '<div class="w-25 d-flex justify-content-center">'
+                                        + '<div class="form-check form-switch me-n3">'
+                                            + '<input type="checkbox" name="is_popular" id="is_popular" ' + popular_checked +' class="form-check-input">'
+                                        + '</div>'
+                                    + '</div>'
+                                + '</div>'
+                            + '</div>'
+                        + '</div>'
+                        + '<div class="row">'
+                            + '<div class="col-6">'
+                                + '<div class="d-flex justify-content-between align-items-center pt-2">'
+                                + '<span class="mb-0">Is Trending Product</span>'
+                                    + '<div class="w-25 d-flex justify-content-center">'
+                                        + '<div class="form-check form-switch me-n3">'
+                                            + '<input type="checkbox" name="is_trending" id="is_trending" ' + trending_checked +' class="form-check-input">'
+                                        + '</div>'
+                                    + '</div>'
+                                + '</div>'
+                            + '</div>'
+                            + '<div class="col-6">'
+                                + '<div class="d-flex justify-content-between align-items-center pt-2">'
+                                + '<span class="mb-0">s Latest Product</span>'
+                                    + '<div class="w-25 d-flex justify-content-center">'
+                                        + '<div class="form-check form-switch me-n3">'
+                                            + '<input type="checkbox" name="is_latest" id="is_latest" ' + new_checked +' class="form-check-input">'
+                                        + '</div>'
+                                    + '</div>'
+                                + '</div>'
+                            + '</div>'
+                        + '</div>'
+                        + '<div class="row">'
+                            + '<div class="col-6">'
+                                + '<div class="d-flex justify-content-between align-items-center pt-2">'
+                                + '<span class="mb-0">Is Top Selling Product</span>'
+                                    + '<div class="w-25 d-flex justify-content-center">'
+                                        + '<div class="form-check form-switch me-n3">'
+                                            + '<input type="checkbox" name="is_top_selling" id="is_top_selling" ' + top_checked +' class="form-check-input">'
+                                        + '</div>'
+                                    + '</div>'
+                                + '</div>'
+                            + '</div>'
+                            + '<div class="col-6">'
+
+                            + '</div>'
+                        + '</div>'
+                        + '<div class="row">'
+                            + '<div class="col-6">'
+                                + '<div class="d-flex justify-content-between align-items-center pt-2">'
+                                + '<span class="mb-0">Quantity</span>'
+                                    + '<div class="w-75 d-flex justify-content-center">'
+                                        + ' <input type="number" class="form-control" value="' + product_dt.quantity + '" id="edit_quantity" placeholder="quantity" name="quantity" aria-label="Product quantity" >'
+                                    + '</div>'
+                                + '</div>'
+                            + '</div>'
+                            + '<div class="col-6">'
+                                + '<div class="d-flex justify-content-between align-items-center pt-2">'
+                                + '<span class="mb-0">Price</span>'
+                                    + '<div class="w-75 d-flex justify-content-center">'
+                                        + ' <input type="number" class="form-control" value="' + product_dt.price + '" id="edit_price" placeholder="Price" name="price" aria-label="Product price" >'
+                                    + '</div>'
+                                + '</div>'
+                            + '</div>'
+                        + '</div>'
+                        + '<div class="row">'
+                            + '<div class="col-6">'
+                                + '<div class="d-flex justify-content-between align-items-center pt-2">'
+                                + '<span class="mb-0">Category</span>'
+                                    + '<div class="w-75 d-flex justify-content-center">'
+                                        + '<select class="form-select select2" id="edit_category" name="category">'
+                                            + '<option value="">Select category *</option>'
+                                            + category_options
+                                        + '</select>'
+                                    + '</div>'
+                                + '</div>'
+                            + '</div>'
+                            + '<div class="col-6">'
+                                + '<div class="d-flex justify-content-between align-items-center pt-2">'
+                                + '<span class="mb-0">Price</span>'
+                                    + '<div class="w-75 d-flex justify-content-center">'
+                                    + '<select class="form-select select2" id="edit_sub_category" name="sub_category">'
+                                        + '<option value="">Select category *</option>'
+                                        + sub_category_options
+                                    + '</select>'
+                                    + '</div>'
+                                + '</div>'
+                            + '</div>'
+                        + '</div>'
+                    + '</form>';
+        return body_div;
+    }
+
+    function varient_modal_body(product_dt)
+    {
+        var attributes = JSON.parse(product_dt.attributes);
+        var attributes_options = '';
+        $.each(attributes, function (key, value) {
+            attributes_options += '<option value="' + value.id + '">' + value.name + '</option>';
+        })
+
+        var body_div = '<form id="edit_varient_form" action="' + product_dt.edit_url + '" method="POST">'
+                        + '<div class="row">'
+                            + '<div class="col-6">'
+                                + '<div class="d-flex justify-content-between align-items-center pt-2">'
+                                + '<span class="mb-0">Variant Options</span>'
+                                    + '<div class="w-50 d-flex justify-content-center">'
+                                    + '<select class="form-select select2" id="edit_sub_category" name="sub_category">'
+                                        + '<option value="">Select attribute </option>'
+                                            + attributes_options
+                                    + '</select>'
+                                    + '</div>'
+                                + '</div>'
+                            + '</div>'
+                            + '<div class="col-6">'
+                                + '<div class="d-flex justify-content-between align-items-center pt-2">'
+                                    + '<div class="w-50 d-flex justify-content-center">'
+                                        + ' <input type="number" class="form-control" value="' + product_dt.price + '" id="edit_price" placeholder="Price" name="price" aria-label="Product price" >'
+                                    + '</div>'
+                                + '</div>'
+                            + '</div>'
+                        + '</div>'
+                    + '</form>'
+
+            return body_div;
+    }
+
+    // function updateOutOfStock(product_id)
+    // {
+
+    // }
     //Form Submission
     function submit_form( form, opration)
     {
