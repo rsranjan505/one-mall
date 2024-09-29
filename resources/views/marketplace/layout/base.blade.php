@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@yield('page_title')</title>
     <meta name="keywords" content="HTML5 Template">
-    <meta name="description" content="One Mall - Bootstrap eCommerce Template">
+    <meta name="description" content="One Mall - eCommerce Template">
     <meta name="author" content="p-themes">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -279,6 +279,8 @@
     <!-- Main JS File -->
     <script src="{{ asset('marketplace/assets/js/main.js')}}"></script>
     <script src="{{ asset('marketplace/assets/js/demos/demo-13.js')}}"></script>
+
+    <script src="{{ asset('marketplace/assets/js/custom.js')}}"></script>
 
 
     <script>

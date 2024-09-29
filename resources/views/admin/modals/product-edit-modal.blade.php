@@ -10,10 +10,10 @@
                 <div id="modal-body">
                 </div>
                 <div class="col-12 justify-content-between d-flex mt-2 pt-1">
-                    <button type="submit" class="btn btn-primary me-1">Save</button>
                     <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                         Close
                     </button>
+                    <button type="button" id="btn_edit_product_save" class="btn btn-primary me-1">Save</button>
                 </div>
             </div>
         </div>

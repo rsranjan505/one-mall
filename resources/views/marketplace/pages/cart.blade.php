@@ -10,7 +10,7 @@
 <nav aria-label="breadcrumb" class="breadcrumb-nav">
     <div class="container">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('market.home') }}">Home</a></li>
             <li class="breadcrumb-item"><a href="#">Shop</a></li>
             <li class="breadcrumb-item active" aria-current="page">Shopping Cart</li>
         </ol>
@@ -34,7 +34,34 @@
                         </thead>
 
                         <tbody>
-                            <tr>
+                            @if (count($carts) > 0)
+                                @foreach ($carts as $item)
+                                    <tr id="product-{{$item->id}}">
+                                        <td class="product-col">
+                                            <div class="product">
+                                                <figure class="product-media">
+                                                    <a href="#">
+                                                        <img src="marketplace/assets/images/products/table/product-1.jpg" alt="Product image">
+                                                    </a>
+                                                </figure>
+
+                                                <h3 class="product-title">
+                                                    <a href="#">{{$item->product->name}}</a>
+                                                </h3><!-- End .product-title -->
+                                            </div><!-- End .product -->
+                                        </td>
+                                        <td id="item_price-{{$item->id}}" class="price-col">&#8377;{{$item->product->sale_price}}</td>
+                                        <td class="quantity-col">
+                                            <div class="cart-product-quantity">
+                                                <input type="number" onchange="updateQuantity(this,'cart')" id="cart_quantity-{{$item->id}}" name="quantity" class="form-control" value="{{$item->quantity}}" min="1" max="10" step="1" data-decimals="0" required>
+                                            </div><!-- End .cart-product-quantity -->
+                                        </td>
+                                        <td id="item_total-{{$item->id}}" class="total-col">&#8377; {{$item->product->sale_price * $item->quantity}}</td>
+                                        <td class="remove-col"><button class="btn-remove" onclick="removeCartItem('{{$item->id}}')"><i class="icon-close"></i></button></td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                            {{-- <tr>
                                 <td class="product-col">
                                     <div class="product">
                                         <figure class="product-media">
@@ -79,7 +106,7 @@
                                 </td>
                                 <td class="total-col">$76.00</td>
                                 <td class="remove-col"><button class="btn-remove"><i class="icon-close"></i></button></td>
-                            </tr>
+                            </tr> --}}
                         </tbody>
                     </table><!-- End .table table-wishlist -->
 
@@ -104,53 +131,61 @@
 
                         <table class="table table-summary">
                             <tbody>
+                                @php
+                                    $carts = isset($carts) ? $carts : [];
+                                    $total = 0;
+                                    $shipping_id = 0;
+                                    $shipping_amt = 0;
+                                    foreach ($carts as $key => $cart) {
+                                        $total += $cart->product->sale_price * $cart->quantity;
+                                        $shipping_id = $cart->shipping_id;
+                                        $shipping_amt = $cart->shipping ? $cart->shipping->charges : 0;
+                                    }
+                                @endphp
+
                                 <tr class="summary-subtotal">
                                     <td>Subtotal:</td>
-                                    <td>$160.00</td>
+                                    <td id="subtotal">&#8377;{{$total}}</td>
                                 </tr><!-- End .summary-subtotal -->
                                 <tr class="summary-shipping">
                                     <td>Shipping:</td>
                                     <td>&nbsp;</td>
                                 </tr>
 
-                                <tr class="summary-shipping-row">
+
+                                @if ($shippings->count() > 0)
+                                    @foreach ($shippings as $item)
+                                        <tr class="summary-shipping-row">
+                                            <td>
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" onchange="selectShipping('{{$item->id}}')" id="{{Str::slug($item->shipping_type)}}" value="{{ $item->id}}" name="shipping" class="custom-control-input" {{$item->id == $shipping_id ? 'checked' : ''}}>
+                                                    <label class="custom-control-label" for="{{Str::slug($item->shipping_type)}}">{{$item->shipping_type}}</label>
+                                                </div>
+                                            </td>
+                                            <td id="shipping_charges-{{$item->id}}">&#8377;{{$item->charges}}</td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+
+                                {{-- <tr class="summary-shipping-row">
                                     <td>
                                         <div class="custom-control custom-radio">
                                             <input type="radio" id="free-shipping" name="shipping" class="custom-control-input">
                                             <label class="custom-control-label" for="free-shipping">Free Shipping</label>
-                                        </div><!-- End .custom-control -->
+                                        </div>
                                     </td>
                                     <td>$0.00</td>
-                                </tr><!-- End .summary-shipping-row -->
+                                </tr>
+                                 --}}
 
-                                <tr class="summary-shipping-row">
-                                    <td>
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="standart-shipping" name="shipping" class="custom-control-input">
-                                            <label class="custom-control-label" for="standart-shipping">Standart:</label>
-                                        </div><!-- End .custom-control -->
-                                    </td>
-                                    <td>$10.00</td>
-                                </tr><!-- End .summary-shipping-row -->
-
-                                <tr class="summary-shipping-row">
-                                    <td>
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="express-shipping" name="shipping" class="custom-control-input">
-                                            <label class="custom-control-label" for="express-shipping">Express:</label>
-                                        </div><!-- End .custom-control -->
-                                    </td>
-                                    <td>$20.00</td>
-                                </tr><!-- End .summary-shipping-row -->
-
-                                <tr class="summary-shipping-estimate">
+                                {{-- <tr class="summary-shipping-estimate">
                                     <td>Estimate for Your Country<br> <a href="dashboard.html">Change address</a></td>
                                     <td>&nbsp;</td>
-                                </tr><!-- End .summary-shipping-estimate -->
+                                </tr> --}}
 
                                 <tr class="summary-total">
                                     <td>Total:</td>
-                                    <td>$160.00</td>
+                                    <td id="total">&#8377;{{$total + $shipping_amt}}</td>
                                 </tr><!-- End .summary-total -->
                             </tbody>
                         </table><!-- End .table table-summary -->
@@ -158,10 +193,66 @@
                         <a href="{{ route('market.checkout') }}" class="btn btn-outline-primary-2 btn-order btn-block">PROCEED TO CHECKOUT</a>
                     </div><!-- End .summary -->
 
-                    <a href="category.html" class="btn btn-outline-dark-2 btn-block mb-3"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>
+                    <a href="{{ route('market.home')}}" class="btn btn-outline-dark-2 btn-block mb-3"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>
                 </aside><!-- End .col-lg-3 -->
             </div><!-- End .row -->
         </div><!-- End .container -->
     </div><!-- End .cart -->
 </div>
+
+<script>
+
+
+    function selectShipping(shipping_id) {
+        var shipping_charges = $('#shipping_charges-'+shipping_id).text();
+        var charge_amt = shipping_charges.replace('₹','')
+        var exiting_total = $('#subtotal').text();
+        var total_amt = exiting_total.replace('₹','')
+
+        var grand_total = parseFloat(total_amt) + parseFloat(charge_amt);
+        $('#total').text('₹'+grand_total);
+
+    }
+
+
+
+
+
+    function removeCartItem(cart_id) {
+
+        var charge_amt = 0;
+        var shipping_id = '';
+        var is_radio_clicked = $('input[type=radio]:checked').length > 0 ? true : false;
+        if(is_radio_clicked){
+            var shipping_id = $('input[name="shipping"]:checked').val();
+            var shipping_charges = $('#shipping_charges-'+shipping_id).text();
+            charge_amt = shipping_charges.replace('₹','')
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "{{ route('market.cart.remove') }}",
+            data: {
+                _token: "{{ csrf_token() }}",
+                cart_id: cart_id
+            },
+            success: function (response) {
+                console.log(response);
+                var all_cart_items = response.data.all_items;
+                var total = 0;
+                all_cart_items.forEach(element => {
+                    total += element.product.sale_price * element.quantity;
+                })
+
+                var total = total + parseFloat(charge_amt);
+                $('#subtotal').text('₹'+total);
+                $('#total').text('₹'+total);
+                $('.cart-count').text(response.data.all_items.length);
+                $('#product-'+cart_id).remove();
+            }
+        });
+    }
+
+
+</script>
 @endsection

@@ -189,10 +189,11 @@
                         <span id="error-price" class="text-danger input-error"></span>
                     </div>
                     <!-- Discounted Price -->
-                    {{-- <div class="mb-2">
-                    <label class="form-label" for="discount-price">Discounted Price</label>
-                    <input type="number" class="form-control" id="discount-price" placeholder="Discounted Price" name="discount-price" aria-label="Product discounted price" >
-                    </div> --}}
+                    <div class="mb-2">
+                        <label class="form-label" for="discount-price">Discounted Price *</label>
+                        <input type="number" class="form-control" id="sale_price" placeholder="Discounted Price" name="sale_price" aria-label="Product discounted price" >
+                        <span id="error-sale_price" class="text-danger input-error"></span>
+                    </div>
                     <!-- Charge tax check box -->
                     <div class="form-check ms-2 mt-2 mb-4">
                         <input class="form-check-input" type="checkbox" value="" id="price-charge-tax" checked="">
@@ -299,7 +300,7 @@
                             <span class="mb-0">Is Featured Product</span>
                             <div class="w-25 d-flex justify-content-center">
                             <div class="form-check form-switch me-n3">
-                                <input type="checkbox" name="featured" id="featured" class="form-check-input">
+                                <input type="checkbox" name="is_featured" id="is_featured" class="form-check-input">
                             </div>
                             </div>
                         </div>
@@ -488,7 +489,6 @@
             data: form.serialize(),
             success: function (response) {
                 if(response.success == true){
-                    console.log(response)
                     toastr.success(response.message, 'Success!', {
                         closeButton: true,
                         tapToDismiss: false

@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
+use Dotenv\Parser\Lexer;
 use Exception;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use nadar\quill\Lexer as QuillLexer;
 use Symfony\Component\Finder\SplFileInfo;
 
 class Controller extends BaseController
@@ -109,8 +113,15 @@ class Controller extends BaseController
                 return [];
             }
         } catch (Exception $e) {
-            dd($e);
             return [];
         }
     }
 }
+
+
+
+////////////////////////////////////////////////////////////////
+/////////////// MarketPlace Controller /////////////////////////
+////////////////////////////////////////////////////////////////
+
+

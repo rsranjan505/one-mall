@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-class ProductService
+class ProductService extends BaseService
 {
     /**
      * Create a new class instance.
@@ -17,12 +17,29 @@ class ProductService
 
     public function getAllProducts()
     {
-        return Product::all();
+        return Product::with('Category','subCategory','attribute_value','attribute_value.attribute','image')->get();
     }
 
     public function getProductDetails($product_id)
     {
-        return Product::where('id', $product_id)->with('category_list','subCategory_list','attribute_value','attribute_value.attribute','image')->first();
+        $product = Product::where('id', $product_id)->with('Category','subCategory','attribute_value','attribute_value.attribute','image')->first();
+        $attributes = [];
+
+        foreach ($product->attribute_value as $key => $item) {
+            if($item->attribute->attribute_type == 'varient'){
+
+                $attributes[$item->attribute->name][] = $item->value;
+                // $attributes[$item->attribute->name]['type'] = $item->attribute->type;
+            }
+        }
+
+        $product->attributes = $attributes;
+        $product->short_description_html = $this->quillEditorDeltaToHtml($product->short_description);
+        $product->description_html = $this->quillEditorDeltaToHtml($product->description);
+        $product->long_description_html = $this->quillEditorDeltaToHtml($product->long_description);
+
+        return $product;
+
     }
 
 

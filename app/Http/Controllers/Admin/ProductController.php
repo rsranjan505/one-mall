@@ -51,6 +51,7 @@ class ProductController extends Controller
             'short_description' => 'required',
             'description' => 'required',
             'price' => 'required|numeric',
+            'sale_price' => 'required|numeric',
             'category' => 'required',
             'sub_category' => 'required',
             // 'product_images' => 'nullable|image|mimes:jpeg,jpg,png|max:1024',
@@ -59,6 +60,7 @@ class ProductController extends Controller
             'short_description.required' => 'Short description is required',
             'description.required' => 'Description is required',
             'price.required' => 'Price is required',
+            'sale_price.required' => 'Sale price is required',
             'category.required' => 'Category is required',
             'sub_category.required' => 'Sub category is required',
             // 'product_images.image' => 'image should be in jpeg,jpg,png format',
@@ -143,6 +145,7 @@ class ProductController extends Controller
 
             $request->validate([
                 'price' => 'required|numeric',
+                'sale_price' => 'required|numeric',
                 'category' => 'required',
                 'sub_category' => 'required',
             ],[
@@ -160,7 +163,7 @@ class ProductController extends Controller
 
         }
 
-        dd($request->all());
+
         // $product = $this->productService->getProductDetails($product->id);
         $update_status = $this->productService->updateProduct($request,$product);
         if($update_status){
@@ -187,3 +190,5 @@ class ProductController extends Controller
         return bad('Something went wrong');
     }
 }
+
+

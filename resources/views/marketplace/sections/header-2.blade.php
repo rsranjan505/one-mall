@@ -141,12 +141,40 @@
                 <div class="dropdown cart-dropdown">
                     <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
                         <i class="icon-shopping-cart"></i>
-                        <span class="cart-count">2</span>
+                        <span class="cart-count">{{ isset($carts) ? count($carts) : 0}}</span>
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right">
                         <div class="dropdown-cart-products">
-                            <div class="product">
+                            @php
+                                $carts = isset($carts) ? $carts : [];
+                                $total = 0;
+                                foreach ($carts as $key => $cart) {
+                                    $total += $cart->product->sale_price * $cart->quantity;
+                                }
+                            @endphp
+                            @if (isset($carts))
+                                @foreach ($carts as $item)
+                                <div class="product">
+                                    <div class="product-cart-details">
+                                        <h4 class="product-title">
+                                            <a href="javascript::void">{{ucfirst($item->product->name)}}</a>
+                                        </h4>
+                                        <span class="cart-product-info">
+                                            <span class="cart-product-qty">{{ $item->quantity}}</span>
+                                            x &#8377;{{ $item->product->sale_price}}
+                                        </span>
+                                    </div>
+                                    <figure class="product-image-container">
+                                        <a href="product.html" class="product-image">
+                                            <img src="marketplace/assets/images/products/cart/product-1.jpg" alt="product">
+                                        </a>
+                                    </figure>
+                                    <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
+                                </div>
+                                @endforeach
+                            @endif
+                            {{-- <div class="product">
                                 <div class="product-cart-details">
                                     <h4 class="product-title">
                                         <a href="product.html">Beige knitted elastic runner shoes</a>
@@ -156,17 +184,16 @@
                                         <span class="cart-product-qty">1</span>
                                         x $84.00
                                     </span>
-                                </div><!-- End .product-cart-details -->
-
+                                </div>
                                 <figure class="product-image-container">
                                     <a href="product.html" class="product-image">
                                         <img src="marketplace/assets/images/products/cart/product-1.jpg" alt="product">
                                     </a>
                                 </figure>
                                 <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
-                            </div><!-- End .product -->
+                            </div> --}}
 
-                            <div class="product">
+                            {{-- <div class="product">
                                 <div class="product-cart-details">
                                     <h4 class="product-title">
                                         <a href="product.html">Blue utility pinafore denim dress</a>
@@ -176,7 +203,7 @@
                                         <span class="cart-product-qty">1</span>
                                         x $76.00
                                     </span>
-                                </div><!-- End .product-cart-details -->
+                                </div>
 
                                 <figure class="product-image-container">
                                     <a href="product.html" class="product-image">
@@ -184,13 +211,13 @@
                                     </a>
                                 </figure>
                                 <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
-                            </div><!-- End .product -->
-                        </div><!-- End .cart-product -->
+                            </div> --}}
+                        </div>
 
                         <div class="dropdown-cart-total">
                             <span>Total</span>
 
-                            <span class="cart-total-price">$160.00</span>
+                            <span class="cart-total-price">&#8377;{{$total}}</span>
                         </div><!-- End .dropdown-cart-total -->
 
                         <div class="dropdown-cart-action">

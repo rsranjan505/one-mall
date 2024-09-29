@@ -154,6 +154,87 @@
   <script>
 
 
+    $('#btn_edit_product_save').on('click', function(e) {
+
+        var form = $('#editProductForm')[0];
+        var form_type = $('#form_type').val();
+        var form_args = {};
+
+        if(form_type == 'details')
+        {
+            let name = $('#edit_name').val();
+            let sku = $('#edit_sku').val();
+            let barcode = $('#edit_barcode').val();
+
+            form_args = {
+                name: name,
+                sku: sku,
+                barcode: barcode,
+                short_description: JSON.stringify(edit_short_description.getContents()),            //edit_short_description id global variable
+                long_description: JSON.stringify(edit_long_description_editor.getContents()),        //edit_long_description id global variable
+                description: JSON.stringify(edit_description_editor.getContents())                   //edit_description id global variable
+            }
+        }
+        else if(form_type == 'stocks')
+        {
+
+            let is_featured = $('#edit_is_featured').val();
+            let is_popular = $('#edit_is_popular').val();
+            let is_trending = $('#edit_is_trending').val();
+            let is_latest = $('#edit_is_latest').val();
+            let is_top_selling = $('#edit_is_top_selling').val();
+            let quantity = $('#edit_quantity').val();
+            let price = $('#edit_price').val();
+            let sale_price = $('#edit_sale_price').val();
+            let category = $('#edit_category').val();
+            let sub_category = $('#edit_sub_category').val();
+
+
+            form_args = {
+                is_featured: is_featured,
+                is_popular: is_popular,
+                is_trending: is_trending,
+                is_latest: is_latest,
+                is_top_selling: is_top_selling,
+                price: price,
+                sale_price: sale_price,
+                category: category,
+                sub_category: sub_category,
+                quantity: quantity,
+            }
+        }
+        else if(form_type == 'varients')
+        {
+
+        }
+
+
+        $.ajax({
+            type: "PATCH",
+            url: form.action,
+            data: form_args,
+            headers: {
+                'X-CSRF-Token': token
+            },
+            success: function (response) {
+                if(response.success == true){
+                    console.log(response)
+                    toastr.success(response.message, 'Success!', {
+                        closeButton: true,
+                        tapToDismiss: false
+                    });
+                    // window.location.href = "{{ route('products.index') }}";
+                }
+            },
+            error: function(response) {
+                $('.spinner-border').addClass('d-none');
+                $.each(response.responseJSON.errors, function(key, value) {
+                    $('#error-' + key ).text(value[0]);
+                    $('#'+ key ).removeClass('border-0').addClass('is-invalid');
+                })
+            }
+        });
+    })
 
     getajaxdata('{{ route("products.index") }}','product');
 

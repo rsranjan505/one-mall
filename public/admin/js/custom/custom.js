@@ -98,11 +98,11 @@ function clone_div(clone_element,element_count) {
     var select_type = clone_element.split('-')[1];
 
     var options_count = $('#' + clone_element + '-0 option').length; // minus 1 for select item
-    if(element_count + 1 > options_count -1) {
-        alert('cannot add more than ' + element_count + ' options');
-        return false;
-    }
-    else{
+    // if(element_count + 1 > options_count -1) {
+    //     alert('cannot add more than ' + element_count + ' options');
+    //     return false;
+    // }
+    // else{
 
         let clone_div = $('#div_main_' + clone_element ).clone();
         clone_div.attr('id', 'div_' + clone_element + '-' + element_count);
@@ -113,15 +113,15 @@ function clone_div(clone_element,element_count) {
 
         clone_div.appendTo('#div_' + clone_element);
 
-        if(select_type == 'feature') {
-            feature_element_count++
+        // if(select_type == 'feature') {
+            // feature_element_count++
 
-        }
-        else
-        {
-            varient_element_count++;
-        }
-    }
+        // }
+        // else
+        // {
+        //     varient_element_count++;
+        // }
+    // }
 }
 
 
@@ -290,6 +290,10 @@ function getajaxdata(url, table)
         });
     }
 
+    /* make it globale due to we access it in multiple places and when we update records*/
+    var edit_short_description = '';
+    var edit_description_editor = '';
+    var edit_long_description_editor = '';
 
     function editProduct(menu,product_dt)
     {
@@ -302,11 +306,11 @@ function getajaxdata(url, table)
 
             $('#edit_product #modal-body').html(modal_body);
 
-            var edit_short_description = new Quill('#edit_short_description_editor', {
+            edit_short_description = new Quill('#edit_short_description_editor', {
                 theme: 'snow' });
-            var edit_description_editor = new Quill('#edit_description_editor', {
+            edit_description_editor = new Quill('#edit_description_editor', {
                 theme: 'snow' });
-            var edit_long_description_editor = new Quill('#edit_long_description_editor', {
+            edit_long_description_editor = new Quill('#edit_long_description_editor', {
                 theme: 'snow' });
 
 
@@ -337,11 +341,23 @@ function getajaxdata(url, table)
             $('#edit_product #modal-body').html(modal_body);
         }
 
+        $('input[type="checkbox"]').click(function(){
+            if($(this).is(':checked'))
+            {
+                $(this).val(1);
+            }
+            else
+            {
+                $(this).val(0);
+            }
+        });
+
     }
 
     function details_modal_body(product_dt)
     {
-        var body_div = '<form id="editProductForm" class="row gy-1 pt-75" onsubmit="return false">'
+        var body_div = '<form id="editProductForm" method="PATCH" action="'+product_dt.update_route+'" class="row gy-1 pt-75" data-table="products">'
+                        + '<input type="hidden" name="form_type" id="form_type"  value="details">'
                         + '<div class="mb-1">'
                                 + '<label class="form-label" for="edit_name">Name *</label>'
                                 + '<input type="text" class="form-control" id="edit_name" placeholder="Product title" value="' + product_dt.name + '" name="name" aria-label="Product title">'
@@ -414,14 +430,15 @@ function getajaxdata(url, table)
         let top_checked = product_dt.is_top_selling == 1 ? 'checked' : '';
 
 
-        var body_div = '<form id="editProductForm" class="row gy-1 pt-75" onsubmit="return false">'
+        var body_div = '<form id="editProductForm" method="PATCH" action="'+product_dt.update_route+'" class="row gy-1 pt-75" data-table="products">'
+                        + '<input type="hidden" id="form_type" value="stocks">'
                         + '<div class="row">'
                             + '<div class="col-6">'
                                 + '<div class="d-flex justify-content-between align-items-center pt-2">'
                                     + '<span class="mb-0">Is Featured Product</span>'
                                     + '<div class="w-25 d-flex justify-content-center">'
                                         + '<div class="form-check form-switch me-n3">'
-                                            + '<input type="checkbox" name="featured" id="featured" ' + feature_checked +' class="form-check-input">'
+                                            + '<input type="checkbox" name="is_featured" id="edit_is_featured" ' + feature_checked +' value="'+ product_dt.is_featured +'" class="form-check-input">'
                                         + '</div>'
                                     + '</div>'
                                 + '</div>'
@@ -431,7 +448,7 @@ function getajaxdata(url, table)
                                     + '<span class="mb-0">Is Popular Product</span>'
                                     + '<div class="w-25 d-flex justify-content-center">'
                                         + '<div class="form-check form-switch me-n3">'
-                                            + '<input type="checkbox" name="is_popular" id="is_popular" ' + popular_checked +' class="form-check-input">'
+                                            + '<input type="checkbox" name="is_popular" id="edit_is_popular" ' + popular_checked +' value="'+ product_dt.is_popular +'" class="form-check-input">'
                                         + '</div>'
                                     + '</div>'
                                 + '</div>'
@@ -443,17 +460,17 @@ function getajaxdata(url, table)
                                 + '<span class="mb-0">Is Trending Product</span>'
                                     + '<div class="w-25 d-flex justify-content-center">'
                                         + '<div class="form-check form-switch me-n3">'
-                                            + '<input type="checkbox" name="is_trending" id="is_trending" ' + trending_checked +' class="form-check-input">'
+                                            + '<input type="checkbox" name="is_trending" id="edit_is_trending" ' + trending_checked +' value="'+ product_dt.is_trending +'" class="form-check-input">'
                                         + '</div>'
                                     + '</div>'
                                 + '</div>'
                             + '</div>'
                             + '<div class="col-6">'
                                 + '<div class="d-flex justify-content-between align-items-center pt-2">'
-                                + '<span class="mb-0">s Latest Product</span>'
+                                + '<span class="mb-0">Is Latest Product</span>'
                                     + '<div class="w-25 d-flex justify-content-center">'
                                         + '<div class="form-check form-switch me-n3">'
-                                            + '<input type="checkbox" name="is_latest" id="is_latest" ' + new_checked +' class="form-check-input">'
+                                            + '<input type="checkbox" name="is_latest" id="edit_is_latest" ' + new_checked +' value="'+ product_dt.is_latest +'" class="form-check-input">'
                                         + '</div>'
                                     + '</div>'
                                 + '</div>'
@@ -465,13 +482,31 @@ function getajaxdata(url, table)
                                 + '<span class="mb-0">Is Top Selling Product</span>'
                                     + '<div class="w-25 d-flex justify-content-center">'
                                         + '<div class="form-check form-switch me-n3">'
-                                            + '<input type="checkbox" name="is_top_selling" id="is_top_selling" ' + top_checked +' class="form-check-input">'
+                                            + '<input type="checkbox" name="is_top_selling" id="edit_is_top_selling" ' + top_checked +' value="'+ product_dt.is_top_selling +'" class="form-check-input">'
                                         + '</div>'
                                     + '</div>'
                                 + '</div>'
                             + '</div>'
                             + '<div class="col-6">'
 
+                            + '</div>'
+                        + '</div>'
+                        + '<div class="row">'
+                            + '<div class="col-6">'
+                                + '<div class="d-flex justify-content-between align-items-center pt-2">'
+                                + '<span class="mb-0">Price</span>'
+                                    + '<div class="w-75 d-flex justify-content-center">'
+                                        + ' <input type="number" class="form-control" value="' + product_dt.price + '" id="edit_price" placeholder="quantity" name="edit_price" aria-label="Product price" >'
+                                    + '</div>'
+                                + '</div>'
+                            + '</div>'
+                            + '<div class="col-6">'
+                                + '<div class="d-flex justify-content-between align-items-center pt-2">'
+                                + '<span class="mb-0">Discount Price</span>'
+                                    + '<div class="w-75 d-flex justify-content-center">'
+                                        + ' <input type="number" class="form-control" value="' + product_dt.sale_price + '" id="edit_sale_price" placeholder="Price" name="sale_price" aria-label="Product discount price" >'
+                                    + '</div>'
+                                + '</div>'
                             + '</div>'
                         + '</div>'
                         + '<div class="row">'
@@ -484,12 +519,7 @@ function getajaxdata(url, table)
                                 + '</div>'
                             + '</div>'
                             + '<div class="col-6">'
-                                + '<div class="d-flex justify-content-between align-items-center pt-2">'
-                                + '<span class="mb-0">Price</span>'
-                                    + '<div class="w-75 d-flex justify-content-center">'
-                                        + ' <input type="number" class="form-control" value="' + product_dt.price + '" id="edit_price" placeholder="Price" name="price" aria-label="Product price" >'
-                                    + '</div>'
-                                + '</div>'
+
                             + '</div>'
                         + '</div>'
                         + '<div class="row">'
@@ -528,7 +558,8 @@ function getajaxdata(url, table)
             attributes_options += '<option value="' + value.id + '">' + value.name + '</option>';
         })
 
-        var body_div = '<form id="edit_varient_form" action="' + product_dt.edit_url + '" method="POST">'
+        var body_div = '<form id="editProductForm" method="PATCH" action="'+product_dt.update_route+'" class="row gy-1 pt-75" data-table="products">'
+                        + '<input type="hidden" id="form_type" value="varients">'
                         + '<div class="row">'
                             + '<div class="col-6">'
                                 + '<div class="d-flex justify-content-between align-items-center pt-2">'
@@ -554,6 +585,7 @@ function getajaxdata(url, table)
             return body_div;
     }
 
+
     // function updateOutOfStock(product_id)
     // {
 
@@ -563,15 +595,21 @@ function getajaxdata(url, table)
     {
         var table_name = form.getAttribute('data-table'); // its a custom attribute added in the form
 
+        var method = opration == 'add' ? 'POST' : 'PATCH';
+
         $.ajax({
         url: form.action,
-        method: "POST",
+        method: method,
         data: new FormData(form),
         dataType: "JSON",
         contentType: false,
         cache: false,
         processData: false,
+        headers: {
+            'X-CSRF-Token': token
+        },
         success: function(data) {
+
             if (data.status == 200) {
 
                 $('.spinner-border').addClass('d-none');
@@ -839,176 +877,5 @@ function getajaxdata(url, table)
 
 
 
-//     //amenity
-//     $("#amenity-table").DataTable({
-//         processing: true,
-//         serverSide: true,
-//       ajax:"amenity",
-//       data: {
-//         _token: $('input[name="_token"]').val()
-//         },
-//       columns: [
-//         // { data: 'responsive_id'},
-//         {data: 'id', name: 'id',
-//             orderable: false,
-//             searchable: false,
-//         },
-//         { data: 'name', name: 'name'},
-//         { data: 'type',name: 'type' },
-//         { data: 'description',name: 'description' },
-//         { data: 'is_active',name: 'is_active' },
-//         { data: 'created_at',name: 'created_at' },
-//         { data: 'updated_at', name: 'updated_at' },
-//         { data: 'action',name: 'action' }
-//       ],
-//       columnDefs: [
-//         {
-//           className: 'control',
-//           orderable: false,
-//           targets: 0
-//         }
-
-//       ],
-//       language: {
-//         paginate: {
-//           // remove previous & next text from pagination
-//           previous: '&nbsp;',
-//           next: '&nbsp;'
-//         }
-//       }
-//     });
-
-//     //Feature
-//     $("#feature-table").DataTable({
-//         processing: true,
-//         serverSide: true,
-//         ajax:"feature",
-//         data: {
-//         _token: $('input[name="_token"]').val()
-//         },
-//         columns: [
-//         // { data: 'responsive_id'},
-//         {data: 'id', name: 'id',
-//             orderable: false,
-//             searchable: false,
-//         },
-//         { data: 'name', name: 'name'},
-//         { data: 'type',name: 'type' },
-//         { data: 'description',name: 'description' },
-//         { data: 'is_active',name: 'is_active' },
-//         { data: 'created_at',name: 'created_at' },
-//         { data: 'updated_at', name: 'updated_at' },
-//         { data: 'action',name: 'action' }
-//         ],
-//         columnDefs: [
-//         {
-//             className: 'control',
-//             orderable: false,
-//             targets: 0
-//         }
-
-//         ],
-//         language: {
-//         paginate: {
-//             // remove previous & next text from pagination
-//             previous: '&nbsp;',
-//             next: '&nbsp;'
-//         }
-//         }
-//     });
-
-
-//     //amenity
-//     $("#commission-table").DataTable({
-//         processing: true,
-//         serverSide: true,
-//       ajax:"commission",
-//       data: {
-//         _token: $('input[name="_token"]').val()
-//         },
-//       columns: [
-//         // { data: 'responsive_id'},
-//         {data: 'id', name: 'id',
-//             orderable: false,
-//             searchable: false,
-//         },
-//         { data: 'profile_id', name: 'profile_id'},
-//         { data: 'percentage', name: 'percentage'},
-//         { data: 'flat_rate', name: 'flat_rate'},
-//         // { data: 'Hospital Name', name: 'Hospital Name'},
-//         // { data: 'Commission Percentage',name: 'Commission Percentage' },
-//         // { data: 'Commission Flat Rate',name: 'Commission Flat Rate' },
-//         { data: 'is_active',name: 'is_active' },
-//         { data: 'action',name: 'action' }
-//       ],
-//       columnDefs: [
-//         {
-//           className: 'control',
-//           orderable: false,
-//           targets: 0
-//         }
-
-//       ],
-//       language: {
-//         paginate: {
-//           // remove previous & next text from pagination
-//           previous: '&nbsp;',
-//           next: '&nbsp;'
-//         }
-//       }
-//     });
-
-
-
-//       // Filter form control to default size for all tables
-//   $('.dataTables_filter .form-control').removeClass('form-control-sm');
-//   $('.dataTables_length .form-select').removeClass('form-select-sm').removeClass('form-control-sm');
-
-// // }
-
-
-// //sweet alert
-// function deleteConfirmation(id,model){
-
-//     var id = id;
-//     if(model=='feature'){
-//         var url ='';
-//     }else if(model=='amenity'){
-//         var url ='';
-//     }
-
-//         Swal.fire({
-//             title: 'Are you sure?',
-//             text: "You won't be able to revert this!",
-//             icon: 'warning',
-//             showCancelButton: true,
-//             confirmButtonText: 'Yes, delete it!',
-//             customClass: {
-//             confirmButton: 'btn btn-primary',
-//             cancelButton: 'btn btn-outline-danger ms-1'
-//             },
-//             buttonsStyling: false
-//         }).then(function (result) {
-//             if (result.value) {
-//             Swal.fire({
-//                 icon: 'success',
-//                 title: 'Deleted!',
-//                 text: 'Your file has been deleted.',
-//                 customClass: {
-//                 confirmButton: 'btn btn-success'
-//                 }
-//             });
-//             } else if (result.dismiss === Swal.DismissReason.cancel) {
-//             Swal.fire({
-//                 title: 'Cancelled',
-//                 text: 'Your imaginary file is safe :)',
-//                 icon: 'error',
-//                 customClass: {
-//                 confirmButton: 'btn btn-success'
-//                 }
-//             });
-//             }
-//         });
-// }
 
 

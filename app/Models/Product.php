@@ -13,16 +13,20 @@ class Product extends Model
     protected $fillable = ['name', 'slug','sku','barcode','short_description', 'description','long_description', 'price','sale_price','quantity','out_of_stock', 'category','sub_category','collection','status','type','tags','is_featured','is_popular','is_trending','iS_latest','is_top_selling', 'is_active'];
     protected $hidden = ['created_at', 'updated_at'];
 
-    public function category_list()
+    public function Category()
     {
         return $this->belongsTo(Category::class,'category');
     }
 
-    public function subCategory_list()
+    public function subCategory()
     {
         return $this->belongsTo(Category::class,'sub_category');
     }
 
+    // public function attribute()
+    // {
+    //     return $this->hasMany(Attribute::class, 'attributable');
+    // }
     public function attribute_value()
     {
         return $this->hasMany(AttributeValue::class,'product_id');

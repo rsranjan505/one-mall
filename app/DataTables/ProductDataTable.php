@@ -26,7 +26,7 @@ class ProductDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addIndexColumn()
             ->editColumn('category', function($row){
-                return ucfirst($row->category_list->name) ?? '';
+                return ucfirst($row->Category->name) ?? '';
             })
             ->addColumn('category_id', function($row){
                 return $row->category;
@@ -36,6 +36,9 @@ class ProductDataTable extends DataTable
             })
             ->addColumn('attributes', function($row){
                 return Attribute::all();
+            })
+            ->addColumn('update_route', function($row){
+                return route('products.update', $row);
             })
 
             ->editColumn('status', function($row){
@@ -52,7 +55,6 @@ class ProductDataTable extends DataTable
             })
             ->editColumn('out_of_stock', function($row){
                 $value_checked = $row->out_of_stock == 1 ? 'checked' : '';
-
 
                 return '<div class="form-check form-switch me-n3">
                             <input type="checkbox" name="out_of_stock" id="out_of_stock" value="'.$row->out_of_stock.'" '. $value_checked .'  onchange="statusConfirmation(\''.url('admin/products/'.$row->id.'/out-of-stock').'\')"  class="form-check-input">
@@ -99,7 +101,7 @@ class ProductDataTable extends DataTable
      */
     public function query(Product $model): QueryBuilder
     {
-        return $model->newQuery()->with('category_list','subCategory_list','attribute_value','attribute_value.attribute','image')->latest();
+        return $model->newQuery()->with('Category','subCategory','attribute_value','attribute_value.attribute','image')->latest();
     }
 
     /**
