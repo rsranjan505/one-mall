@@ -37,7 +37,7 @@ $configData = Helper::applClasses();
 
 
           </span> --}}
-            One Mall
+            Ayurmarts
         </a>
         {{-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
             <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>

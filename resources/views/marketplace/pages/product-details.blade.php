@@ -10,7 +10,7 @@
             <li class="breadcrumb-item active" aria-current="page">Default</li>
         </ol>
 
-        <nav class="product-pager ml-auto" aria-label="Product">
+        {{-- <nav class="product-pager ml-auto" aria-label="Product">
             <a class="product-pager-link product-pager-prev" href="#" aria-label="Previous" tabindex="-1">
                 <i class="icon-angle-left"></i>
                 <span>Prev</span>
@@ -20,7 +20,7 @@
                 <span>Next</span>
                 <i class="icon-angle-right"></i>
             </a>
-        </nav><!-- End .pager-nav -->
+        </nav><!-- End .pager-nav --> --}}
     </div><!-- End .container -->
 </nav><!-- End .breadcrumb-nav -->
 
@@ -34,15 +34,33 @@
                         <div class="product-gallery product-gallery-vertical">
                             <div class="row">
                                 <figure class="product-main-image">
-                                    <img id="product-zoom" src="{{ asset('marketplace/assets/images/products/single/1.jpg')}}" data-zoom-image="{{ asset('marketplace/assets/images/products/single/1-big.jpg')}}" alt="product image">
+                                    <img id="product-zoom" src="{{ $product->images[0]->url }}" data-zoom-image="{{ asset('marketplace/assets/images/products/single/1-big.jpg')}}" alt="product image" style="height: 550px;">
 
                                     <a href="#" id="btn-product-gallery" class="btn-product-gallery">
                                         <i class="icon-arrows"></i>
                                     </a>
                                 </figure>
+                                {{-- <figure class="product-main-image">
+                                    <img id="product-zoom" src="{{ asset('marketplace/assets/images/products/single/1.jpg')}}" data-zoom-image="{{ asset('marketplace/assets/images/products/single/1-big.jpg')}}" alt="product image">
+
+                                    <a href="#" id="btn-product-gallery" class="btn-product-gallery">
+                                        <i class="icon-arrows"></i>
+                                    </a>
+                                </figure> --}}
 
                                 <div id="product-zoom-gallery" class="product-image-gallery">
-                                    <a class="product-gallery-item active" href="#" data-image="{{ asset('marketplace/assets/images/products/single/1.jpg')}}" data-zoom-image="{{asset('marketplace/assets/images/products/single/1-big.jpg')}}">
+                                    @foreach ($product->images as $key => $image)
+                                        @if ($key == 0)
+                                            <a class="product-gallery-item active" href="#" data-image="{{ $image->url }}" data-zoom-image="{{ $image->url }}">
+                                                <img src="{{ $image->url }}" alt="product side" style="height: 130px;">
+                                            </a>
+                                        @else
+                                            <a class="product-gallery-item" href="#" data-image="{{ $image->url }}" data-zoom-image="{{ $image->url }}">
+                                                <img src="{{ $image->url }}" alt="product cross" style="height: 130px;">
+                                            </a>
+                                        @endif
+                                    @endforeach
+                                    {{-- <a class="product-gallery-item active" href="#" data-image="{{ asset('marketplace/assets/images/products/single/1.jpg')}}" data-zoom-image="{{asset('marketplace/assets/images/products/single/1-big.jpg')}}">
                                         <img src="{{ asset('marketplace/assets/images/products/single/1-small.jpg')}}" alt="product side">
                                     </a>
 
@@ -56,7 +74,7 @@
 
                                     <a class="product-gallery-item" href="#" data-image="{{asset('marketplace/assets/images/products/single/4.jpg')}}" data-zoom-image="{{ asset('marketplace/assets/images/products/single/4-big.jpg')}}">
                                         <img src="{{ asset('marketplace/assets/images/products/single/4-small.jpg')}}" alt="product back">
-                                    </a>
+                                    </a> --}}
                                 </div><!-- End .product-image-gallery -->
                             </div><!-- End .row -->
                         </div><!-- End .product-gallery -->
@@ -196,20 +214,14 @@
                     <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link">
                         <div class="product-desc-content">
                             <h3>Product Information</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis. Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. </p>
-                            <ul>
-                                <li>Nunc nec porttitor turpis. In eu risus enim. In vitae mollis elit. </li>
-                                <li>Vivamus finibus vel mauris ut vehicula.</li>
-                                <li>Nullam a magna porttitor, dictum risus nec, faucibus sapien.</li>
-                            </ul>
-
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis. Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. </p>
+                            {!! $product->description_html !!}
                         </div><!-- End .product-desc-content -->
                     </div><!-- .End .tab-pane -->
                     <div class="tab-pane fade" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link">
                         <div class="product-desc-content">
                             <h3>Information</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. </p>
+                            {!! $product->long_description_html !!}
+                            {{-- <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. </p>
 
                             <h3>Fabric & care</h3>
                             <ul>
@@ -222,7 +234,7 @@
                             </ul>
 
                             <h3>Size</h3>
-                            <p>one size</p>
+                            <p>one size</p> --}}
                         </div><!-- End .product-desc-content -->
                     </div><!-- .End .tab-pane -->
                     <div class="tab-pane fade" id="product-shipping-tab" role="tabpanel" aria-labelledby="product-shipping-link">
@@ -324,7 +336,7 @@
                 <figure class="product-media">
                     <span class="product-label label-new">New</span>
                     <a href="product.html">
-                        <img src="marketplace/assets/images/products/product-4.jpg" alt="Product image" class="product-image">
+                        <img src="{{ asset('marketplace/assets/images/products/product-4.jpg')}}" alt="Product image" class="product-image">
                     </a>
 
                     <div class="product-action-vertical">
@@ -355,14 +367,14 @@
 
                     <div class="product-nav product-nav-thumbs">
                         <a href="#" class="active">
-                            <img src="marketplace/assets/images/products/product-4-thumb.jpg" alt="product desc">
+                            <img src="{{ asset('marketplace/assets/images/products/product-4-thumb.jpg')}}" alt="product desc">
                         </a>
                         <a href="#">
-                            <img src="marketplace/assets/images/products/product-4-2-thumb.jpg" alt="product desc">
+                            <img src="{{ asset('marketplace/assets/images/products/product-4-2-thumb.jpg')}}" alt="product desc">
                         </a>
 
                         <a href="#">
-                            <img src="marketplace/assets/images/products/product-4-3-thumb.jpg" alt="product desc">
+                            <img src="{{ asset('marketplace/assets/images/products/product-4-3-thumb.jpg')}}" alt="product desc">
                         </a>
                     </div><!-- End .product-nav -->
                 </div><!-- End .product-body -->
@@ -372,7 +384,7 @@
                 <figure class="product-media">
                     <span class="product-label label-out">Out of Stock</span>
                     <a href="product.html">
-                        <img src="marketplace/assets/images/products/product-6.jpg" alt="Product image" class="product-image">
+                        <img src="{{asset('marketplace/assets/images/products/product-6.jpg')}}" alt="Product image" class="product-image">
                     </a>
 
                     <div class="product-action-vertical">
@@ -407,7 +419,7 @@
                 <figure class="product-media">
                     <span class="product-label label-top">Top</span>
                     <a href="product.html">
-                        <img src="marketplace/assets/images/products/product-11.jpg" alt="Product image" class="product-image">
+                        <img src="{{ asset('marketplace/assets/images/products/product-11.jpg')}}" alt="Product image" class="product-image">
                     </a>
 
                     <div class="product-action-vertical">
@@ -438,14 +450,14 @@
 
                     <div class="product-nav product-nav-thumbs">
                         <a href="#" class="active">
-                            <img src="marketplace/assets/images/products/product-11-thumb.jpg" alt="product desc">
+                            <img src="{{ asset('marketplace/assets/images/products/product-11-thumb.jpg')}}" alt="product desc">
                         </a>
                         <a href="#">
-                            <img src="marketplace/assets/images/products/product-11-2-thumb.jpg" alt="product desc">
+                            <img src="{{ asset('marketplace/assets/images/products/product-11-2-thumb.jpg')}}" alt="product desc">
                         </a>
 
                         <a href="#">
-                            <img src="marketplace/assets/images/products/product-11-3-thumb.jpg" alt="product desc">
+                            <img src="{{ asset('marketplace/assets/images/products/product-11-3-thumb.jpg')}}" alt="product desc">
                         </a>
                     </div><!-- End .product-nav -->
                 </div><!-- End .product-body -->
@@ -454,7 +466,7 @@
             <div class="product product-7 text-center">
                 <figure class="product-media">
                     <a href="product.html">
-                        <img src="marketplace/assets/images/products/product-10.jpg" alt="Product image" class="product-image">
+                        <img src="{{ asset('marketplace/assets/images/products/product-10.jpg')}}" alt="Product image" class="product-image">
                     </a>
 
                     <div class="product-action-vertical">
@@ -488,7 +500,7 @@
             <div class="product product-7 text-center">
                 <figure class="product-media">
                     <a href="product.html">
-                        <img src="marketplace/assets/images/products/product-7.jpg" alt="Product image" class="product-image">
+                        <img src="{{ asset('marketplace/assets/images/products/product-7.jpg')}}" alt="Product image" class="product-image">
                     </a>
 
                     <div class="product-action-vertical">

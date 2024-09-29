@@ -26,10 +26,10 @@
                 <path d="M128.068 67.4521C121.468 61.9667 117.208 54.1705 116.145 45.6335C115.86 43.3562 115.799 41.0547 115.965 38.7625L126.494 25.1362C128.47 22.5783 131.375 20.9033 134.572 20.4797C137.768 20.0561 140.994 20.9186 143.539 22.8775C146.084 24.8363 147.74 27.7311 148.143 30.925C148.545 34.1188 147.662 37.3501 145.686 39.908L126.004 65.3875L128.068 67.4521Z" fill="#01E3A4"/>
                 </svg>
 
-            <h2 class="brand-text text-primary ms-1">One Mall</h2>
+            <h2 class="brand-text text-primary ms-1">Ayurmarts</h2>
         </a>
 
-        <h4 class="card-title mb-1">Welcome to One Mall! 👋</h4>
+        <h4 class="card-title mb-1">Welcome to Ayurmarts! 👋</h4>
         <p class="card-text mb-2">Please sign-in to your account and start the adventure</p>
         @if ($errors->any())
             <div class="alert alert-danger">

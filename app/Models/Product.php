@@ -36,4 +36,9 @@ class Product extends Model
     {
         return $this->morphOne(AssetFile::class, 'pictureable','model_type', 'model_id');
     }
+
+    public function images()
+    {
+        return $this->morphMany(AssetFile::class, 'pictureable','model_type', 'model_id');
+    }
 }

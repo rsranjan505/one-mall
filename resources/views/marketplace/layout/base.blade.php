@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@yield('page_title')</title>
     <meta name="keywords" content="HTML5 Template">
-    <meta name="description" content="One Mall - eCommerce Template">
+    <meta name="description" content="Ayurmarts - eCommerce Template">
     <meta name="author" content="p-themes">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -20,8 +20,8 @@
     <link rel="manifest" href="{{ asset('marketplace/assets/images/icons/site.html')}}">
     <link rel="mask-icon" href="{{ asset('marketplace/assets/images/icons/safari-pinned-tab.svg')}}" color="#666666">
     <link rel="shortcut icon" href="{{ asset('marketplace/assets/images/icons/favicon.ico')}}">
-    <meta name="apple-mobile-web-app-title" content="One Mall">
-    <meta name="application-name" content="One Mall">
+    <meta name="apple-mobile-web-app-title" content="Ayurmarts">
+    <meta name="application-name" content="Ayurmarts">
     <meta name="msapplication-TileColor" content="#cc9966">
     <meta name="msapplication-config" content="{{ asset('marketplace/assets/images/icons/browserconfig.xml')}}">
     <meta name="theme-color" content="#ffffff">
@@ -297,5 +297,5 @@
 
 </body>
 
-<!-- One Mall/index-13.html  22 Nov 2019 09:59:31 GMT -->
+<!-- Ayurmarts/index-13.html  22 Nov 2019 09:59:31 GMT -->
 </html>

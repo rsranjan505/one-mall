@@ -53,8 +53,8 @@
                     </button>
 
                     <a href="{{ route('market.home')}}" class="logo">
-                        {{-- <img src="{{ asset('marketplace/assets/images/demos/demo-13/logo.png')}}" alt="One Mall Logo" width="105" height="25"> --}}
-                        <h3>One Mall</h3>
+                        {{-- <img src="{{ asset('marketplace/assets/images/demos/demo-13/logo.png')}}" alt="Ayurmarts Logo" width="105" height="25"> --}}
+                        <h3>Ayurmarts</h3>
                     </a>
                 </div><!-- End .header-left -->
 

@@ -100,7 +100,13 @@ function submitCheckout() {
         data: form_data,
         dataType: 'JSON',
         success: function (response) {
-            console.log(response);
+            if(response.success == true){
+                toastr.success(response.message, 'Success!', {
+                    closeButton: true,
+                    tapToDismiss: false
+                });
+                // window.location.href = "{{ route('products.index') }}";
+            }
         },
         error: function(response) {
             // $('.spinner-border').addClass('d-none');

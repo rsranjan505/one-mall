@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Marketplace;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Product;
 use App\Services\CartService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,45 +31,70 @@ class CartController extends Controller
             'quantity' => 'required|numeric|min:1'
         ]);
 
-        if(Auth::check()){
-            $cart = Cart::where('product_id', $request->product_id)->where('user_id', auth()->user()->id)->first();
-            if($cart){
-                $cart->quantity = $cart->quantity + $request->quantity;
-                if(isset($request->qty_flag) && $request->qty_flag == true){
-                    $cart->quantity = $request->quantity;
-                }
-                $cart->save();
+        $cart = Auth::check() ? Cart::where('product_id', $request->product_id)->where('user_id', auth()->user()->id)->first() : Cart::where('product_id', $request->product_id)->where('session_id', session()->getId())->first();
 
-            }
-            else{
-                $cart = new Cart();
-                $cart->product_id = $request->product_id;
+        $product_price = Product::find($request->product_id)->sale_price;
+        if($cart){
+            $cart->quantity = $cart->quantity + $request->quantity;
+
+            $cart->shipping_id = $request->shipping_id ? $request->shipping_id : 1;
+            if(isset($request->qty_flag) && $request->qty_flag == true){
                 $cart->quantity = $request->quantity;
-                $cart->session_id = session()->getId();
-                $cart->user_id = Auth::check() ? auth()->user()->id : null;
-                $cart->save();
-
             }
+            $cart->order_price = $cart->quantity * $product_price;
+            $cart->save();
+
+
+        }else{
+            $cart = new Cart();
+            $cart->product_id = $request->product_id;
+            $cart->quantity = $request->quantity;
+            $cart->order_price = $request->quantity * $product_price;
+            $cart->shipping_id = $request->shipping_id ? $request->shipping_id : 1;
+            $cart->session_id = session()->getId();
+            $cart->user_id = Auth::check() ? auth()->user()->id : null;
+            $cart->save();
         }
-        else{
-            $cart = Cart::where('product_id', $request->product_id)->where('session_id', session()->getId())->first();
-            if($cart){
-                if(isset($request->qty_flag) && $request->qty_flag == true){
-                    $cart->quantity = $request->quantity;
-                }
-                $cart->save();
 
-            }
-            else{
-                $cart = new Cart();
-                $cart->product_id = $request->product_id;
-                $cart->quantity = $request->quantity;
-                $cart->session_id = session()->getId();
-                $cart->user_id = Auth::check() ? auth()->user()->id : null;
-                $cart->save();
+        // if(Auth::check()){
+        //     $cart = Cart::where('product_id', $request->product_id)->where('user_id', auth()->user()->id)->first();
+        //     if($cart){
+        //         $cart->quantity = $cart->quantity + $request->quantity;
+        //         if(isset($request->qty_flag) && $request->qty_flag == true){
+        //             $cart->quantity = $request->quantity;
+        //         }
+        //         $cart->save();
 
-            }
-        }
+        //     }
+        //     else{
+        //         $cart = new Cart();
+        //         $cart->product_id = $request->product_id;
+        //         $cart->quantity = $request->quantity;
+        //         $cart->session_id = session()->getId();
+        //         $cart->user_id = Auth::check() ? auth()->user()->id : null;
+        //         $cart->save();
+
+        //     }
+        // }
+        // else{
+        //     $cart = Cart::where('product_id', $request->product_id)->where('session_id', session()->getId())->first();
+        //     if($cart){
+        //         if(isset($request->qty_flag) && $request->qty_flag == true){
+        //             $cart->quantity = $request->quantity;
+        //         }
+        //         $cart->save();
+
+        //     }
+        //     else{
+        //         $cart = new Cart();
+        //         $cart->product_id = $request->product_id;
+        //         $cart->quantity = $request->quantity;
+        //         $cart->session_id = session()->getId();
+        //         $cart->user_id = Auth::check() ? auth()->user()->id : null;
+        //         $cart->save();
+
+        //     }
+        // }
 
         $cart->cart_count = $cart->where('session_id', session()->getId())->count();
 
@@ -85,23 +111,15 @@ class CartController extends Controller
             'quantity' => 'required|numeric|min:1',
         ]);
 
-        if(Auth::check()){
-            $cart = Cart::where(['id' => $request->cart_id,'user_id' => auth()->user()->id])->first();
-            if($cart){
-                $cart->quantity = $request->quantity;
-                $cart->shipping_id = $request->shipping_id;
-                $cart->save();
-            }
-        }
-        else{
-            $cart = Cart::where(['id' => $request->cart_id,'session_id' => session()->getId()])->first();
-            if($cart){
-                $cart->quantity = $request->quantity;
-                $cart->shipping_id = $request->shipping_id;
-                $cart->save();
+        $cart = Auth::check() ? Cart::where(['id' => $request->cart_id,'user_id' => auth()->user()->id])->first() : Cart::where(['id' => $request->cart_id,'session_id' => session()->getId()])->first();
 
-            }
-        }
+        $product_price = Product::find($cart->product_id)->sale_price;
+
+        $cart->quantity = $request->quantity;
+        $cart->shipping_id = $request->shipping_id;
+        $cart->order_price = $request->quantity * $product_price;
+        $cart->save();
+
         $cart->all_items = $this->cartservice->getCart();
         // $cart->with('product','product.images');
         return ok($cart,'Quantity updated successfully');

@@ -182,7 +182,8 @@
                     <a href="category.html" class="cat-block">
                         <figure>
                             <span>
-                                <img src="marketplace/assets/images/demos/demo-13/cats/1.jpg" alt="Category image">
+                                {{-- <img src="marketplace/assets/images/demos/demo-13/cats/1.jpg" alt="Category image"> --}}
+                                <img src="{{ $category->image ? $category->image->url : 'marketplace/assets/images/demos/demo-13/cats/1.jpg'}}" alt="Category image">
                             </span>
                         </figure>
 

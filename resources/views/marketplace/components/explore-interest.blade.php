@@ -59,7 +59,7 @@
                                     <figure class="product-media">
                                         <span class="product-label label-new">New</span>
                                         <a href="{{ route('market.product-deatils', ['product_id' => $product->id])}}">
-                                            <img src="marketplace/assets/images/demos/demo-13/products/product-11.jpg" alt="Product image" class="product-image">
+                                            <img src="{{ $product->image ? $product->image->url : ''}}" style="height: 224px;" alt="Product image" class="product-image">
                                         </a>
 
                                         <div class="product-action-vertical">
@@ -110,7 +110,7 @@
                                         <figure class="product-media">
                                             <span class="product-label label-new">New</span>
                                             <a href="{{ route('market.product-deatils', ['product_id' => $product->id])}}">
-                                                <img src="marketplace/assets/images/demos/demo-13/products/product-11.jpg" alt="Product image" class="product-image">
+                                                <img src="{{ $product->image ? $product->image->url : ''}}"  style="height: 224px;" alt="Product image" class="product-image">
                                             </a>
 
                                             <div class="product-action-vertical">

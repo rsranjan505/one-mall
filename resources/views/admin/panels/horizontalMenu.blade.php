@@ -39,9 +39,9 @@ $configData = Helper::applClasses();
                   </g>
                 </g>
               </svg> --}}
-              One Mall
+              Ayurmarts
             </span>
-            <h2 class="brand-text mb-0">One Mall</h2>
+            <h2 class="brand-text mb-0">Ayurmarts</h2>
           </a>
         </li>
         <li class="nav-item nav-toggle">

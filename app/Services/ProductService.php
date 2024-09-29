@@ -22,7 +22,7 @@ class ProductService extends BaseService
 
     public function getProductDetails($product_id)
     {
-        $product = Product::where('id', $product_id)->with('Category','subCategory','attribute_value','attribute_value.attribute','image')->first();
+        $product = Product::where('id', $product_id)->with('Category','subCategory','attribute_value','attribute_value.attribute','image','images')->first();
         $attributes = [];
 
         foreach ($product->attribute_value as $key => $item) {

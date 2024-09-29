@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-sm-12 col-lg-6">
                     <div class="widget widget-about">
-                        <h3>One Mall</h3>
+                        <h3>Ayurmarts</h3>
                         {{-- <img src="marketplace/assets/images/demos/demo-13/logo-footer.png" class="footer-logo" alt="Footer Logo" width="105" height="25"> --}}
                         <p>Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. </p>
 
@@ -32,8 +32,8 @@
                         <h4 class="widget-title">Information</h4><!-- End .widget-title -->
 
                         <ul class="widget-list">
-                            <li><a href="{{ route('market.about') }}">About One Mall</a></li>
-                            <li><a href="#">How to shop on One Mall</a></li>
+                            <li><a href="{{ route('market.about') }}">About Ayurmarts</a></li>
+                            <li><a href="#">How to shop on Ayurmarts</a></li>
                             <li><a href="faq.html">FAQ</a></li>
                             <li><a href="{{ route('market.contact') }}">Contact us</a></li>
                             <li><a href="login.html">Log in</a></li>
@@ -75,7 +75,7 @@
 
     <div class="footer-bottom">
         <div class="container">
-            <p class="footer-copyright">Copyright © 2019 One Mall Store. All Rights Reserved.</p><!-- End .footer-copyright -->
+            <p class="footer-copyright">Copyright © 2019 Ayurmarts Store. All Rights Reserved.</p><!-- End .footer-copyright -->
             <ul class="footer-menu">
                 <li><a href="#">Terms Of Use</a></li>
                 <li><a href="#">Privacy Policy</a></li>

@@ -35,17 +35,17 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label>First Name *</label>
-                                    <input type="text" id="first_name" name="first_name" class="form-control" required>
+                                    <input type="text" id="first_name" name="first_name" class="form-control" required placeholder="First name">
                                 </div><!-- End .col-sm-6 -->
 
                                 <div class="col-sm-6">
                                     <label>Last Name *</label>
-                                    <input type="text" id="last_name" name="last_name" class="form-control" required>
+                                    <input type="text" id="last_name" name="last_name" class="form-control" required placeholder="Last name">
                                 </div><!-- End .col-sm-6 -->
                             </div><!-- End .row -->
 
                             <label>Company Name (Optional)</label>
-                            <input type="text" class="form-control" name="company_name" id="company_name">
+                            <input type="text" class="form-control" name="company_name" id="company_name" placeholder="Company name (optional)">
 
                             <label>Country *</label>
                             <input type="text" class="form-control" id="country" name="country" required>
@@ -56,29 +56,29 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label>Town / City *</label>
-                                    <input type="text" id="city" name="city" class="form-control" required>
+                                    <input type="text" id="city" name="city" class="form-control" required placeholder="City name">
                                 </div><!-- End .col-sm-6 -->
 
                                 <div class="col-sm-6">
                                     <label>State / County *</label>
-                                    <input type="text" id="state" name="state" class="form-control" required>
+                                    <input type="text" id="state" name="state" class="form-control" required placeholder="State name">
                                 </div><!-- End .col-sm-6 -->
                             </div><!-- End .row -->
 
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label>Postcode / ZIP *</label>
-                                    <input type="text" id="postcode" name="postcode" class="form-control" required>
+                                    <label>Postcode *</label>
+                                    <input type="text" id="postcode" name="postcode" class="form-control" required placeholder="Postcode">
                                 </div><!-- End .col-sm-6 -->
 
                                 <div class="col-sm-6">
                                     <label>Phone *</label>
-                                    <input type="tel" id="phone" name="phone" class="form-control" required>
+                                    <input type="tel" id="phone" name="phone" class="form-control" required placeholder="Phone Number">
                                 </div><!-- End .col-sm-6 -->
                             </div><!-- End .row -->
 
                             <label>Email address *</label>
-                            <input type="email" id="email" name="email" class="form-control" required>
+                            <input type="email" id="email" name="email" class="form-control" required placeholder="Email address">
 
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="checkout_create_acc" name="checkout_create_acc">
@@ -244,6 +244,9 @@
             $('#payment_mode').val(payment_mode);
         }
     }
+
+
+
 
 </script>
 @endsection

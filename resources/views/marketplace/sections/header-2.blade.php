@@ -50,7 +50,7 @@
                 </button>
 
                 {{-- <a href="{{ route('market.home')}}" class="logo">
-                    <h3>One Mall</h3>
+                    <h3>Ayurmarts</h3>
                     <img src="marketplace/assets/images/logo.png" alt="Molla Logo" width="105" height="25">
                 </a> --}}
 

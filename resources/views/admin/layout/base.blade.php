@@ -15,11 +15,11 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="description"
-    content="One Mall, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    content="Ayurmarts, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
   <meta name="keywords"
-    content="One Mall">
+    content="Ayurmarts">
   <meta name="author" content="PIXINVENT">
-  <title>{{ config('app.name', 'One Mall') }}</title>
+  <title>{{ config('app.name', 'Ayurmarts') }}</title>
   <link rel="apple-touch-icon" href="{{ asset('images/ico/favicon-32x32.png') }}">
   <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/logo/favicon.ico') }}">
 
