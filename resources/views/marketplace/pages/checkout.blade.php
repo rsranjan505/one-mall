@@ -230,23 +230,24 @@
             </form>
         </div><!-- End .container -->
     </div><!-- End .checkout -->
+    <div id="checkout_success" style="display: none;">
+        <div class="container">
+            <h1 class="text-center text-success">Order Placed</h1>
+            <p class="text-center text-success"> Thank you. Your order has been received.</p>
+        </div>
+    </div>
 </div>
 
 <script>
 
     setpaymentMethod = (el) => {
         var payment_mode = $(el).data('title');
-
-        console.log(payment_mode);
         if(payment_mode == 'cod'){
             $('#payment_mode').val('cod');
         }else{
             $('#payment_mode').val(payment_mode);
         }
     }
-
-
-
 
 </script>
 @endsection

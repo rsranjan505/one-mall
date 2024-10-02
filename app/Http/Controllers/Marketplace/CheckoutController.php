@@ -60,6 +60,8 @@ class CheckoutController extends Controller
             ]);
         }
 
+        $this->checkoutservice->clearCart();
+
         if($order){
             return ok($order,'Order created successfully');
         }

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\{
     AttributeController,
     CategoryController,
     DashboardController,
+    OrderController,
     ProductController
 };
 use App\Http\Controllers\Controller;
@@ -57,4 +58,7 @@ Route::middleware('auth','web')->prefix('admin')->group(function(){
 
     Route::resource('products', ProductController::class);
     Route::get('/products/{productId}/out-of-stock', [ProductController::class, 'setOutOfStock'])->name('products.outofstock');
+
+    Route::get('orders',[OrderController::class, 'index'])->name('orders.index');
+    Route::get('orders/{order}',[OrderController::class, 'show'])->name('orders.show');
 });

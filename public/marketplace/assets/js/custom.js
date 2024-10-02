@@ -101,11 +101,8 @@ function submitCheckout() {
         dataType: 'JSON',
         success: function (response) {
             if(response.success == true){
-                toastr.success(response.message, 'Success!', {
-                    closeButton: true,
-                    tapToDismiss: false
-                });
-                // window.location.href = "{{ route('products.index') }}";
+               $('.checkout').hide();
+               $('#checkout_success').show();
             }
         },
         error: function(response) {

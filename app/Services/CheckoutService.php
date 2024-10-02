@@ -11,4 +11,13 @@ class CheckoutService extends BaseService
     {
         //
     }
+
+    public function clearCart()
+    {
+        $carts = $this->getCart();
+
+        foreach ($carts as $cart) {
+            $cart->delete();
+        }
+    }
 }
