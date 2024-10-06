@@ -41,13 +41,14 @@
                                             <td class="product-col">
                                                 <div class="product">
                                                     <figure class="product-media">
-                                                        <a href="#">
-                                                            <img src="marketplace/assets/images/products/table/product-1.jpg" alt="Product image">
+                                                        <a href="{{ route('market.product-deatils', ['product_id' => $item->product_id]) }}">
+                                                            <img src="{{$item->product->image->url}}" alt="Product image">
+                                                            {{-- <img src="marketplace/assets/images/products/table/product-1.jpg" alt="Product image"> --}}
                                                         </a>
                                                     </figure>
 
                                                     <h3 class="product-title">
-                                                        <a href="#">{{$item->product->name}}</a>
+                                                        <a href="{{ route('market.product-deatils', ['product_id' => $item->product_id]) }}">{{$item->product->name}}</a>
                                                     </h3><!-- End .product-title -->
                                                 </div><!-- End .product -->
                                             </td>
@@ -180,9 +181,6 @@
         $('#total').text('₹'+grand_total);
 
     }
-
-
-
 
 
     function removeCartItem(cart_id) {

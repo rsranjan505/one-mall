@@ -2,8 +2,11 @@
 
 namespace App\Services;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+
+use function PHPSTORM_META\type;
 
 class ProductService extends BaseService
 {
@@ -19,6 +22,31 @@ class ProductService extends BaseService
     {
         return Product::with('Category','subCategory','attribute_value','attribute_value.attribute','image')->get();
     }
+
+    public function getProductsByCategory(array|Category $category)
+    {
+        $products = Product::with('Category','subCategory','attribute_value','attribute_value.attribute','image');
+
+        if(gettype($category) == 'array'){
+            $products = $products->whereIn('category', $category);
+        }
+        else
+        {
+            $subcats = Category::where('parent_id', $category->id)->pluck('id');
+            $products = Product::whereIn('sub_category', $subcats)
+            ->orWhere('category', $category->id);
+        }
+        $products = $products->get();
+
+        return $products;
+    }
+
+    public function getProductsBySubCategory(array $subcategory)
+    {
+        return Product::whereIn('sub_category', $subcategory)
+            ->with('Category','subCategory','attribute_value','attribute_value.attribute','image')->get();
+    }
+
 
     public function getProductDetails($product_id)
     {

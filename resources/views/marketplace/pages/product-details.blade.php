@@ -304,9 +304,9 @@
             </div>
         @endif
 
-        <h2 class="title text-center mb-4">You May Also Like</h2><!-- End .title text-center -->
+        {{-- <h2 class="title text-center mb-4">You May Also Like</h2><!-- End .title text-center --> --}}
 
-        <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl"
+        {{-- <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl"
             data-owl-options='{
                 "nav": false,
                 "dots": true,
@@ -530,7 +530,7 @@
                     </div><!-- End .rating-container -->
                 </div><!-- End .product-body -->
             </div><!-- End .product -->
-        </div><!-- End .owl-carousel -->
+        </div><!-- End .owl-carousel --> --}}
     </div><!-- End .container -->
 </div><!-- End .page-content -->
 

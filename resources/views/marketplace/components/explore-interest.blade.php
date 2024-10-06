@@ -156,7 +156,7 @@
 
     <div class="mb-3"></div>
     <div class="text-center">
-        <a href="category.html" class="btn btn-viewMore">
+        <a href="{{ route('market.shop') }}" class="btn btn-viewMore">
             <span>VIEW MORE PRODUCTS</span>
             <i class="icon-long-arrow-right"></i>
         </a>
