@@ -27,7 +27,7 @@
                             <li><a href="#">How to shop on Molla</a></li>
                             <li><a href="#">FAQ</a></li>
                             <li><a href="{{ route('market.contact') }}">Contact us</a></li>
-                            <li><a href="login.html">Log in</a></li>
+                            <li><a href="#">Log in</a></li>
                         </ul><!-- End .widget-list -->
                     </div><!-- End .widget -->
                 </div><!-- End .col-sm-6 col-lg-3 -->
@@ -53,7 +53,7 @@
 
                         <ul class="widget-list">
                             <li><a href="#">Sign In</a></li>
-                            <li><a href="cart.html">View Cart</a></li>
+                            <li><a href="{{ route('market.cart') }}">View Cart</a></li>
                             <li><a href="#">My Wishlist</a></li>
                             <li><a href="#">Track My Order</a></li>
                             <li><a href="#">Help</a></li>
