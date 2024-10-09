@@ -40,6 +40,7 @@ return [
     "Notification" => "Notification",
     "Account" => "Account",
     "Commission" => "Commission",
+    "Coupans" => "Coupans",
 ];
 
 // return [

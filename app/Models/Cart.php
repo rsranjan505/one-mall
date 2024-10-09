@@ -14,6 +14,9 @@ class Cart extends Model
         'product_id',
         'session_id',
         'quantity',
+        'order_price',
+        'shipping_id',
+        'coupan_id',
     ];
     protected $hidden = ['created_at', 'updated_at'];
 
@@ -25,5 +28,10 @@ class Cart extends Model
     public function shipping()
     {
         return $this->belongsTo(Shipping::class);
+    }
+
+    public function coupan()
+    {
+        return $this->belongsTo(Coupan::class);
     }
 }

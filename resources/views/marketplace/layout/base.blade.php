@@ -38,6 +38,11 @@
 
     <script src="{{ asset('marketplace/assets/js/jquery.min.js')}}"></script>
 
+
+    {{-- toast --}}
+    <link rel="stylesheet" href="{{ asset('admin/vendors/css/extensions/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/css/base/plugins/extensions/ext-component-toastr.css') }}">
+
 </head>
 
 <body>
@@ -203,6 +208,10 @@
     <script src="{{ asset('marketplace/assets/js/demos/demo-13.js')}}"></script>
 
     <script src="{{ asset('marketplace/assets/js/custom.js')}}"></script>
+
+
+    {{-- toast --}}
+    <script src="{{ asset('admin/vendors/js/extensions/toastr.min.js') }}"></script>
 
 
     <script>

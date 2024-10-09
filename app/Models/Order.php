@@ -33,6 +33,8 @@ class Order extends Model
         'expected_date',
         'delivered_date',
         'shipping_charge_id',
+        'is_coupan_applied',
+        'coupan_id',
 
     ];
     protected $dates = [

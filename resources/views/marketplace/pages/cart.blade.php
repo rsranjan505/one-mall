@@ -68,24 +68,25 @@
 
                         <div class="cart-bottom">
                             <div class="cart-discount">
-                                <form action="#">
+                                <form action="#" onsubmit="return false;">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" required placeholder="coupon code">
+                                        <input type="text" class="form-control text-uppercase" id="coupon_code" required placeholder="coupon code">
                                         <div class="input-group-append">
-                                            <button class="btn btn-outline-primary-2" type="submit"><i class="icon-long-arrow-right"></i></button>
+                                            <button class="btn btn-outline-primary-2" onclick="applyCoupon()" type="submit"><i class="icon-long-arrow-right"></i></button>
                                         </div><!-- .End .input-group-append -->
+                                        <span id="error-coupon_code" class="text-danger input-error"></span>
                                     </div><!-- End .input-group -->
                                 </form>
                             </div><!-- End .cart-discount -->
 
-                            <a href="#" class="btn btn-outline-dark-2"><span>UPDATE CART</span><i class="icon-refresh"></i></a>
+                            <a href="javascript:void(0)" onclick="applyCoupon()" class="btn btn-outline-dark-2"><span>UPDATE CART</span><i class="icon-refresh"></i></a>
                         </div><!-- End .cart-bottom -->
                     </div><!-- End .col-lg-9 -->
                     <aside class="col-lg-3">
                         <div class="summary summary-cart">
                             <h3 class="summary-title">Cart Total</h3><!-- End .summary-title -->
 
-                            <table class="table table-summary">
+                            <table id="cart_summary" class="table table-summary">
                                 <tbody>
                                     @php
                                         $carts = isset($carts) ? $carts : [];
@@ -123,6 +124,11 @@
                                         @endforeach
                                     @endif
 
+                                    <tr id="tr_coupan_code_apply" class="summary-shipping d-none">
+                                        <td>Apply Coupan:<br><span id="coupan_code_apply" class="text-success text-uppercase"> </span></td>
+                                        <td>&nbsp;<span id="coupan_value_discount" class="text-success"></span></td>
+                                    </tr>
+
                                     {{-- <tr class="summary-shipping-row">
                                         <td>
                                             <div class="custom-control custom-radio">
@@ -131,8 +137,8 @@
                                             </div>
                                         </td>
                                         <td>$0.00</td>
-                                    </tr>
-                                    --}}
+                                    </tr> --}}
+
 
                                     {{-- <tr class="summary-shipping-estimate">
                                         <td>Estimate for Your Country<br> <a href="dashboard.html">Change address</a></td>

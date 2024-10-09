@@ -140,6 +140,9 @@ function getajaxdata(url, table)
             }else if(table == 'product'){
                 products_datatable(data);
             }
+            else if(table == 'coupans'){
+                coupan_datatable(data);
+            }
 
         },
         error: function (data) {
@@ -287,6 +290,42 @@ function getajaxdata(url, table)
                     //     }
                     // }
                 },
+        });
+    }
+
+    function coupan_datatable(dataset)
+    {
+
+        $('#coupans-table').DataTable({
+        "data": dataset.data,
+        "iDisplayLength": 10,
+        // "order": ([1, 'asc'], [9, 'asc']),
+        "lengthChange": false,
+        "searching": true,
+        "bDestroy": true,
+        "paging": true,
+        "info": true,
+        "ordering": true,
+        "scrollCollapse": true,
+        "autoWidth": false,
+        "columns": [
+                    { 'data': 'DT_RowId'},
+                    { 'data': 'code' },
+                    { 'data': 'type'},
+                    { 'data': 'value'},
+                    { 'data': 'min_purchase_amount'},
+                    { 'data': 'used'},
+                    { 'data': 'from_date'},
+                    { 'data': 'to_date'},
+                    { 'data': 'action', orderable: false, searchable: false},
+                ],
+                "columnDefs":
+                [
+                  {
+                  "targets": [0],
+                  "orderable": false
+                  }
+                ],
         });
     }
 
@@ -597,6 +636,10 @@ function getajaxdata(url, table)
 
         var method = opration == 'add' ? 'POST' : 'PATCH';
 
+        if(form.id == 'category-edit-form' || form.id == 'attribute-edit-form'){
+            method = 'POST';
+        }
+
         $.ajax({
         url: form.action,
         method: method,
@@ -654,6 +697,9 @@ function getajaxdata(url, table)
         }
         else if(table == 'attribute'){
             edit_attribute(id,url);
+        }
+        else if(table == 'coupan'){
+            edit_coupan(id,url);
         }
     }
 
@@ -741,6 +787,48 @@ function getajaxdata(url, table)
         return offcanvas.toggle();
     }
 
+    function edit_coupan(id,url)
+    {
+        var offcanvasElement = document.getElementById("offcanvasedit");
+        var offcanvas = new bootstrap.Offcanvas(offcanvasElement);
+
+        $.ajax({
+            url: 'coupans/'+id,
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+
+                $('#coupan-edit-form').attr('action',url);
+
+                $("#edit_code").val(data.data.code);
+
+                $("#edit_value").val(data.data.value);
+                $("#edit_min_purchase_amount").val(data.data.min_purchase_amount);
+                $("#edit_from_date").val(data.data.from_date);
+                $("#edit_to_date").val(data.data.to_date);
+
+
+                // let option = '';
+                // if(data.data.parent_id != 0 && data.data.parent != null){
+                //     option += '<option value="'+data.data.parent_id+'" selected>' + data.data.parent.name + '</option>';
+                //     $('#edit_parent_id').append(option);
+                // }
+                $("#edit_type option").each(function()
+                {
+                   if(this.value == data.data.type)
+                   {
+                       $(this).prop('selected', 'selected');
+                   }
+                });
+
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+        });
+
+        return offcanvas.toggle();
+    }
 
     function deleteConfirmation(model,url)
     {

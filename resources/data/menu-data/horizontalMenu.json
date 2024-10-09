@@ -35,7 +35,13 @@
             "name": "Attribute",
             "icon": "circle",
             "slug": "attributes.index"
-        }
+        },
+        {
+          "url": "admin/coupans",
+          "name": "Coupans",
+          "icon": "circle",
+          "slug": "coupans.index"
+      }
       ]
     },
     {

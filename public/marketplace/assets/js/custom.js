@@ -26,7 +26,10 @@ function addTocart(product_id, qty_elementId = '') {
         success: function(response) {
             $('.cart-count').text(response.data.cart_count);
 
-            console.log(response);
+            toastr['success']('', 'Added Item In Your Cart 🛒', {
+                closeButton: true,
+                tapToDismiss: false
+            });
         }
     });
 }
@@ -62,7 +65,6 @@ function updateQuantity(cart_element, page = 'cart') {
             'X-CSRF-Token': token
         },
         success: function(response) {
-            console.log(response);
             if (page == 'cart') {
                 var all_cart_items = response.data.all_items;
                 var total = 0;
@@ -177,3 +179,65 @@ $('.sidebar-filter-clear').click(function() {
     })
     fetchProduct();
 });
+
+
+function applyCoupon()
+{
+    var coupon_id = $('#coupon_code').val();
+    $.ajax({
+        url: "/check-coupan/" + coupon_id,
+        type: "GET",
+        data: {
+            coupan_code: coupon_id
+        },
+        success: function (data) {
+
+            if(data.status == 200){
+                if(data.data != ''){
+                    $('#tr_coupan_code_apply').removeClass('d-none');
+
+                    toastr['success']('', 'Coupon Applied Successfully', {
+                        closeButton: true,
+                        tapToDismiss: false
+                    });
+                    $('#coupon_code').addClass('valid');
+                    var total = parseFloat($('#total').text().replace('₹', ''));
+                    var coupon_value = parseFloat(data.data.value);
+                    var coupon_amount = 0;
+                    var grand_total = 0;
+
+                    if(data.data.type == 'percentage'){
+                        grand_total = total - (total * coupon_value / 100);
+                        coupon_amount = total * coupon_value / 100;
+                    }
+                    else{
+                        grand_total = total - coupon_value;
+                        coupon_amount = coupon_value;
+                    }
+                    $('#total').text('₹' + grand_total);
+
+                    $('#total').text('₹' + grand_total);
+
+                    $('#coupan_code_apply').text(data.data.code);
+                    $('#coupan_value_discount').text('(-) ₹' + coupon_amount);
+
+                    $('#coupon_code').attr('readonly', true);
+                }
+                else{
+                    $('#coupon_code').addClass('is-invalid');
+                    toastr['error']('', data.message, {
+                        closeButton: true,
+                        tapToDismiss: false
+                    })
+                }
+            }
+        },
+        error: function (data) {
+            $('#coupon_code').addClass('is-invalid');
+            toastr['error']('', data.message, {
+                closeButton: true,
+                tapToDismiss: false
+            })
+        }
+    })
+}

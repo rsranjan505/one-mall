@@ -20,13 +20,13 @@
 <div class="page-content">
     <div class="checkout">
         <div class="container">
-            <div class="checkout-discount">
+            {{-- <div class="checkout-discount">
                 <form action="#" onsubmit="return false;" method="POST" >
                     @csrf
                     <input type="text" class="form-control" required id="checkout-discount-input">
                     <label for="checkout-discount-input" class="text-truncate">Have a coupon? <span>Click here to enter your code</span></label>
                 </form>
-            </div><!-- End .checkout-discount -->
+            </div> --}}
             <form id="checkout-form" action="{{ route('market.cart.checkout') }}" method="POST" >
                 @csrf
                 <div class="row">
@@ -80,15 +80,15 @@
                             <label>Email address *</label>
                             <input type="email" id="email" name="email" class="form-control" required placeholder="Email address">
 
-                            <div class="custom-control custom-checkbox">
+                            {{-- <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="checkout_create_acc" name="checkout_create_acc">
                                 <label class="custom-control-label" for="checkout-create-acc">Create an account?</label>
-                            </div>
-
-                            {{-- <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="checkout-diff-address">
-                                <label class="custom-control-label" for="checkout-diff-address">Ship to a different address?</label>
                             </div> --}}
+
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" value="0" id="checkout_create_acc" name="checkout_create_acc">
+                                <label class="custom-control-label" for="checkout_create_acc">Create an account?</label>
+                            </div>
 
                             <label>Order notes (optional)</label>
                             <textarea class="form-control" id="order_notes" name="order_notes" cols="30" rows="4" placeholder="Notes about your order, e.g. special notes for delivery"></textarea>
@@ -247,6 +247,17 @@
         }else{
             $('#payment_mode').val(payment_mode);
         }
+    }
+
+    $('#checkout_create_acc').on('change', function() {
+        if($(this).is(':checked')) {
+            $('#checkout_create_acc').val('1');
+        } else {
+            $('#checkout_create_acc').val('0');
+        }
+    })
+    submitCheckout = () => {
+        $('#checkout_form').submit();
     }
 
 </script>

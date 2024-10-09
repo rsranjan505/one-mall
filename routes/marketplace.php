@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CoupanController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Marketplace\{
     CartController,
@@ -27,6 +28,8 @@ Route::get('/checkout', [CheckoutController::class, 'index'])->name('market.chec
 Route::post('/add-to-cart', [CartController::class, 'addtocart'])->name('market.addtocart');
 Route::post('/update-quantity-cart', [CartController::class, 'updateQuantity'])->name('market.cart.update-quantity');
 Route::post('/remove-cart-item', [CartController::class, 'removeCartItem'])->name('market.cart.remove');
+
+Route::get('/check-coupan/{code}', [CoupanController::class, 'checkcoupan'])->name('market.checkcoupan');
 Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('market.cart.checkout');
 
 
