@@ -70,7 +70,7 @@
                             <div class="cart-discount">
                                 <form action="#" onsubmit="return false;">
                                     <div class="input-group">
-                                        <input type="text" class="form-control text-uppercase" id="coupon_code" required placeholder="coupon code">
+                                        <input type="text" class="form-control text-uppercase" id="coupon_code" required placeholder="coupon code" value="{{ $carts[0]->coupan ? $carts[0]->coupan->code : '' }}">
                                         <div class="input-group-append">
                                             <button class="btn btn-outline-primary-2" onclick="applyCoupon()" type="submit"><i class="icon-long-arrow-right"></i></button>
                                         </div><!-- .End .input-group-append -->
@@ -98,6 +98,13 @@
                                             $shipping_id = $cart->shipping_id;
                                             $shipping_amt = $cart->shipping ? $cart->shipping->charges : 0;
                                         }
+
+                                        $coupan = $carts[0]->coupan;
+                                        $coupan_amount = 0;
+                                        if (isset($coupan)) {
+                                            $coupan_amount = $coupan->type == 'percentage' ? $total * $coupan->value / 100 : $coupan->value;
+                                            $total -= $coupan_amount ;
+                                        }
                                     @endphp
 
                                     <tr class="summary-subtotal">
@@ -108,7 +115,6 @@
                                         <td>Shipping:</td>
                                         <td>&nbsp;</td>
                                     </tr>
-
 
                                     @if ($shippings->count() > 0)
                                         @foreach ($shippings as $item)
@@ -124,9 +130,9 @@
                                         @endforeach
                                     @endif
 
-                                    <tr id="tr_coupan_code_apply" class="summary-shipping d-none">
-                                        <td>Apply Coupan:<br><span id="coupan_code_apply" class="text-success text-uppercase"> </span></td>
-                                        <td>&nbsp;<span id="coupan_value_discount" class="text-success"></span></td>
+                                    <tr id="tr_coupan_code_apply" class="summary-shipping {{ isset($coupan) ? '' : 'd-none' }}">
+                                        <td>Apply Coupan:<br><span id="coupan_code_apply" class="text-success text-uppercase"> {{ isset($coupan) ? $coupan->code : '' }}</span></td>
+                                        <td>&nbsp;<span id="coupan_value_discount" class="text-success">(-) &#8377;{{$coupan_amount}} </span></td>
                                     </tr>
 
                                     {{-- <tr class="summary-shipping-row">

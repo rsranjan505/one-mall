@@ -2,7 +2,8 @@
     <div class="col-6 col-md-4 col-lg-4">
         <div class="product product-7 text-center">
             <figure class="product-media">
-                <span class="product-label label-new">New</span>
+                {{ $product->is_latest ? '<span class="product-label label-hot">Hot</span>' : ''}}
+                {{-- <span class="product-label label-new">New</span> --}}
                 <a href="{{ route('market.product-deatils', ['product_id' => $product->id])}}">
                     @if (isset($product->image) )
                         <img src="{{ $product->image->url }}" alt="Product image" class="product-image" height="335px">

@@ -201,6 +201,7 @@ function applyCoupon()
                         tapToDismiss: false
                     });
                     $('#coupon_code').addClass('valid');
+
                     var total = parseFloat($('#total').text().replace('₹', ''));
                     var coupon_value = parseFloat(data.data.value);
                     var coupon_amount = 0;

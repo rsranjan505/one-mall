@@ -119,12 +119,21 @@
                                         $total = 0;
                                         $shipping_amt = 0;
                                         $net_total = 0;
+                                        $coupan_amount = 0;
                                         if (isset($carts) && count($carts) > 0) {
                                             foreach ($carts as $key => $cart) {
                                                 $total += $cart->product->sale_price * $cart->quantity;
                                                 $shipping_amt = $cart->shipping ? $cart->shipping->charges : 0;
                                             }
+
+                                            $coupan = $carts[0]->coupan;
+                                            if (isset($coupan)) {
+                                                $coupan_amount = $coupan->type == 'percentage' ? $total * $coupan->value / 100 : $coupan->value;
+                                                $total -= $coupan_amount ;
+                                            }
                                         }
+
+
 
                                         $net_total = $total + $shipping_amt;
                                     @endphp
@@ -135,6 +144,10 @@
                                     <tr>
                                         <td>Shipping:</td>
                                         <td>{{ $shipping_amt != 0 ? '₹'.$shipping_amt : 'Free shipping'}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Apply Coupan:<br><span id="coupan_code_apply" class="text-success text-uppercase"> {{ isset($coupan) ? $coupan->code : '' }}</span></td>
+                                        <td><span id="coupan_value_discount" class="text-success">(-) &#8377;{{$coupan_amount}} </span></td>
                                     </tr>
                                     <tr class="summary-total">
                                         <td>Total:</td>

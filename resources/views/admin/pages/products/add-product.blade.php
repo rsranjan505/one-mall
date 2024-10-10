@@ -401,7 +401,7 @@
         paramName: "file", // The name that will be used to transfer the file
         acceptedFiles : ".png,.jpg,.jpeg",
         clickable: true,
-        maxFilesize: 1, // MB
+        maxFilesize: 4, // MB
         addRemoveLinks: true,
         headers: {
             'X-CSRF-TOKEN': "{{ csrf_token() }}"

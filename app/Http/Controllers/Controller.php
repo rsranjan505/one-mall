@@ -80,13 +80,14 @@ class Controller extends BaseController
     }
 
     //Upload images
-    function fileUpload($file, $model, $storageType='local'): array
+    function fileUpload($file, $model, $storageType='local',$image_index = 0): array
     {
 
         try {
             if($storageType == 'local'){
                 $extension = $file->getClientOriginalExtension();
-                $filename = $model->id.'_'.time().'.'.$extension;
+                $filename = $model->id.'_'.$image_index.'.'.$extension;
+                // $filename = $model->id.'_'.time().'.'.$extension;
 
 
                 $path = 'images'.'/'.$model->getTable().'/';

@@ -57,7 +57,7 @@
                             <div class="col-xl-5col col-lg-3 col-md-4 col-6">
                                 <div class="product">
                                     <figure class="product-media">
-                                        <span class="product-label label-new">New</span>
+                                        {{ $product->is_latest ? '<span class="product-label label-hot">Hot</span>' : ''}}
                                         <a href="{{ route('market.product-deatils', ['product_id' => $product->id])}}">
                                             <img src="{{ $product->image ? $product->image->url : ''}}" style="height: 224px;" alt="Product image" class="product-image">
                                         </a>
@@ -88,10 +88,10 @@
                                             <span class="ratings-text">( 12 Reviews )</span>
                                         </div>
 
-                                        <div class="product-nav product-nav-dots">
+                                        {{-- <div class="product-nav product-nav-dots">
                                             <a href="#" class="active" style="background: #333333;"><span class="sr-only">Color name</span></a>
                                             <a href="#" style="background: #e2e2e2;"><span class="sr-only">Color name</span></a>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +108,8 @@
                                 <div class="col-xl-5col col-lg-3 col-md-4 col-6">
                                     <div class="product">
                                         <figure class="product-media">
-                                            <span class="product-label label-new">New</span>
+                                            {{ $product->is_latest ? '<span class="product-label label-hot">Hot</span>' : ''}}
+                                            {{-- <span class="product-label label-new">New</span> --}}
                                             <a href="{{ route('market.product-deatils', ['product_id' => $product->id])}}">
                                                 <img src="{{ $product->image ? $product->image->url : ''}}"  style="height: 224px;" alt="Product image" class="product-image">
                                             </a>
@@ -139,10 +140,10 @@
                                                 <span class="ratings-text">( 12 Reviews )</span>
                                             </div>
 
-                                            <div class="product-nav product-nav-dots">
+                                            {{-- <div class="product-nav product-nav-dots">
                                                 <a href="#" class="active" style="background: #333333;"><span class="sr-only">Color name</span></a>
                                                 <a href="#" style="background: #e2e2e2;"><span class="sr-only">Color name</span></a>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>

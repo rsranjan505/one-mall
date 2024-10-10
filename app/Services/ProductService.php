@@ -23,12 +23,14 @@ class ProductService extends BaseService
         return Product::with('Category','subCategory','attribute_value','attribute_value.attribute','image')->get();
     }
 
-    public function getProductsByCategory(array|Category $category)
+    public function getProductsByCategory(null|array|Category $category)
     {
         $products = Product::with('Category','subCategory','attribute_value','attribute_value.attribute','image');
 
         if(gettype($category) == 'array'){
             $products = $products->whereIn('category', $category);
+        }else if($category == null){
+            $products = $products;
         }
         else
         {

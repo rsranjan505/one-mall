@@ -34,22 +34,16 @@
                         <div class="product-gallery product-gallery-vertical">
                             <div class="row">
                                 <figure class="product-main-image">
-                                    <img id="product-zoom" src="{{ $product->images[0]->url }}" data-zoom-image="{{ asset('marketplace/assets/images/products/single/1-big.jpg')}}" alt="product image" style="height: 550px;">
+                                    <img id="product-zoom" src="{{ $product->images[0]->url }}" data-zoom-image="{{ $product->images[0]->url }}" alt="product image" style="height: 550px;">
 
                                     <a href="#" id="btn-product-gallery" class="btn-product-gallery">
                                         <i class="icon-arrows"></i>
                                     </a>
                                 </figure>
-                                {{-- <figure class="product-main-image">
-                                    <img id="product-zoom" src="{{ asset('marketplace/assets/images/products/single/1.jpg')}}" data-zoom-image="{{ asset('marketplace/assets/images/products/single/1-big.jpg')}}" alt="product image">
-
-                                    <a href="#" id="btn-product-gallery" class="btn-product-gallery">
-                                        <i class="icon-arrows"></i>
-                                    </a>
-                                </figure> --}}
 
                                 <div id="product-zoom-gallery" class="product-image-gallery">
                                     @foreach ($product->images as $key => $image)
+
                                         @if ($key == 0)
                                             <a class="product-gallery-item active" href="#" data-image="{{ $image->url }}" data-zoom-image="{{ $image->url }}">
                                                 <img src="{{ $image->url }}" alt="product side" style="height: 130px;">
@@ -60,21 +54,7 @@
                                             </a>
                                         @endif
                                     @endforeach
-                                    {{-- <a class="product-gallery-item active" href="#" data-image="{{ asset('marketplace/assets/images/products/single/1.jpg')}}" data-zoom-image="{{asset('marketplace/assets/images/products/single/1-big.jpg')}}">
-                                        <img src="{{ asset('marketplace/assets/images/products/single/1-small.jpg')}}" alt="product side">
-                                    </a>
 
-                                    <a class="product-gallery-item" href="#" data-image="{{ asset('marketplace/assets/images/products/single/2.jpg')}}" data-zoom-image="{{ asset('marketplace/assets/images/products/single/2-big.jpg')}}">
-                                        <img src="{{ asset('marketplace/assets/images/products/single/2-small.jpg')}}" alt="product cross">
-                                    </a>
-
-                                    <a class="product-gallery-item" href="#" data-image="{{ asset('marketplace/assets/images/products/single/3.jpg')}}" data-zoom-image="{{ asset('marketplace/assets/images/products/single/3-big.jpg')}}">
-                                        <img src="{{ asset('marketplace/assets/images/products/single/3-small.jpg')}}" alt="product with model">
-                                    </a>
-
-                                    <a class="product-gallery-item" href="#" data-image="{{asset('marketplace/assets/images/products/single/4.jpg')}}" data-zoom-image="{{ asset('marketplace/assets/images/products/single/4-big.jpg')}}">
-                                        <img src="{{ asset('marketplace/assets/images/products/single/4-small.jpg')}}" alt="product back">
-                                    </a> --}}
                                 </div><!-- End .product-image-gallery -->
                             </div><!-- End .row -->
                         </div><!-- End .product-gallery -->
@@ -110,9 +90,9 @@
                                             {{-- @if ($item->attribute->type == 'select') --}}
                                                 <div class="select-custom">
                                                     <select name="size" id="size" class="form-control">
-                                                        <option value="#" selected="selected">Select a {{ $attr_key}}</option>
-                                                        @foreach ($item as $value)
-                                                            <option value="{{ $value}}">{{ $value}}</option>
+                                                        {{-- <option value="#" selected="selected">Select a {{ $attr_key}}</option> --}}
+                                                        @foreach ($item as $key => $value)
+                                                            <option value="{{ $value}} {{ $key == 1 ? 'selected' : ''}}">{{ $value}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -173,13 +153,11 @@
                                     <a href="#" class="btn-product btn-compare" title="Compare"><span>Add to Compare</span></a>
                                 </div> --}}
                             </div>
-
                             <div class="product-details-footer">
                                 <div class="product-cat">
                                     <span>Category:</span>
-                                    <a href="#">Women</a>,
-                                    <a href="#">Dresses</a>,
-                                    <a href="#">Yellow</a>
+                                    <a href="{{ route('market.shop', ['category' => $product->Category->slug])}}">{{ ucfirst($product->Category ? $product->Category->name : '')}}</a>,
+                                    <a href="#">{{ ucfirst($product->subCategory ? $product->subCategory->name : '')}}</a>
                                 </div>
 
                                 <div class="social-icons social-icons-sm">
@@ -247,7 +225,7 @@
                     <div class="tab-pane fade" id="product-review-tab" role="tabpanel" aria-labelledby="product-review-link">
                         <div class="reviews">
                             <h3>Reviews (2)</h3>
-                            <div class="review">
+                            {{-- <div class="review">
                                 <div class="row no-gutters">
                                     <div class="col-auto">
                                         <h4><a href="#">Samanta J.</a></h4>
@@ -271,9 +249,9 @@
                                         </div><!-- End .review-action -->
                                     </div><!-- End .col-auto -->
                                 </div><!-- End .row -->
-                            </div><!-- End .review -->
+                            </div><!-- End .review --> --}}
 
-                            <div class="review">
+                            {{-- <div class="review">
                                 <div class="row no-gutters">
                                     <div class="col-auto">
                                         <h4><a href="#">John Doe</a></h4>
@@ -297,7 +275,7 @@
                                         </div><!-- End .review-action -->
                                     </div><!-- End .col-auto -->
                                 </div><!-- End .row -->
-                            </div><!-- End .review -->
+                            </div><!-- End .review --> --}}
                         </div><!-- End .reviews -->
                     </div><!-- .End .tab-pane -->
                 </div><!-- End .tab-content -->

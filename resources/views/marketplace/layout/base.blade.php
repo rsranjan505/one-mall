@@ -199,6 +199,9 @@
     <script src="{{ asset('marketplace/assets/js/superfish.min.js')}}"></script>
     <script src="{{ asset('marketplace/assets/js/owl.carousel.min.js')}}"></script>
     <script src="{{ asset('marketplace/assets/js/bootstrap-input-spinner.js')}}"></script>
+
+    <script src="{{ asset('marketplace/assets/js/jquery.elevateZoom.min.js')}}"></script>
+
     <script src="{{ asset('marketplace/assets/js/jquery.magnific-popup.min.js')}}"></script>
     <script src="{{ asset('marketplace/assets/js/jquery.plugin.min.js')}}"></script>
     <script src="{{ asset('marketplace/assets/js/jquery.countdown.min.js')}}"></script>

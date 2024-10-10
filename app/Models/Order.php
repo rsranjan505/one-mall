@@ -28,6 +28,7 @@ class Order extends Model
         'cancel_date',
         'order_notes',
         'total_amount',
+        'payable_amount',
         'payment_mode',
         'payment_status',
         'expected_date',

@@ -73,6 +73,8 @@ class ProductController extends Controller
         $product_images = $request->product_images;
 
         $files = File::files(storage_path('tmp/uploads/'));
+
+
         $data['slug'] = Str::slug($request->name);
 
         $product = new Product();
@@ -90,10 +92,10 @@ class ProductController extends Controller
             }
 
             if($request->product_images !=null){
-                foreach ($files as $file) {
+                foreach ($files as $i_img => $file) {
                     if(in_array($file->getFilename(), $product_images)){
                         $uploadedimage = $this->convertSplFileInfoToUploadedFile($file);  //convert SplFileInfo to UploadedFile
-                        $image = $this->fileUpload($uploadedimage,$product,'local');
+                        $image = $this->fileUpload($uploadedimage,$product,'local',$i_img);
                         $image['image_type']='product_image';
                         $product->image()->create($image);
 
