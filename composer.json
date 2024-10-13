@@ -10,7 +10,6 @@
         "laravel/framework": "^11.9",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
-        "laravelcollective/html": "*",
         "laravel/ui": "^4.5",
         "nadar/quill-delta-parser": "^3.4",
         "spatie/laravel-permission": "^6.9",
