@@ -25,4 +25,19 @@ class OrderController extends Controller
         return $dataTable->render('admin.pages.orders.list');
 
     }
+
+    public function show(Order $order)
+    {
+        $order = $this->orderService->getOrderById($order->id);
+        return ok($order);
+    }
+
+    public function changeStatus($orderid, $status)
+    {
+        $order = Order::find($orderid);
+        $order->status = $status;
+        $order->save();
+
+        return ok($order);
+    }
 }

@@ -178,17 +178,17 @@
         </div>
         <span class="avatar">
           <img class="round"
-            src="{{ Auth::user() ? Auth::user()->profile_photo_url : asset('images/portrait/small/avatar-s-11.jpg') }}"
+            src="{{ Auth::user() ? (Auth::user()->image ? Auth::user()->image->url : asset('img/6596121.png')) : asset('img/6596121.png') }}"
             alt="avatar" height="40" width="40">
           <span class="avatar-status-online"></span>
         </span>
       </a>
       <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user">
         <a class="dropdown-item"
-          href="{{ Route::has('profile.show') ? route('profile.show') : 'javascript:void(0)' }}">
+          href="{{ Route::has('users.profile') ? route('users.profile', Auth::user()->id) : 'javascript:void(0)' }}">
           <i class="me-50" data-feather="user"></i> Profile
         </a>
-        <a class="dropdown-item" href="#">
+        <a class="dropdown-item" href="{{ Route::has('users.security') ? route('users.security', Auth::user()->id) : 'javascript:void(0)' }}">
           <i class="me-50" data-feather="settings"></i> Settings
         </a>
 

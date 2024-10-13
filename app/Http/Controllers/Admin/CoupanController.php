@@ -83,8 +83,6 @@ class CoupanController extends Controller
             'to_date' => 'required',
         ]);
 
-
-
         $coupan = new Coupan();
 
         $coupan = $coupan->create($request->all());

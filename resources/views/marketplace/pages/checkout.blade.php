@@ -145,7 +145,7 @@
                                         <td>Shipping:</td>
                                         <td>{{ $shipping_amt != 0 ? '₹'.$shipping_amt : 'Free shipping'}}</td>
                                     </tr>
-                                    <tr>
+                                    <tr id="tr_coupan_code_apply" class="summary-shipping {{ isset($coupan) ? '' : 'd-none' }}">
                                         <td>Apply Coupan:<br><span id="coupan_code_apply" class="text-success text-uppercase"> {{ isset($coupan) ? $coupan->code : '' }}</span></td>
                                         <td><span id="coupan_value_discount" class="text-success">(-) &#8377;{{$coupan_amount}} </span></td>
                                     </tr>

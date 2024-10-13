@@ -2,8 +2,8 @@
 
 namespace App\DataTables;
 
-use App\Models\Order;
-use App\Services\OrderService;
+use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -13,15 +13,12 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class OrderDataTable extends DataTable
+class UserDataTable extends DataTable
 {
-
-    /** @var  OrderService $orderservice */
-    private OrderService $orderservice;
-
-    public function __construct(OrderService $orderservice)
+    protected UserService $userservice;
+    public function __construct(UserService $userservice)
     {
-        $this->orderservice = $orderservice;
+        $this->userservice = $userservice;
     }
     /**
      * Build the DataTable class.
@@ -31,45 +28,25 @@ class OrderDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+        ->editColumn('name', function($row){
+            return ucfirst($row->getFullName());
+        })
         ->addColumn('status', function($row){
-            $badge_class = '';
-            if($row->status == 'delivered'){
-                $badge_class = "badge rounded-pill badge-light-success";
-            }else if($row->status == 'cancelled'){
-                $badge_class = "badge rounded-pill badge-light-danger";
-            }else if($row->status == 'pending'){
-                $badge_class = "badge rounded-pill badge-light-warning";
-            }else if($row->status == 'accepted'){
-                $badge_class = "badge rounded-pill badge-light-info";
-            }
-
-            $status = '<select class="form-select form-select-sm status '.$badge_class.'" data-id="'.$row->id.'" onchange="changeOrderStatus(this)">
-                <option  value="delivered" '.($row->status == 'delivered' ? 'selected' : '').'>Delivered</option>
-                <option value="accepted" '.($row->status == 'accepted' ? 'selected' : '').'>Accepted</option>
-                <option value="cancelled" '.($row->status == 'cancelled' ? 'selected' : '').'>Cancelled</option>
-                <option value="pending" '.($row->status == 'pending' ? 'selected' : '').'>Pending</option>
-            </select>';
+            $active = $row->is_active == 1 ? "checked" : "";
+            $status = '<div class="form-check form-switch mb-2">
+                        <input class="form-check-input" onchange="statusConfirmation(\''.route('users.change.status', $row).'\')" type="checkbox" id="status_check-'.$row->id.'" '.$active.'>
+                        <label class="form-check-label" for="'.$row->id.'"></label>
+                    </div>';
 
             return $status;
 
         })
-        ->addColumn('name', function($row){
-            return ucfirst($row->first_name) . " " . $row->last_name;
+        ->addColumn('role', function($row){
+            return ucfirst($row->role);
         })
         ->editColumn('created_at', function($row){
-            return $row->created_at->diffForHumans();
-        })
-        ->editColumn('total_amount', function($row){
-            return  "&#8377; " . number_format($row->total_amount, 2);
-        })
-        ->editColumn('payable_amount', function($row){
-            return  "&#8377; " . number_format($row->payable_amount, 2);
-        })
-        ->editColumn('payment_mode', function($row){
-            return str_replace('_', ' ', ucfirst($row->payment_mode));
-        })
-        ->editColumn('payment_status', function($row){
-            return ucfirst($row->payment_status != null ? $row->payment_status : 'Upaid');
+
+            return $row->created_at->format('d-m-Y');
         })
         ->addColumn('action', function($row){
 
@@ -79,34 +56,47 @@ class OrderDataTable extends DataTable
                             </svg>
                         </a>
                     <div class="dropdown-menu dropdown-menu-end">
-                        <a href="javascript:void(0);" class="dropdown-item" id="view-items">
+                        <a href="javascript:void(0);" class="dropdown-item" id="assign_role">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text font-small-4 me-50"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline>
                             </svg>
-                            View Items
+                            Assign Role
                         </a>
-                        <a href="javascript:void(0);" class="dropdown-item" id="address">
+                        <a href="'. route('users.profile', $row->id).'" class="dropdown-item" id="profile">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text font-small-4 me-50"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline>
+                            </svg>
+                            Profile
+                        </a>
+                        <a href="'. route('users.security', $row->id).'" class="dropdown-item" id="security">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive font-small-4 me-50"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line>
                             </svg>
-                            Address
+                            Security
                         </a>
-
+                         <a href="'. route('users.notification', $row->id).'" class="dropdown-item" id="notifications">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive font-small-4 me-50"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line>
+                            </svg>
+                            Notifications
+                        </a>
+                        <a href="javascript:void(0);" class="dropdown-item delete-record" id="delete">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 font-small-4 me-50"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line>
+                            </svg>
+                            Delete
+                        </a>
                     </div>
                  </div>';
 
                 return  $action;
         })
-        ->rawColumns(['action','total_amount','payable_amount','status'])
+        ->rawColumns(['action','status','images'])
         ->setRowId('id');
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(Order $model): QueryBuilder
+    public function query(User $model): QueryBuilder
     {
-        $orders = $this->orderservice->getAllOrders();
-        // return $model->newQuery()->Order::with('order_items','user')->latest()->get();
-        return $orders;
+        $users = $this->userservice->getAllUsers();
+        return $users;
     }
 
     /**
@@ -115,7 +105,7 @@ class OrderDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('order-table')
+                    ->setTableId('user-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
@@ -138,25 +128,18 @@ class OrderDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('order_number'),
             Column::make('name'),
-            // Column::make('email'),
-            Column::make('phone'),
-            Column::make('postcode'),
-            Column::make('total_amount'),
-            // Column::make('coupon_discount'),
-            Column::make('payable_amount'),
-            Column::make('created_at'),
-            Column::make('payment_mode'),
-            Column::make('payment_status'),
+            Column::make('email'),
+            Column::make('mobile'),
+            Column::make('last_login'),
+            Column::make('role'),
             Column::make('status'),
-
+            Column::make('created_at'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
                   ->width(60)
                   ->addClass('text-center'),
-
         ];
     }
 
@@ -165,6 +148,6 @@ class OrderDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Order_' . date('YmdHis');
+        return 'User_' . date('YmdHis');
     }
 }

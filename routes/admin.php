@@ -5,9 +5,13 @@ use App\Http\Controllers\Admin\{
     AttributeController,
     CategoryController,
     CoupanController,
+    CustomerController,
     DashboardController,
     OrderController,
-    ProductController
+    PermissionController,
+    ProductController,
+    RoleController,
+    UserController
 };
 use App\Http\Controllers\Controller;
 
@@ -51,6 +55,21 @@ Route::post('/file-upload', [Controller::class, 'storeTempFile'])->name('file.up
 Route::middleware('auth','web')->prefix('admin')->group(function(){
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
+    Route::resource('users', UserController::class);
+    Route::get('/users/{user}/change-status', [UserController::class, 'changeStatus'])->name('users.change.status');
+    Route::get('/profile/{user}', [UserController::class, 'profile'])->name('users.profile');
+    Route::get('/security/{user}', [UserController::class, 'changePassword'])->name('users.security');
+    Route::get('/notifications/{user}', [UserController::class, 'notifications'])->name('users.notification');
+
+    Route::resource('roles', RoleController::class);
+    Route::get('/roles/{role}/change-status', [RoleController::class, 'changeStatus'])->name('roles.change.status');
+
+    Route::resource('permissions', PermissionController::class);
+    Route::get('/permissions/{permission}/change-status', [PermissionController::class, 'changeStatus'])->name('permissions.change.status');
+
+    Route::resource('customers', CustomerController::class);
+    Route::get('/customers/{customer}/change-status', [CustomerController::class, 'changeStatus'])->name('customers.change.status');
+
     Route::resource('categories', CategoryController::class);
     Route::get('/categories/{category}/change-status', [CategoryController::class, 'changeStatus'])->name('categories.change.status');
 
@@ -65,4 +84,5 @@ Route::middleware('auth','web')->prefix('admin')->group(function(){
 
     Route::get('orders',[OrderController::class, 'index'])->name('orders.index');
     Route::get('orders/{order}',[OrderController::class, 'show'])->name('orders.show');
+    Route::get('orders/{order}/change-status/{status}',[OrderController::class, 'changeStatus'])->name('orders.change.status');
 });

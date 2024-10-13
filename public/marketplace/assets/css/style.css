@@ -7623,6 +7623,7 @@ p {
 }
 .product.product-list .product-content p {
     margin-bottom: 0;
+    overflow-wrap: anywhere;
 }
 .product.product-list .product-action {
     position: static;
@@ -10930,6 +10931,7 @@ button:focus {
 }
 .product-desc-content blockquote p {
     margin-bottom: 0;
+    overflow-wrap: anywhere;
 }
 .product-desc-content blockquote cite {
     font-weight: 300;

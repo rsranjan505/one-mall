@@ -132,16 +132,27 @@ function getajaxdata(url, table)
         type: "GET",
         dataType: "json",
         success: function (data) {
-            if(table == 'category'){
+            if(table == 'user'){
+                user_datatable(data);
+            }
+            else if(table == 'customer'){
+                customer_datatable(data);
+            }
+            else if(table == 'category'){
                 category_datatable(data);
-            }else if(table == 'attribute'){
+            }
+            else if(table == 'attribute'){
 
                 attribute_datatable(data);
-            }else if(table == 'product'){
+            }
+            else if(table == 'product'){
                 products_datatable(data);
             }
             else if(table == 'coupans'){
                 coupan_datatable(data);
+            }
+            else if(table == 'order'){
+                order_datatable(data);
             }
 
         },
@@ -150,6 +161,79 @@ function getajaxdata(url, table)
         }
     });
 }
+
+    function user_datatable(dataset)
+    {
+
+        $('#users-table').DataTable({
+        "data": dataset.data,
+        "iDisplayLength": 10,
+        // "order": ([1, 'asc'], [9, 'asc']),
+        "lengthChange": false,
+        "searching": true,
+        "bDestroy": true,
+        "paging": true,
+        "info": true,
+        "ordering": true,
+        "scrollCollapse": true,
+        "autoWidth": false,
+        "columns": [
+                    { 'data': 'DT_RowId'},
+                    { 'data': 'name' },
+                    { 'data': 'email'},
+                    { 'data': 'mobile'},
+                    { 'data': 'last_login'},
+                    { 'data': 'role'},
+                    { 'data': 'created_at'},
+                    { 'data': 'status'},
+
+                    { 'data': 'action', orderable: false, searchable: false},
+                ],
+                "columnDefs":
+                [
+                {
+                "targets": [0],
+                "orderable": false
+                }
+                ],
+        });
+    }
+
+    function customer_datatable(dataset)
+    {
+
+        $('#customers-table').DataTable({
+        "data": dataset.data,
+        "iDisplayLength": 10,
+        // "order": ([1, 'asc'], [9, 'asc']),
+        "lengthChange": false,
+        "searching": true,
+        "bDestroy": true,
+        "paging": true,
+        "info": true,
+        "ordering": true,
+        "scrollCollapse": true,
+        "autoWidth": false,
+        "columns": [
+                { 'data': 'DT_RowId'},
+                { 'data': 'name' },
+                { 'data': 'email'},
+                { 'data': 'mobile'},
+                { 'data': 'last_login'},
+                { 'data': 'created_at'},
+                { 'data': 'status'},
+
+                    { 'data': 'action', orderable: false, searchable: false},
+                ],
+                "columnDefs":
+                [
+                {
+                "targets": [0],
+                "orderable": false
+                }
+                ],
+        });
+    }
 
     function category_datatable(dataset)
     {
@@ -325,6 +409,70 @@ function getajaxdata(url, table)
                   "targets": [0],
                   "orderable": false
                   }
+                ],
+        });
+    }
+
+
+    function order_datatable(dataset)
+    {
+
+        $('#orders-table').DataTable({
+        "data": dataset.data,
+        "iDisplayLength": 10,
+        // "order": ([1, 'asc'], [9, 'asc']),
+        "lengthChange": false,
+        "searching": true,
+        "bDestroy": true,
+        "paging": true,
+        "info": true,
+        "ordering": true,
+        "scrollCollapse": true,
+        "autoWidth": false,
+        "columns": [
+                    { 'data': 'DT_RowId'},
+                    { 'data': 'order_number' },
+                    { 'data': 'name'},
+                    // { 'data': 'email'},
+                    { 'data': 'phone'},
+                    { 'data': 'postcode'},
+                    { 'data': 'total_amount'},
+                    // { 'data': 'coupon_discount'},
+                    { 'data': 'payable_amount'},
+                    { 'data': 'created_at'},
+                    { 'data': 'payment_mode'},
+                    { 'data': 'payment_status'},
+                    { 'data': 'status'},
+                    { 'data': 'action', orderable: false, searchable: false},
+                ],
+                "columnDefs":
+                [
+                  {
+                  "targets": [0],
+                  "orderable": false
+                  },
+                  {
+                    "targets": [11],
+                    "createdCell": function (td, cellData, rowData, row, col) {
+
+                       if(col == 11)
+                        {
+                            // console.log($(td).children().children().find('a#details'));
+                            $(td).children().children().find('a#view-items').on('click', function(){
+                                editOrdermodal('view-items',rowData);
+                            })
+                            $(td).children().children().find('a#address').on('click', function(){
+                                editOrdermodal('address',rowData);
+                            })
+                            // $(td).children().children().find('a#variants').on('click', function(){
+                            //     editProduct('variants',rowData);
+                            // })
+                            // $(td).children().children().find('a#delete').on('click', function(){
+                            //     editProduct('delete',rowData);
+                            // })
+                        }
+                    }
+                  },
                 ],
         });
     }
@@ -625,6 +773,150 @@ function getajaxdata(url, table)
     }
 
 
+
+
+    // order servtion
+    function editOrdermodal(menu,product_dt)
+    {
+
+        $('#order_modal').modal('show');
+        var modal_body = '';
+        $('#order_modal #modal-body').html('');
+        if(menu == 'view-items')
+        {
+            modal_body = orderItems(product_dt);
+            $('#order_modal #modal-body').html(modal_body);
+        }else if(menu == 'address'){
+            modal_body = orderAddress(product_dt);
+            $('#order_modal #modal-body').html(modal_body);
+        }
+    }
+
+    function orderItems(product_dt)
+    {
+        var orderitems = product_dt.order_items;
+
+        var body_div = '<div class="row">'
+                        + '<div class="col-12">'
+                            + '<div class="d-flex justify-content-between align-items-center pb-2">'
+                                + '<span class="mb-0">Order Items</span>'
+                            + '</div>'
+                        + '</div>'
+                    + '</div>';
+
+                    body_div += '<table class="table table-striped" id="order-item-table" style="width:100%">'
+                    + '<thead>'
+                        + '<tr>'
+                            + '<th>Product Name</th>'
+                            + '<th>Quantity</th>'
+                            + '<th>Price</th>'
+                        + '</tr>'
+                    + '</thead>'
+                    + '<tbody>';
+                        $.each(orderitems, function (key, value) {
+                            body_div += '<tr>'
+                                + '<td>' + value.product.name + '</td>'
+                                + '<td>' + value.quantity + '</td>'
+                                + '<td>' + value.order_price + '</td>'
+                            + '</tr>';
+                        })
+                    body_div += '</tbody>'
+                    + ' </table>'
+        return body_div;
+    }
+
+    function orderAddress(product_dt)
+    {
+
+        var body_div = '<div class="row">'
+                        + '<div class="col-12">'
+                            + '<div class="d-flex justify-content-between align-items-center pb-2">'
+                                + '<span class="mb-0">Delivery Address</span>'
+                            + '</div>'
+                        + '</div>'
+                    + '</div>';
+                    body_div += '<table class="table table-striped table-bordered" id="order-item-table" style="width:100%">'
+                    + '<tbody>';
+                        body_div += '<tr>'
+                            + '<tr><td>Address: </td><td>' + product_dt.address + '</td></tr>'
+                            + '<tr><td>City: </td><td>' + product_dt.city + '</td></tr>'
+                            + '<tr><td>State: </td><td>' + product_dt.state + '</td></tr>'
+                            + '<tr><td>Pincode: </td><td>' + product_dt.postcode + '</td></tr>'
+                            + '<tr><td>Country: </td><td>' + product_dt.country + '</td></tr>'
+                        + '</tr>';
+                    body_div += '</tbody>'
+                    + ' </table>'
+        return body_div;
+    }
+
+    function changeOrderStatus(element)
+    {
+        var order_id = $(element).data('id');
+        var status = $(element).val();
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to change order status!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, Change it!',
+            customClass: {
+            confirmButton: 'btn btn-primary',
+            cancelButton: 'btn btn-outline-danger ms-1'
+            },
+            buttonsStyling: false
+        }).then(function (result) {
+            if (result.value) {
+                $.ajax({
+                    url:'orders/' + order_id + '/change-status/' + status,
+                    type: "GET",
+                    headers: {
+                        'X-CSRF-Token': token
+                },
+                    // data: {
+                    //     id: 5
+                    // },
+                    // dataType: "html",
+                    success: function (data) {
+
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Changed!',
+                            text: 'Your order status has been changed.',
+                            customClass: {
+                            confirmButton: 'btn btn-success'
+                            }
+                        }).then(function(success){
+                            location.reload();
+                        });
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        var err = JSON.parse(xhr.responseText);
+                        Swal.fire({
+                            title: 'Cancelled',
+                            text: err.message,
+                            icon: 'error',
+                            customClass: {
+                            confirmButton: 'btn btn-success'
+                            }
+                        });
+
+                    },
+
+                });
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+            Swal.fire({
+                title: 'Cancelled',
+                text: 'Status not changed :)',
+                icon: 'error',
+                customClass: {
+                confirmButton: 'btn btn-success'
+                }
+            });
+            }
+        });
+    }
+
+
     // function updateOutOfStock(product_id)
     // {
 
@@ -640,6 +932,7 @@ function getajaxdata(url, table)
             method = 'POST';
         }
 
+        console.log(form);
         $.ajax({
         url: form.action,
         method: method,
@@ -700,6 +993,9 @@ function getajaxdata(url, table)
         }
         else if(table == 'coupan'){
             edit_coupan(id,url);
+        }
+        else if(table == 'permission'){
+            edit_permission(id,url);
         }
     }
 
@@ -820,6 +1116,31 @@ function getajaxdata(url, table)
                        $(this).prop('selected', 'selected');
                    }
                 });
+
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+        });
+
+        return offcanvas.toggle();
+    }
+
+    function edit_permission(id,url)
+    {
+
+        var offcanvasElement = document.getElementById("offcanvasedit");
+        var offcanvas = new bootstrap.Offcanvas(offcanvasElement);
+
+        $.ajax({
+            url: 'permissions/'+id,
+            type: "GET",
+            dataType: "json",
+            success: function (data) {
+
+                $('#permissions-edit-form').attr('action',url);
+
+                $("#edit_name").val(data.data.name);
 
             },
             error: function (data) {

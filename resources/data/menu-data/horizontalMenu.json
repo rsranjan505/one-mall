@@ -51,16 +51,10 @@
       "slug": "",
       "submenu": [
         {
-          "url": "ui/typography",
+          "url": "admin/orders",
           "name": "Order List",
-          "icon": "type",
-          "slug": "ui-typography"
-        },
-        {
-          "url": "icons/feather",
-          "name": "Order Details",
           "icon": "eye",
-          "slug": "icons-feather"
+          "slug": "orders.index"
         }
       ]
     },
@@ -71,10 +65,10 @@
       "slug": "",
       "submenu": [
         {
-          "url": "form/layout",
+          "url": "admin/customers",
           "name": "All Customers",
           "icon": "box",
-          "slug": "form-layout"
+          "slug": "customers.index"
         },
         {
           "name": "Customer Details",
@@ -117,33 +111,20 @@
       "submenu": [
         {
           "url": "page/profile",
-          "name": "Profile",
-          "icon": "user",
+          "name": "Reviews",
+          "icon": "circle",
           "slug": "page-profile"
         },
         {
           "url": "page/api-key",
-          "name": "API Key",
+          "name": "Product Reviews",
           "icon": "circle",
           "slug": "page-api-key"
         }
       ]
     },
 
-    {
-      "name": "Referrals",
-      "icon": "bar-chart-2",
-      "dropdown": "1",
-      "slug": "",
-      "submenu": [
-        {
-          "url": "maps/leaflet",
-          "name": "Leaflet Maps",
-          "icon": "map",
-          "slug": "map-leaflet"
-        }
-      ]
-    },
+
     {
         "name": "Settings",
         "icon": "shield",
@@ -221,40 +202,22 @@
       },
     {
       "name": "Users",
-      "icon": "box",
+      "icon": "user",
       "dropdown": "1",
       "slug": "",
       "submenu": [
-          {
-            "name": "View",
-            "icon": "circle",
-            "slug": "",
-            "submenu": [
-              {
-                "url": "app/user/view/account",
-                "name": "Account",
-                "icon": "circle",
-                "slug": "app-user-view-account"
-              },
-              {
-                "url": "app/user/view/security",
-                "name": "Security",
-                "icon": "circle",
-                "slug": "app-user-view-security"
-              },
-              {
-                "url": "app/user/view/notifications",
-                "name": "Notifications",
-                "icon": "circle",
-                "slug": "app-user-view-notifications"
-              }
-            ]
-          },
         {
-          "url": "app/invoice/add",
+        "url": "admin/users",
+        "name": "View",
+        "icon": "circle",
+        "slug": "users.index"
+
+        },
+        {
+          "url": "admin/users/create",
           "name": "Add",
           "icon": "circle",
-          "slug": "app-invoice-add"
+          "slug": "users.create"
         },
         {
             "name": "Roles & Permission",
@@ -263,16 +226,16 @@
             "slug": "",
             "submenu": [
                 {
-                "url": "app/access-roles",
+                "url": "admin/roles",
                 "name": "Roles",
                 "icon": "circle",
-                "slug": "app-access-roles"
+                "slug": "roles.index"
                 },
                 {
-                "url": "app/access-permission",
+                "url": "admin/permissions",
                 "name": "Permission",
                 "icon": "circle",
-                "slug": "app-access-permission"
+                "slug": "permissions.index"
                 }
             ]
         }

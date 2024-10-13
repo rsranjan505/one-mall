@@ -41,6 +41,8 @@ return [
     "Account" => "Account",
     "Commission" => "Commission",
     "Coupans" => "Coupans",
+    "Reviews" => "Reviews",
+    "Product Reviews" => "Product Reviews",
 ];
 
 // return [

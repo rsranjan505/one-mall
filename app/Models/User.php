@@ -51,4 +51,19 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function getFullName(): string
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
+    public function image()
+    {
+        return $this->morphOne(AssetFile::class, 'pictureable','model_type', 'model_id');
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }

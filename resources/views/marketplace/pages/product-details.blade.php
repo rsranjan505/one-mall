@@ -76,7 +76,7 @@
                                 &#8377;{{ $product->sale_price }}
                             </div><!-- End .product-price -->
 
-                            <div class="product-content">
+                            <div class="product-content" style="overflow-wrap: anywhere">
                                 <p> {!! $product->short_description_html !!}.</p>
                             </div><!-- End .product-content -->
 
@@ -190,13 +190,13 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link">
-                        <div class="product-desc-content">
+                        <div class="product-desc-content" style="overflow-wrap: anywhere">
                             <h3>Product Information</h3>
                             {!! $product->description_html !!}
                         </div><!-- End .product-desc-content -->
                     </div><!-- .End .tab-pane -->
                     <div class="tab-pane fade" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link">
-                        <div class="product-desc-content">
+                        <div class="product-desc-content" style="overflow-wrap: anywhere">
                             <h3>Information</h3>
                             {!! $product->long_description_html !!}
                             {{-- <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. </p>
@@ -216,7 +216,7 @@
                         </div><!-- End .product-desc-content -->
                     </div><!-- .End .tab-pane -->
                     <div class="tab-pane fade" id="product-shipping-tab" role="tabpanel" aria-labelledby="product-shipping-link">
-                        <div class="product-desc-content">
+                        <div class="product-desc-content" style="overflow-wrap: anywhere">
                             <h3>Delivery & returns</h3>
                             <p>We deliver to over 100 countries around the world. For full details of the delivery options we offer, please view our <a href="#">Delivery information</a><br>
                             We hope you’ll love every purchase, but if you ever need to return an item you can do so within a month of receipt. For full details of how to make a return, please view our <a href="#">Returns information</a></p>
